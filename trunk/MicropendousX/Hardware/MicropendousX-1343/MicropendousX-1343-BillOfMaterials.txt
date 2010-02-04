@@ -1,0 +1,5 @@
+Not yet complete.
+
+Look through at MicropendousX-1343.cmp and MicropendousX-1343-Assembly.svg for
+footprints and component values.  Only the 1.5k resistor needs to be 1%.  All
+other components can be standard and from any supplier.
