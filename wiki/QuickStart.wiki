@@ -10,6 +10,8 @@ Procure any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG adapter wit
 
 Edit `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/OpenOCD.cfg` for your particular JTAG `interface`.  Connect your MicropendousX to your OpenOCD adapter and run `openocd OpenOCD.cfg`.  In a separate Terminal or Command Prompt run `gdb -x gdb_lpc17xx_debug.gdb` to program your MicropendousX and start debugging.  You can also connect to your running OpenOCD server via a [http://en.wikipedia.org/wiki/Telnet Telnet] session (`localhost` with port 23) and run the command `script OpenOCD_program.script` to program your MicropendousX.
 
+You can then connect to your MicropendousX with a serial terminal.  See [http://code.google.com/p/micropendous/wiki/SerialPortUsageLinux SerialPortUsageLinux] or [http://code.google.com/p/micropendous/wiki/SerialPortUsageWindows SerialPortUsageWindows] for some notes.
+
 Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface such as that which comes with [http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=726-1042-ND LM3S811] or [http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=726-1203-ND LM3S9B92] development kits.
 
-MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
