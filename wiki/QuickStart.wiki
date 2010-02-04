@@ -1,0 +1,13 @@
+#summary How to get start with the MicropendousX
+#labels Featured,Phase-Deploy
+
+DRAFT!
+
+
+Download the latest [http://www.codesourcery.com/sgpp/lite/arm/download.html EABI GCC] for your platform and install.  Download the [http://code.google.com/p/micropendousx/downloads/list MicropendousX Distribution] and extract it.  Open a Terminal or Command Prompt and change to the `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/` directory.  Run `make` to compile.
+
+Procure any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG adapter with a [http://infocenter.arm.com/help/topic/com.arm.doc.faqs/ka13634.html Cortex Debug Header] or an ARM JTAG to Cortex Debug Header adapter.  [http://www.freddiechopin.info/index.php/en/download/category/4-openocd OpenOCD for Windows] is also available.
+
+Edit `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/OpenOCD.cfg` for your particular JTAG `interface`.  Connect your MicropendousX to your OpenOCD adapter and run `openocd OpenOCD.cfg`.  In a separate Terminal or Command Prompt run `gdb -x gdb_lpc17xx_debug.gdb` to program your MicropendousX and start debugging.  You can also connect to your running OpenOCD server via a [http://en.wikipedia.org/wiki/Telnet Telnet] session (`localhost` with port 23) and run the command `script OpenOCD_program.script` to program your MicropendousX.
+
+http://code.google.com/p/micropendousx/source/browse/trunk/MicropendousX#
