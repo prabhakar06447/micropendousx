@@ -1,0 +1,5 @@
+Not yet complete.
+
+Look through at MicropendousX-1758.cmp and MicropendousX-1758-Assembly.svg for
+footprints and component values.  Most components can be standard and from any supplier.
+Only the 1.5k, 12k, 43k, and 73k resistors need to be 1%.
