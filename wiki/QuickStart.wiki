@@ -12,6 +12,6 @@ Edit `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/OpenOCD.cfg` f
 
 You can then connect to your MicropendousX with a serial terminal.  See [http://code.google.com/p/micropendous/wiki/SerialPortUsageLinux SerialPortUsageLinux] or [http://code.google.com/p/micropendous/wiki/SerialPortUsageWindows SerialPortUsageWindows] for some notes.
 
-Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface such as that which comes with [http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=726-1042-ND LM3S811] or [http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=726-1203-ND LM3S9B92] development kits.
+Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface such as that which comes with a [http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=726-1203-ND LM3S9B92] development kit.
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
