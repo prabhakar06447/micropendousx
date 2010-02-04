@@ -1,4 +1,4 @@
-#summary How to get start with the MicropendousX
+#summary How to get started with the MicropendousX
 #labels Featured,Phase-Deploy
 
 DRAFT!
