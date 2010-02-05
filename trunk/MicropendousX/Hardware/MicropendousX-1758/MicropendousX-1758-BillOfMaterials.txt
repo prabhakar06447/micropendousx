@@ -1,5 +1,60 @@
-Not yet complete.
+QTY, Manufacturer Part#     , Cost($USD each) - References - Description
 
-Look through at MicropendousX-1758.cmp and MicropendousX-1758-Assembly.svg for
-footprints and component values.  Most components can be standard and from any supplier.
-Only the 1.5k, 12k, 43k, and 73k resistors need to be 1%.
+6  , GRM1555C1H220JZ01D     , 0.02 - C1 C2 C3 C4 C5 C6 - CAP CER 22PF 50V 5% C0G 0402
+4  , GRM1555C1H120JZ01D     , 0.02 - C8 C9 C10 C11 - CAP CER 12PF 50V 5% C0G 0402
+1  , C0805C103K5RACTU       , 0.03 - C29 - CAP CER 10000PF=0.01uF 50V CERAMIC X7R 0805
+1  , GRM21BR71E104KA01L     , 0.04 - C28 - CAP CER 0.1UF 25V 10% X7R 0805
+1  , GRM219F51E105ZA01D     , 0.08 - C13 - CAP CER 1.0UF 25V Y5V 0805
+2  , GRM188R71C104KA01D     , 0.02 - C17 C30 - CAP CER .1UF 16V 10% X7R 0603
+2  , GRM188R61A105KA61D     , 0.04 - C16 C20 - CAP CER 1.0UF 10V 10% X5R 0603
+5  , ECJ-0EB1A104K          , 0.03 - C7 C19 C21 C23 C25 - CAP .1UF 10V CERAMIC X5R 0402
+5  , GRM155R61A105KE15D     , 0.07 - C12 C18 C22 C24 C27 - CAP CER 1UF 10V X5R 0402
+3  , C2012Y5V1A475Z         , 0.13 - C14 C15 C32 - CAP CER 4.7UF 10V Y5V 0805
+3  , LMK212BJ106KG-T        , 0.28 - C26 C31 C33 - CAP CER 10uF 10V X5R 0805
+1  , LG L29K-G2J1-24-Z      , 0.16 - D1 - LED SMARTLED GREEN 570NM 2mA 0603
+1  , MBR120VLSFT1G          , 0.53 - D2 - DIODE SCHOTTKY 20V 1A SOD123FL
+1  , LPC1758FBD80           ,12.23 - IC1 - IC ARM CORTEX MCU 512K 80-LQFP
+1  , ST1L05BPUR             , 0.95 - IC2 - IC VREG LDO BICMOS ADJ 6-DFN
+1  , TS3USB221DRCR          , 2.10 - IC3 - IC USB SWITCH DUAL 1X2 10SON
+1  , LAN8720A-CP            , 1.95 - IC4 - TXRX ETHERNET 10/100 RMII 24-QFN
+6  , BKP1608HS330-T         , 0.04 - L1 L2 L3 L4 L5 L6 - FERRITE BEAD 33 OHM 0603
+1  , 2N7002,215             , 0.32 - Q1 - MOSFET N-CH 60V 300MA SOT-23
+2  , RMCF1/16270JRTR-ND     , 0.02 - R14 R15 - RES 270 OHM 1/10W 5% 0603 SMD
+2  , RC0402FR-0733RL        , 0.07 - R1 R2 - RES 33.0 OHM 1/16W 1% 0402 SMD
+4  , RC0402FR-0749R9L       , 0.07 - R4 R5 R6 R7 - RES 49.9 OHM 1/16W 1% 0402 SMD
+1  , RC0402FR-071K5L        , 0.07 - R3 - RES 1.50K OHM 1/16W 1% 0402 SMD
+1  , CRCW04021K60JNED       , 0.07 - R12 - RES 1.6K OHM 1/16W 5% 0402 SMD
+1  , RC0402FR-0712K1L       , 0.07 - R13 - RES 12.1K OHM 1/16W 1% 0402 SMD
+2  , RMCF1/16S4.7KJRTR-ND   , 0.02 - R9 R23 - RES 4.7K OHM 1/16W 5% 0402 SMD
+2  , RMCF1/16S10KJRTR-ND    , 0.02 - R8 R22 - RES 10K OHM 1/16W 5% 0402 SMD
+3  , RMCF1/16S15KFRTR-ND    , 0.04 - R10 R20 R21 - RES 15K OHM 1/16W 1% 0402 SMD
+1  , RMCF1/16S1MJRTR-ND     , 0.02 - R11 - RES 1M OHM 1/16W 5% 0402 SMD
+1  , RC0402FR-0743KL        , 0.07 - R17 - RES 43.0K OHM 1/16W 1% 0402 SMD
+1  , CRCW040273K2FKED       , 0.08 - R16 - RES 73.2K OHM 1/16W 1% 0402 SMD
+1  , UX60-MB-5ST            , 1.18 - U1 - CONN RECEPT MINI-B USB2.0 5POS
+1  , 2908-05WB-MG           , 1.23 - U3 - CONN EJECT MICROSD PUSH-PUSH SMD
+1  , GRPB052VWVN-RC         , 1.11 - U4 - Cortex CONN HEADER .050" 10PS DL PCB AU
+2  , TL59AF160Q             , 0.33 - SW1 SW2 - SWITCH TACT RADIAL H=5MM 160GF
+1  , NX3225SA-12.000000MHZ  , 1.06 - X1 - CRYSTAL 12.000000 MHZ SMD 8PF 3.2x2.5mm 15ppm
+1  , 8Z-25.000MAAJ-T        , 2.06 - X3 - CRYSTAL 25.000 MHZ 18PF SMD 18pF 2.5x2.0mm
+1  , ABS10-32.768KHZ-T      , 1.13 - X2 - CRYSTAL 32.768KHZ 12.5PF SMD 12.5pF 4.9mm x 1.8mm
+2  , 68000-436HLF           , 0.96 - P2 P3 - .100" STRAIGHT 36POS TH Male Header
+1  , J0011D01BNL            , 6.87 - J1 - CONN PULSEJACK 1PORT 10/100B-TX with LEDs
+1  , 151-1082-ND            , 1.10 - U2 - CONN USB JACK TYPE A VERT STR
+1  , S7035-ND               , 0.23 - P1 - CONN HEADER FEMALE 2POS .1" GOLD
+-----------------------Total:40.19
+
+Notes:	- Component costs listed are for single quantity orders from DigiKey
+	- The outer male headers can be replaced with PPPC301LFBN-RC female headers
+	- Most components can be replaced with same size but lower quality
+	- only the 10uF and pF capacitors need to be kept high quality
+	- R1, R2, R3, R4, R5, R6, R7, R13, R16, R17 must be 1% or better
+	- R12, the LED current limiter can be 1.5k to simplify BillOfMaterials
+	- Ethernet Jack J0011D01BNL can be replaced with J0011D01NL if you do not
+	  need LEDs.  Do not mount R14, R15 270 Ohm resistors if not using LEDs
+	- MBR120VLSF can be replaced with MBRX120LF in SOD123-compatible package
+	- R18 is a copper trace connecting GND and GNDPWR
+	- R16, R17 can be other values so long as 1.22(1 + (R16/R17)) = 3.3 and
+	  both resistor values are between 10k and 100k
+	- R19 should not be mounted
+
