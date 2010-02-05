@@ -45,7 +45,7 @@ QTY, Manufacturer Part#     , Cost($USD each) - References - Description
 -----------------------Total:40.19
 
 Notes:	- Component costs listed are for single quantity orders from DigiKey
-	- The outer male headers can be replaced with PPPC301LFBN-RC female headers
+	- The outer male headers P2, P3 can be replaced with PPPC301LFBN-RC female headers
 	- Most components can be replaced with same size but lower quality
 	- only the 10uF and pF capacitors need to be kept high quality
 	- R1, R2, R3, R4, R5, R6, R7, R13, R16, R17 must be 1% or better
