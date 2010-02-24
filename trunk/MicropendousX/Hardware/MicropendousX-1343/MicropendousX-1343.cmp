@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CVpcb (20090216-final) date = 2/3/2010 10:08:51 AM
+Cmp-Mod V01 Created by CVpcb (20090216-final) date = 2/23/2010 10:21:58 PM
 
 BeginCmp
 TimeStamp = /4B184FF0;
@@ -52,7 +52,14 @@ EndCmp
 BeginCmp
 TimeStamp = /4B18585F;
 Reference = C8;
-ValeurCmp = 10n;
+ValeurCmp = 10u;
+IdModule  = SM0805_Opendous;
+EndCmp
+
+BeginCmp
+TimeStamp = /4B849616;
+Reference = C9;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
@@ -99,9 +106,9 @@ IdModule  = PIN_ARRAY_20Pin;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B199FC5;
+TimeStamp = /4B849590;
 Reference = Q1;
-ValeurCmp = NCH;
+ValeurCmp = PCH;
 IdModule  = SOT23-3_Opendous;
 EndCmp
 
@@ -596,42 +603,42 @@ IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B69917D;
+TimeStamp = /4B849824;
 Reference = V59;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B699177;
+TimeStamp = /4B849822;
 Reference = V60;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B699179;
+TimeStamp = /4B849820;
 Reference = V61;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B69917B;
+TimeStamp = /4B84981E;
 Reference = V62;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B699173;
+TimeStamp = /4B849B4C;
 Reference = V63;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B699175;
+TimeStamp = /4B849B4A;
 Reference = V64;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
