@@ -1,0 +1,1114 @@
+# EESchema Netlist Version 1.1 created  2/24/2010 10:10:10 PM
+(
+ ( /4B8542C4 $noname  Q1 PCH {Lib=MOSFET_P_OPENDOUS}
+  (    1 /USB_CONNECT )
+  (    2 N-000001 )
+  (    3 VDD33 )
+ )
+ ( /4B814D2D $noname  C41 10uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4B8141C5 $noname  C40 33uF {Lib=CP_TANTALUM_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4ADAB70B $noname  L5 FB {Lib=L_MINI}
+  (    1 GNDPWR )
+  (    2 GND )
+ )
+ ( /4B7965DD $noname  C39 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4B794B36 $noname  C38 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4B794A59 $noname  C37 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4B75F45C $noname  P9 Top {Lib=CONN_36}
+  (    1 VDD33 )
+  (    2 VIN )
+  (    3 VBUS )
+  (    4 VBUS_AUX )
+  (    5 /P1.20-MCI0-PWM1.2-SCK0 )
+  (    6 /P1.21-MCABORT-PWM1.3-SSEL0 )
+  (    7 /P1.23-MCI1-PWM1.4-MISO0 )
+  (    8 /P1.24-MCI2-PWM1.5-MOSI0 )
+  (    9 /P1.25-MCOA1-CLKOUT-MAT1.1 )
+  (   10 /P1.26-MCOB1-PWM1.6-CAP0.0 )
+  (   11 /P1.28-MCOA2-PCAP1.0-MAT0.0 )
+  (   12 /P1.29-MCOB2-PCAP1.1-MAT0.1 )
+  (   13 /P0.0-RD1-TXD3-SDA1 )
+  (   14 /P0.1-TD1-RXD3-SCL1 )
+  (   15 /P0.10-TXD2-SDA2-MAT3.0 )
+  (   16 /P2.13-^EINT3-I2STX_SDA )
+  (   17 /P0.11-RXD2-SCL2-MAT3.1 )
+  (   18 /P2.12-^EINT2-I2STX_WS )
+  (   19 /P2.11-^EINT1-I2STX_CLK )
+  (   20 /P2.10-^EINT0-NMI )
+  (   21 /P0.22-RTS1-TD1 )
+  (   22 /P0.21-RI1-RD1 )
+  (   23 /P0.20-DTR1-SCL1 )
+  (   24 /P0.19-DSR1-SDA1 )
+  (   25 /^RESET )
+  (   26 /P2.8-TD2-TXD2-ENET_MDC )
+  (   27 /P2.7-RD2-RTS1 )
+  (   28 /P2.6-PCAP1.0-RI1-TRACECLK )
+  (   29 /P2.5-PWM1.6-DTR1-TRACEDATA.0 )
+  (   30 /P2.4-PWM1.5-DSR1-TRACEDATA.1 )
+  (   31 /P2.3-PWM1.4-DCD1-TRACEDATA.2 )
+  (   32 /P2.2-PWM1.3-CTS1-TRACEDATA.3 )
+  (   33 /P2.1-PWM1.2-RXD1 )
+  (   34 /P2.0-PWM1.1-TXD1 )
+  (   35 /LEDR_A )
+  (   36 GND )
+ )
+ ( /4B75F45A $noname  P8 Bottom {Lib=CONN_36}
+  (    1 GND )
+  (    2 /P0.16-RXD1-SSEL0-SSEL )
+  (    3 /P0.17-CTS1-MISO0-MISO )
+  (    4 /P0.15-TXD1-SCK0-SCK )
+  (    5 /P0.18-DCD1-MOSI0-MOSI )
+  (    6 /P3.25-MAT0.0-PWM1.2 )
+  (    7 /P3.26-STCLK-MAT0.1-PWM1.3 )
+  (    8 /P0.27-SDA0-USB_SDA )
+  (    9 /P0.28-SCL0-USB_SCL )
+  (   10 /P1.31-SCK1-AD0.5 )
+  (   11 /VBAT )
+  (   12 /P0.23-AD0.0-I2SRX_CLK-CAP3.0 )
+  (   13 /P0.24-AD0.1-I2SRX_WS-CAP3.1 )
+  (   14 /P0.25-AD0.2-I2SRX_SDA-TXD3 )
+  (   15 /P0.26-AD0.3-AOUT-RXD3 )
+  (   16 /^TRST )
+  (   17 /P0.3-RXD0-AD0.6 )
+  (   18 /P0.2-TXD0-AD0.7 )
+  (   19 GND )
+  (   20 /^RSTOUT )
+  (   21 /P4.29-TX_MCLK-MAT2.1-RXD3 )
+  (   22 /P4.28-RX_MCLK-MAT2.0-TXD3 )
+  (   23 /P0.4-I2SRX_CLK-RD2-CAP2.0 )
+  (   24 /P0.5-I2SRX_WS-TD2-CAP2.1 )
+  (   25 /P0.6-I2SSRX_SDA-SSEL1-MAT2.0 )
+  (   26 /P0.7-I2SSTX_CLK-SCK1-MAT2.1 )
+  (   27 /P0.8-I2SSTX_WS-MISO1-MAT2.2 )
+  (   28 /P0.9-I2SSTX_SDA-MOSI1-MAT2.3 )
+  (   29 /USB_CONNECT )
+  (   30 ? )
+  (   31 ? )
+  (   32 ? )
+  (   33 ? )
+  (   34 ? )
+  (   35 /LEDL_A )
+  (   36 GND )
+ )
+ ( /4B73C6D2 $noname  U6 JTAG {Lib=CONN_CORTEXM3_JTAG}
+  (    1 VDD33 )
+  (    2 /TMS-SWDIO )
+  (    3 GND )
+  (    4 /TCK-SWDCLK )
+  (    5 GND )
+  (    6 /TDO-SWO )
+  (    7 /RTCK )
+  (    8 /TDI )
+  (    9 GND )
+  (   10 /^RESET )
+ )
+ ( /4B739B9C $noname  U3 CONN_MICROSD {Lib=CONN_MICROSD}
+  (    1 ? )
+  (    2 /P0.16-RXD1-SSEL0-SSEL )
+  (    3 /P0.18-DCD1-MOSI0-MOSI )
+  (    4 VDD33 )
+  (    5 /P0.15-TXD1-SCK0-SCK )
+  (    6 GND )
+  (    7 /P0.17-CTS1-MISO0-MISO )
+  (    8 ? )
+  (    9 GNDPWR )
+  (   10 ? )
+ )
+ ( /4B739A85 $noname  IC5 TS3USB221 {Lib=TS3USB221}
+  (    1 /1DN )
+  (    2 /1DP )
+  (    3 /2DN )
+  (    4 /2DP )
+  (    5 GND )
+  (    6 N-000030 )
+  (    7 /USB_DP )
+  (    8 /USB_DN )
+  (    9 /P1.19-MCOA0-^USB_PPWR-CAP1.1 )
+  (   10 VDD33 )
+  (   11 GND )
+ )
+ ( /4B7343EB $noname  U4 1117-3.3 {Lib=1117}
+  (    1 GND )
+  (    2 VDD33 )
+  (    3 VIN )
+  (    4 VDD33 )
+ )
+ ( /4B2273AF $noname  R41 0 {Lib=R_MINI}
+  (    1 VBUS_AUX )
+  (    2 /P1.22-MCOB0-USB_PWRD-MAT1.0 )
+ )
+ ( /4B2272B0 $noname  R40 10k {Lib=R_MINI}
+  (    1 VBUS )
+  (    2 /P1.27-CLKOUT-^USB_OVRCR-CAP0.1 )
+ )
+ ( /4B22726A $noname  C36 0.1uF {Lib=C_MINI}
+  (    1 VBUS_AUX )
+  (    2 GND )
+ )
+ ( /4B227269 $noname  C35 120uF {Lib=C_MINI}
+  (    1 VBUS_AUX )
+  (    2 GND )
+ )
+ ( /4B2271CB $noname  IC2 AP2101 {Lib=USB_SWITCH}
+  (    1 VBUS_AUX )
+  (    2 GND )
+  (    3 /P1.27-CLKOUT-^USB_OVRCR-CAP0.1 )
+  (    4 /P1.19-MCOA0-^USB_PPWR-CAP1.1 )
+  (    5 VBUS )
+ )
+ ( /4AE00E61 $noname  CR2 ESD_ZENER {Lib=ESD_ZENER}
+  (    1 GNDPWR )
+  (    2 /2DP )
+ )
+ ( /4AE00E56 $noname  CR1 ESD_ZENER {Lib=ESD_ZENER}
+  (    1 GNDPWR )
+  (    2 /2DN )
+ )
+ ( /4ADD83B9 $noname  C30 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4ADC5ACB $noname  C29 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4ADC5AC8 $noname  C28 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4AD741F6 $noname  R2 0 {Lib=R_MINI}
+  (    1 /USB_DN )
+  (    2 /2DN )
+ )
+ ( /4AD741E0 $noname  R1 0 {Lib=R_MINI}
+  (    1 /USB_DP )
+  (    2 /2DP )
+ )
+ ( /4AD73D21 $noname  R35 15k {Lib=R_MINI}
+  (    1 GND )
+  (    2 /1DP )
+ )
+ ( /4AD73D14 $noname  R34 15k {Lib=R_MINI}
+  (    1 GND )
+  (    2 /1DN )
+ )
+ ( /4AD72BD3 $noname  D2 MBRX120 {Lib=D_RECTIFIER}
+  (    1 VIN )
+  (    2 VBUS )
+ )
+ ( /4AD6D523 $noname  R32 15k {Lib=R_MINI}
+  (    1 /USB_CONNECT )
+  (    2 VDD33 )
+ )
+ ( /4AD6D45F $noname  R33 1.5k {Lib=R_MINI}
+  (    1 N-000001 )
+  (    2 /2DP )
+ )
+ ( /4AD6CE32 $noname  X3 25MHz {Lib=CRYSTAL}
+  (    1 N-000104 )
+  (    2 N-000103 )
+ )
+ ( /4AD6CD68 $noname  C19 10uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4AD6CD67 $noname  C20 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4AD6CD5E $noname  C17 10uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4AD6CD5D $noname  C18 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4AD6C39C $noname  X1 12MHz {Lib=CRYSTAL}
+  (    1 N-000107 )
+  (    2 N-000106 )
+ )
+ ( /4AD6C23F $noname  IC1 LPC176X {Lib=LPC176X}
+  (    1 /TDO-SWO )
+  (    2 /TDI )
+  (    3 /TMS-SWDIO )
+  (    4 /^TRST )
+  (    5 /TCK-SWDCLK )
+  (    6 /P0.26-AD0.3-AOUT-RXD3 )
+  (    7 /P0.25-AD0.2-I2SRX_SDA-TXD3 )
+  (    8 /P0.24-AD0.1-I2SRX_WS-CAP3.1 )
+  (    9 /P0.23-AD0.0-I2SRX_CLK-CAP3.0 )
+  (   10 /VDDA_FB )
+  (   11 GNDA )
+  (   12 /VREFP )
+  (   13 ? )
+  (   14 /^RSTOUT )
+  (   15 GNDA )
+  (   16 N-000124 )
+  (   17 /^RESET )
+  (   18 N-000123 )
+  (   19 /VBAT )
+  (   20 /P1.31-SCK1-AD0.5 )
+  (   21 /P1.30-VBUS-AD0.4 )
+  (   22 N-000106 )
+  (   23 N-000107 )
+  (   24 /P0.28-SCL0-USB_SCL )
+  (   25 /P0.27-SDA0-USB_SDA )
+  (   26 /P3.26-STCLK-MAT0.1-PWM1.3 )
+  (   27 /P3.25-MAT0.0-PWM1.2 )
+  (   28 VDD33 )
+  (   29 /D+ )
+  (   30 /D- )
+  (   31 GND )
+  (   32 /P1.18-USB_UP_LED-PWM1.1-CAP1.0 )
+  (   33 /P1.19-MCOA0-^USB_PPWR-CAP1.1 )
+  (   34 /P1.20-MCI0-PWM1.2-SCK0 )
+  (   35 /P1.21-MCABORT-PWM1.3-SSEL0 )
+  (   36 /P1.22-MCOB0-USB_PWRD-MAT1.0 )
+  (   37 /P1.23-MCI1-PWM1.4-MISO0 )
+  (   38 /P1.24-MCI2-PWM1.5-MOSI0 )
+  (   39 /P1.25-MCOA1-CLKOUT-MAT1.1 )
+  (   40 /P1.26-MCOB1-PWM1.6-CAP0.0 )
+  (   41 GND )
+  (   42 VDD33 )
+  (   43 /P1.27-CLKOUT-^USB_OVRCR-CAP0.1 )
+  (   44 /P1.28-MCOA2-PCAP1.0-MAT0.0 )
+  (   45 /P1.29-MCOB2-PCAP1.1-MAT0.1 )
+  (   46 /P0.0-RD1-TXD3-SDA1 )
+  (   47 /P0.1-TD1-RXD3-SCL1 )
+  (   48 /P0.10-TXD2-SDA2-MAT3.0 )
+  (   49 /P0.11-RXD2-SCL2-MAT3.1 )
+  (   50 /P2.13-^EINT3-I2STX_SDA )
+  (   51 /P2.12-^EINT2-I2STX_WS )
+  (   52 /P2.11-^EINT1-I2STX_CLK )
+  (   53 /P2.10-^EINT0-NMI )
+  (   54 VDD33 )
+  (   55 GND )
+  (   56 /P0.22-RTS1-TD1 )
+  (   57 /P0.21-RI1-RD1 )
+  (   58 /P0.20-DTR1-SCL1 )
+  (   59 /P0.19-DSR1-SDA1 )
+  (   60 /P0.18-DCD1-MOSI0-MOSI )
+  (   61 /P0.17-CTS1-MISO0-MISO )
+  (   62 /P0.15-TXD1-SCK0-SCK )
+  (   63 /P0.16-RXD1-SSEL0-SSEL )
+  (   64 /USB_CONNECT )
+  (   65 /P2.8-TD2-TXD2-ENET_MDC )
+  (   66 /P2.7-RD2-RTS1 )
+  (   67 /P2.6-PCAP1.0-RI1-TRACECLK )
+  (   68 /P2.5-PWM1.6-DTR1-TRACEDATA.0 )
+  (   69 /P2.4-PWM1.5-DSR1-TRACEDATA.1 )
+  (   70 /P2.3-PWM1.4-DCD1-TRACEDATA.2 )
+  (   71 VDD33 )
+  (   72 GND )
+  (   73 /P2.2-PWM1.3-CTS1-TRACEDATA.3 )
+  (   74 /P2.1-PWM1.2-RXD1 )
+  (   75 /P2.0-PWM1.1-TXD1 )
+  (   76 /P0.9-I2SSTX_SDA-MOSI1-MAT2.3 )
+  (   77 /P0.8-I2SSTX_WS-MISO1-MAT2.2 )
+  (   78 /P0.7-I2SSTX_CLK-SCK1-MAT2.1 )
+  (   79 /P0.6-I2SSRX_SDA-SSEL1-MAT2.0 )
+  (   80 /P0.5-I2SRX_WS-TD2-CAP2.1 )
+  (   81 /P0.4-I2SRX_CLK-RD2-CAP2.0 )
+  (   82 /P4.28-RX_MCLK-MAT2.0-TXD3 )
+  (   83 GND )
+  (   84 VDD33 )
+  (   85 /P4.29-TX_MCLK-MAT2.1-RXD3 )
+  (   86 /P1.17-ENET_MDIO )
+  (   87 /P1.16-ENET_MDC )
+  (   88 /P1.15-ENET_REF_CLK )
+  (   89 /P1.14-ENET_RX_ER )
+  (   90 /P1.10-ENET_RXD1 )
+  (   91 /P1.9-ENET_RXD0 )
+  (   92 /P1.8-ENET_CRS )
+  (   93 /P1.4-ENET_TX_EN )
+  (   94 /P1.1-ENET_TXD1 )
+  (   95 /P1.0-ENET_TXD0 )
+  (   96 VDD33 )
+  (   97 GND )
+  (   98 /P0.2-TXD0-AD0.7 )
+  (   99 /P0.3-RXD0-AD0.6 )
+  (  100 /RTCK )
+ )
+ ( /4ACF2E00 $noname  R23 4.7k {Lib=R_MINI}
+  (    1 /P1.30-VBUS-AD0.4 )
+  (    2 VBUS )
+ )
+ ( /4A8B1065 $noname  R22 10k {Lib=R_MINI}
+  (    1 GND )
+  (    2 /LED1 )
+ )
+ ( /4A8AEDCD $noname  C24 10uF {Lib=C_MINI}
+  (    1 /VBAT )
+  (    2 GND )
+ )
+ ( /4A8A5DEF $noname  J1 PULSE_J0011_PHY_SIDE {Lib=PULSE_J0011_PHY_SIDE}
+  (    1 /TD+ )
+  (    2 /TD- )
+  (    3 /RD+ )
+  (    4 VDD33 )
+  (    5 VDD33 )
+  (    6 /RD- )
+  (    7 ? )
+  (    8 GND )
+  (    9 /LEDL_A )
+  (   10 GND )
+  (   11 GND )
+  (   12 /LEDR_A )
+  (   13 GNDPWR )
+ )
+ ( /4A89FECB $noname  R7 49.9 {Lib=R_MINI}
+  (    1 /RD+ )
+  (    2 VDD33 )
+ )
+ ( /4A89FECA $noname  R6 49.9 {Lib=R_MINI}
+  (    1 /RD- )
+  (    2 VDD33 )
+ )
+ ( /4A89FEC7 $noname  R5 49.9 {Lib=R_MINI}
+  (    1 /TD+ )
+  (    2 VDD33 )
+ )
+ ( /4A89FEB4 $noname  R39 49.9 {Lib=R_MINI}
+  (    1 /TD- )
+  (    2 VDD33 )
+ )
+ ( /4A89FBF2 $noname  C7 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4A89F056 $noname  R11 1M {Lib=R_MINI}
+  (    1 N-000103 )
+  (    2 N-000104 )
+ )
+ ( /4A89EF10 $noname  C21 10uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4A89EEC2 $noname  C8 12pF {Lib=C_MINI}
+  (    1 /TD- )
+  (    2 GND )
+ )
+ ( /4A89EEC1 $noname  C11 12pF {Lib=C_MINI}
+  (    1 /RD+ )
+  (    2 GND )
+ )
+ ( /4A89EEBF $noname  C10 12pF {Lib=C_MINI}
+  (    1 /RD- )
+  (    2 GND )
+ )
+ ( /4A89EEA8 $noname  C9 12pF {Lib=C_MINI}
+  (    1 /TD+ )
+  (    2 GND )
+ )
+ ( /4A89E96B $noname  R21 15k {Lib=R_MINI}
+  (    1 /^RESET )
+  (    2 VDD33 )
+ )
+ ( /4A89E965 $noname  R20 15k {Lib=R_MINI}
+  (    1 /P2.10-^EINT0-NMI )
+  (    2 VDD33 )
+ )
+ ( /4A89E934 $noname  SW2 NMI {Lib=SWITCH_PUSHBUTTON}
+  (    1 /P2.10-^EINT0-NMI )
+  (    2 GND )
+ )
+ ( /4A89E931 $noname  SW1 RESET {Lib=SWITCH_PUSHBUTTON}
+  (    1 /^RESET )
+  (    2 GND )
+ )
+ ( /4A89E766 $noname  R14 270 {Lib=R_MINI}
+  (    1 /LEDL_A )
+  (    2 /LED1 )
+ )
+ ( /4A89E763 $noname  R15 270 {Lib=R_MINI}
+  (    1 /LEDR_A )
+  (    2 /LED2 )
+ )
+ ( /4A89E4C1 $noname  R8 10k {Lib=R_MINI}
+  (    1 GND )
+  (    2 /LED2 )
+ )
+ ( /4A89DFA4 $noname  C12 1uF {Lib=C_MINI}
+  (    1 GND )
+  (    2 /VDDCR )
+ )
+ ( /4A89DF50 $noname  R13 12.1k {Lib=R_MINI}
+  (    1 /RBIAS )
+  (    2 GND )
+ )
+ ( /4A89DE7A $noname  C5 22pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000104 )
+ )
+ ( /4A89DE79 $noname  C6 22pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000103 )
+ )
+ ( /4A89DB24 $noname  R37 33 {Lib=R_MINI}
+  (    1 /D- )
+  (    2 /USB_DN )
+ )
+ ( /4A89DB20 $noname  R36 33 {Lib=R_MINI}
+  (    1 /D+ )
+  (    2 /USB_DP )
+ )
+ ( /4A89BD36 $noname  C3 22pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000123 )
+ )
+ ( /4A89BD35 $noname  C4 22pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000124 )
+ )
+ ( /4A89BD34 $noname  X2 32.768kHz {Lib=CRYSTAL}
+  (    1 N-000124 )
+  (    2 N-000123 )
+ )
+ ( /4A89BD1A $noname  C1 33pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000107 )
+ )
+ ( /4A89BD17 $noname  C2 33pF {Lib=C_MINI}
+  (    1 GND )
+  (    2 N-000106 )
+ )
+ ( /4A89BCAE $noname  R12 1650 {Lib=R_MINI}
+  (    1 /P1.18-USB_UP_LED-PWM1.1-CAP1.0 )
+  (    2 N-000016 )
+ )
+ ( /4A89BBDF $noname  D1 USB {Lib=D_LED}
+  (    1 N-000016 )
+  (    2 VDD33 )
+ )
+ ( /4A89BAAE $noname  TP1 CONN_1 {Lib=CONN_1}
+  (    1 N-000030 )
+ )
+ ( /4A89BA8F $noname  R10 15k {Lib=R_MINI}
+  (    1 /P1.19-MCOA0-^USB_PPWR-CAP1.1 )
+  (    2 VDD33 )
+ )
+ ( /4A89BA84 $noname  R9 15k {Lib=R_MINI}
+  (    1 N-000030 )
+  (    2 VDD33 )
+ )
+ ( /4A89B9AB $noname  C22 0.1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4A89B9AA $noname  C23 0.01uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4A89B9A1 $noname  C25 0.1uF {Lib=C_MINI}
+  (    1 /P2.10-^EINT0-NMI )
+  (    2 GND )
+ )
+ ( /4A89B34B $noname  C16 1uF {Lib=C_MINI}
+  (    1 VDD33 )
+  (    2 GND )
+ )
+ ( /4A89B33C $noname  C26 0.1uF {Lib=C_MINI}
+  (    1 /^RESET )
+  (    2 GND )
+ )
+ ( /4A89B194 $noname  L4 FB {Lib=L_MINI}
+  (    1 VDD33 )
+  (    2 /VDDA_FB )
+ )
+ ( /4A714C1D $noname  C13 10uF {Lib=C_MINI}
+  (    1 VIN )
+  (    2 GND )
+ )
+ ( /4A714986 $noname  L2 FB {Lib=L_MINI}
+  (    1 GNDA )
+  (    2 GND )
+ )
+ ( /4A714981 $noname  L1 FB {Lib=L_MINI}
+  (    1 /VREFP )
+  (    2 VDD33 )
+ )
+ ( /4A713FD4 $noname  U1 USB-miniB {Lib=USBCONN-HOSTCAPABLE}
+  (    1 VBUS )
+  (    2 /2DN )
+  (    3 /2DP )
+  (    4 GND )
+  (    5 GNDPWR )
+  (    6 ? )
+ )
+ ( /4A713FC5 $noname  U2 USB-A {Lib=USBCONN}
+  (    1 VBUS_AUX )
+  (    2 /1DN )
+  (    3 /1DP )
+  (    4 GND )
+  (    5 GNDPWR )
+ )
+ ( /4A713F80 $noname  IC4 LAN8720 {Lib=LAN8720}
+  (    1 VDD33 )
+  (    2 /LED2 )
+  (    3 /LED1 )
+  (    4 N-000103 )
+  (    5 N-000104 )
+  (    6 /VDDCR )
+  (    7 /P1.10-ENET_RXD1 )
+  (    8 /P1.9-ENET_RXD0 )
+  (    9 VDD33 )
+  (   10 /P1.14-ENET_RX_ER )
+  (   11 /P1.8-ENET_CRS )
+  (   12 /P1.17-ENET_MDIO )
+  (   13 /P1.16-ENET_MDC )
+  (   14 /P1.15-ENET_REF_CLK )
+  (   15 /^RSTOUT )
+  (   16 /P1.4-ENET_TX_EN )
+  (   17 /P1.0-ENET_TXD0 )
+  (   18 /P1.1-ENET_TXD1 )
+  (   19 VDD33 )
+  (   20 /TD- )
+  (   21 /TD+ )
+  (   22 /RD- )
+  (   23 /RD+ )
+  (   24 /RBIAS )
+  (   25 GND )
+ )
+)
+*
+{ Allowed footprints by component:
+$component D2
+ D?
+ SO*
+ SM*
+ SLP1006P2
+$endlist
+$endfootprintlist
+}
+{ Pin List by Nets
+Net 1 "" ""
+ Q1 2
+ R33 1
+Net 2 "GND" "GND"
+ IC5 5
+ P8 36
+ IC5 11
+ U4 1
+ C36 2
+ C35 2
+ IC2 2
+ C30 2
+ C29 2
+ C28 2
+ P9 36
+ R35 1
+ R34 1
+ U3 6
+ U6 3
+ U6 5
+ C19 2
+ C20 2
+ C17 2
+ C18 2
+ IC4 25
+ U6 9
+ U2 4
+ U1 4
+ C37 2
+ C38 2
+ C39 2
+ L5 2
+ L2 2
+ IC1 31
+ C13 2
+ IC1 41
+ C40 2
+ C26 2
+ C16 2
+ C25 2
+ C23 2
+ C22 2
+ IC1 55
+ C41 2
+ IC1 72
+ IC1 83
+ C2 1
+ C1 1
+ C4 1
+ IC1 97
+ C3 1
+ C6 1
+ C5 1
+ R22 1
+ C24 2
+ J1 11
+ J1 10
+ J1 8
+ R13 2
+ C12 1
+ P8 1
+ C7 2
+ P8 19
+ R8 1
+ C21 2
+ C8 2
+ C11 2
+ C10 2
+ C9 2
+ SW1 2
+ SW2 2
+Net 3 "/VDDA_FB" "VDDA_FB"
+ IC1 10
+ L4 2
+Net 4 "/VDDCR" "VDDCR"
+ IC4 6
+ C12 2
+Net 5 "/VBAT" "VBAT"
+ P8 11
+ C24 1
+ IC1 19
+Net 6 "VIN" "VIN"
+ P9 2
+ U4 3
+ C13 1
+ D2 1
+Net 7 "/P1.27-CLKOUT-^USB_OVRCR-CAP0.1" "P1.27-CLKOUT-^USB_OVRCR-CAP0.1"
+ IC1 43
+ R40 2
+ IC2 3
+Net 8 "/P1.19-MCOA0-^USB_PPWR-CAP1.1" "P1.19-MCOA0-^USB_PPWR-CAP1.1"
+ IC5 9
+ R10 1
+ IC2 4
+ IC1 33
+Net 9 "VBUS_AUX" "VBUS_AUX"
+ P9 4
+ IC2 1
+ C35 1
+ C36 1
+ U2 1
+ R41 1
+Net 10 "/P1.8-ENET_CRS" "P1.8-ENET_CRS"
+ IC4 11
+ IC1 92
+Net 11 "/P1.10-ENET_RXD1" "P1.10-ENET_RXD1"
+ IC4 7
+ IC1 90
+Net 12 "/P1.4-ENET_TX_EN" "P1.4-ENET_TX_EN"
+ IC4 16
+ IC1 93
+Net 13 "/P1.0-ENET_TXD0" "P1.0-ENET_TXD0"
+ IC4 17
+ IC1 95
+Net 14 "/P1.17-ENET_MDIO" "P1.17-ENET_MDIO"
+ IC4 12
+ IC1 86
+Net 15 "/P1.15-ENET_REF_CLK" "P1.15-ENET_REF_CLK"
+ IC1 88
+ IC4 14
+Net 16 "" ""
+ D1 1
+ R12 2
+Net 17 "/D-" "D-"
+ R37 1
+ IC1 30
+Net 18 "/VREFP" "VREFP"
+ IC1 12
+ L1 1
+Net 19 "/LED2" "LED2"
+ R15 2
+ IC4 2
+ R8 2
+Net 20 "/RD+" "RD+"
+ R7 1
+ C11 1
+ IC4 23
+ J1 3
+Net 21 "/RBIAS" "RBIAS"
+ R13 1
+ IC4 24
+Net 22 "/TD+" "TD+"
+ IC4 21
+ R5 1
+ C9 1
+ J1 1
+Net 23 "/TD-" "TD-"
+ IC4 20
+ C8 1
+ R39 1
+ J1 2
+Net 24 "/RD-" "RD-"
+ R6 1
+ J1 6
+ IC4 22
+ C10 1
+Net 25 "/LED1" "LED1"
+ R14 2
+ IC4 3
+ R22 2
+Net 26 "GNDA" "GNDA"
+ IC1 15
+ IC1 11
+ L2 1
+Net 27 "/D+" "D+"
+ IC1 29
+ R36 1
+Net 28 "/P1.30-VBUS-AD0.4" "P1.30-VBUS-AD0.4"
+ IC1 21
+ R23 1
+Net 29 "/P1.18-USB_UP_LED-PWM1.1-CAP1.0" "P1.18-USB_UP_LED-PWM1.1-CAP1.0"
+ R12 1
+ IC1 32
+Net 30 "" ""
+ TP1 1
+ R9 1
+ IC5 6
+Net 31 "/P1.16-ENET_MDC" "P1.16-ENET_MDC"
+ IC4 13
+ IC1 87
+Net 32 "/P1.1-ENET_TXD1" "P1.1-ENET_TXD1"
+ IC4 18
+ IC1 94
+Net 33 "/P1.9-ENET_RXD0" "P1.9-ENET_RXD0"
+ IC1 91
+ IC4 8
+Net 34 "/P1.14-ENET_RX_ER" "P1.14-ENET_RX_ER"
+ IC1 89
+ IC4 10
+Net 35 "VBUS" "VBUS"
+ R23 2
+ P9 3
+ R40 1
+ IC2 5
+ U1 1
+ D2 2
+Net 36 "GNDPWR" "GNDPWR"
+ U1 5
+ U2 5
+ J1 13
+ CR1 1
+ CR2 1
+ L5 1
+ U3 9
+Net 42 "VDD33" "VDD33"
+ IC5 10
+ C39 1
+ Q1 3
+ U3 4
+ C40 1
+ P9 1
+ U4 4
+ U4 2
+ C41 1
+ U6 1
+ R21 2
+ R20 2
+ C38 1
+ C21 1
+ C37 1
+ IC4 1
+ C30 1
+ IC4 19
+ C29 1
+ IC4 9
+ C28 1
+ J1 5
+ J1 4
+ IC1 84
+ IC1 42
+ IC1 96
+ IC1 71
+ IC1 54
+ IC1 28
+ C7 1
+ R39 2
+ L1 2
+ D1 2
+ R5 2
+ R7 2
+ R6 2
+ R32 2
+ L4 1
+ C16 1
+ C19 1
+ C20 1
+ C17 1
+ C23 1
+ C18 1
+ C22 1
+ R10 2
+ R9 2
+Net 43 "/LEDR_A" "LEDR_A"
+ P9 35
+ J1 12
+ R15 1
+Net 44 "/^RESET" "^RESET"
+ C26 1
+ IC1 17
+ SW1 1
+ U6 10
+ R21 1
+ P9 25
+Net 45 "/P0.19-DSR1-SDA1" "P0.19-DSR1-SDA1"
+ P9 24
+ IC1 59
+Net 46 "/P0.20-DTR1-SCL1" "P0.20-DTR1-SCL1"
+ P9 23
+ IC1 58
+Net 47 "/P0.21-RI1-RD1" "P0.21-RI1-RD1"
+ IC1 57
+ P9 22
+Net 48 "/P0.22-RTS1-TD1" "P0.22-RTS1-TD1"
+ IC1 56
+ P9 21
+Net 49 "/P2.10-^EINT0-NMI" "P2.10-^EINT0-NMI"
+ P9 20
+ SW2 1
+ C25 1
+ IC1 53
+ R20 1
+Net 50 "/P2.11-^EINT1-I2STX_CLK" "P2.11-^EINT1-I2STX_CLK"
+ IC1 52
+ P9 19
+Net 51 "/P2.12-^EINT2-I2STX_WS" "P2.12-^EINT2-I2STX_WS"
+ IC1 51
+ P9 18
+Net 52 "/P0.11-RXD2-SCL2-MAT3.1" "P0.11-RXD2-SCL2-MAT3.1"
+ P9 17
+ IC1 49
+Net 53 "/P2.13-^EINT3-I2STX_SDA" "P2.13-^EINT3-I2STX_SDA"
+ P9 16
+ IC1 50
+Net 54 "/P0.10-TXD2-SDA2-MAT3.0" "P0.10-TXD2-SDA2-MAT3.0"
+ IC1 48
+ P9 15
+Net 55 "/P0.1-TD1-RXD3-SCL1" "P0.1-TD1-RXD3-SCL1"
+ P9 14
+ IC1 47
+Net 56 "/P0.0-RD1-TXD3-SDA1" "P0.0-RD1-TXD3-SDA1"
+ IC1 46
+ P9 13
+Net 57 "/P1.29-MCOB2-PCAP1.1-MAT0.1" "P1.29-MCOB2-PCAP1.1-MAT0.1"
+ IC1 45
+ P9 12
+Net 58 "/P1.28-MCOA2-PCAP1.0-MAT0.0" "P1.28-MCOA2-PCAP1.0-MAT0.0"
+ P9 11
+ IC1 44
+Net 59 "/P1.26-MCOB1-PWM1.6-CAP0.0" "P1.26-MCOB1-PWM1.6-CAP0.0"
+ P9 10
+ IC1 40
+Net 60 "/P1.25-MCOA1-CLKOUT-MAT1.1" "P1.25-MCOA1-CLKOUT-MAT1.1"
+ P9 9
+ IC1 39
+Net 61 "/P1.24-MCI2-PWM1.5-MOSI0" "P1.24-MCI2-PWM1.5-MOSI0"
+ P9 8
+ IC1 38
+Net 62 "/P1.23-MCI1-PWM1.4-MISO0" "P1.23-MCI1-PWM1.4-MISO0"
+ IC1 37
+ P9 7
+Net 63 "/P1.21-MCABORT-PWM1.3-SSEL0" "P1.21-MCABORT-PWM1.3-SSEL0"
+ P9 6
+ IC1 35
+Net 64 "/P1.20-MCI0-PWM1.2-SCK0" "P1.20-MCI0-PWM1.2-SCK0"
+ P9 5
+ IC1 34
+Net 65 "/LEDL_A" "LEDL_A"
+ P8 35
+ R14 1
+ J1 9
+Net 66 "/USB_CONNECT" "USB_CONNECT"
+ IC1 64
+ R32 1
+ Q1 1
+ P8 29
+Net 67 "/P0.9-I2SSTX_SDA-MOSI1-MAT2.3" "P0.9-I2SSTX_SDA-MOSI1-MAT2.3"
+ P8 28
+ IC1 76
+Net 68 "/P0.8-I2SSTX_WS-MISO1-MAT2.2" "P0.8-I2SSTX_WS-MISO1-MAT2.2"
+ IC1 77
+ P8 27
+Net 69 "/P0.7-I2SSTX_CLK-SCK1-MAT2.1" "P0.7-I2SSTX_CLK-SCK1-MAT2.1"
+ P8 26
+ IC1 78
+Net 70 "/P0.6-I2SSRX_SDA-SSEL1-MAT2.0" "P0.6-I2SSRX_SDA-SSEL1-MAT2.0"
+ P8 25
+ IC1 79
+Net 71 "/P0.5-I2SRX_WS-TD2-CAP2.1" "P0.5-I2SRX_WS-TD2-CAP2.1"
+ P8 24
+ IC1 80
+Net 72 "/P0.4-I2SRX_CLK-RD2-CAP2.0" "P0.4-I2SRX_CLK-RD2-CAP2.0"
+ P8 23
+ IC1 81
+Net 73 "/P4.28-RX_MCLK-MAT2.0-TXD3" "P4.28-RX_MCLK-MAT2.0-TXD3"
+ IC1 82
+ P8 22
+Net 74 "/P4.29-TX_MCLK-MAT2.1-RXD3" "P4.29-TX_MCLK-MAT2.1-RXD3"
+ P8 21
+ IC1 85
+Net 75 "/^RSTOUT" "^RSTOUT"
+ P8 20
+ IC4 15
+ IC1 14
+Net 76 "/P0.2-TXD0-AD0.7" "P0.2-TXD0-AD0.7"
+ P8 18
+ IC1 98
+Net 77 "/P0.3-RXD0-AD0.6" "P0.3-RXD0-AD0.6"
+ P8 17
+ IC1 99
+Net 78 "/^TRST" "^TRST"
+ IC1 4
+ P8 16
+Net 79 "/P0.26-AD0.3-AOUT-RXD3" "P0.26-AD0.3-AOUT-RXD3"
+ IC1 6
+ P8 15
+Net 80 "/P0.25-AD0.2-I2SRX_SDA-TXD3" "P0.25-AD0.2-I2SRX_SDA-TXD3"
+ IC1 7
+ P8 14
+Net 81 "/P0.24-AD0.1-I2SRX_WS-CAP3.1" "P0.24-AD0.1-I2SRX_WS-CAP3.1"
+ P8 13
+ IC1 8
+Net 82 "/P0.23-AD0.0-I2SRX_CLK-CAP3.0" "P0.23-AD0.0-I2SRX_CLK-CAP3.0"
+ IC1 9
+ P8 12
+Net 83 "/P1.31-SCK1-AD0.5" "P1.31-SCK1-AD0.5"
+ P8 10
+ IC1 20
+Net 84 "/P0.28-SCL0-USB_SCL" "P0.28-SCL0-USB_SCL"
+ IC1 24
+ P8 9
+Net 85 "/P0.27-SDA0-USB_SDA" "P0.27-SDA0-USB_SDA"
+ IC1 25
+ P8 8
+Net 86 "/P3.26-STCLK-MAT0.1-PWM1.3" "P3.26-STCLK-MAT0.1-PWM1.3"
+ IC1 26
+ P8 7
+Net 87 "/P3.25-MAT0.0-PWM1.2" "P3.25-MAT0.0-PWM1.2"
+ IC1 27
+ P8 6
+Net 88 "/P0.18-DCD1-MOSI0-MOSI" "P0.18-DCD1-MOSI0-MOSI"
+ P8 5
+ IC1 60
+ U3 3
+Net 89 "/P0.15-TXD1-SCK0-SCK" "P0.15-TXD1-SCK0-SCK"
+ P8 4
+ IC1 62
+ U3 5
+Net 90 "/P0.17-CTS1-MISO0-MISO" "P0.17-CTS1-MISO0-MISO"
+ U3 7
+ IC1 61
+ P8 3
+Net 91 "/P0.16-RXD1-SSEL0-SSEL" "P0.16-RXD1-SSEL0-SSEL"
+ U3 2
+ IC1 63
+ P8 2
+Net 92 "/RTCK" "RTCK"
+ U6 7
+ IC1 100
+Net 96 "/P1.22-MCOB0-USB_PWRD-MAT1.0" "P1.22-MCOB0-USB_PWRD-MAT1.0"
+ R41 2
+ IC1 36
+Net 97 "/2DP" "2DP"
+ IC5 4
+ U1 3
+ R1 2
+ CR2 2
+ R33 2
+Net 98 "/2DN" "2DN"
+ CR1 2
+ U1 2
+ IC5 3
+ R2 2
+Net 99 "/USB_DN" "USB_DN"
+ IC5 8
+ R2 1
+ R37 2
+Net 100 "/USB_DP" "USB_DP"
+ IC5 7
+ R36 2
+ R1 1
+Net 101 "/1DP" "1DP"
+ R35 2
+ U2 3
+ IC5 2
+Net 102 "/1DN" "1DN"
+ IC5 1
+ U2 2
+ R34 2
+Net 103 "" ""
+ IC4 4
+ X3 2
+ C6 2
+ R11 1
+Net 104 "" ""
+ C5 2
+ X3 1
+ IC4 5
+ R11 2
+Net 106 "" ""
+ IC1 22
+ C2 2
+ X1 2
+Net 107 "" ""
+ X1 1
+ C1 2
+ IC1 23
+Net 108 "/P2.8-TD2-TXD2-ENET_MDC" "P2.8-TD2-TXD2-ENET_MDC"
+ IC1 65
+ P9 26
+Net 109 "/P2.7-RD2-RTS1" "P2.7-RD2-RTS1"
+ P9 27
+ IC1 66
+Net 110 "/P2.6-PCAP1.0-RI1-TRACECLK" "P2.6-PCAP1.0-RI1-TRACECLK"
+ P9 28
+ IC1 67
+Net 111 "/P2.5-PWM1.6-DTR1-TRACEDATA.0" "P2.5-PWM1.6-DTR1-TRACEDATA.0"
+ IC1 68
+ P9 29
+Net 112 "/P2.4-PWM1.5-DSR1-TRACEDATA.1" "P2.4-PWM1.5-DSR1-TRACEDATA.1"
+ IC1 69
+ P9 30
+Net 113 "/P2.3-PWM1.4-DCD1-TRACEDATA.2" "P2.3-PWM1.4-DCD1-TRACEDATA.2"
+ IC1 70
+ P9 31
+Net 114 "/P2.2-PWM1.3-CTS1-TRACEDATA.3" "P2.2-PWM1.3-CTS1-TRACEDATA.3"
+ IC1 73
+ P9 32
+Net 115 "/P2.1-PWM1.2-RXD1" "P2.1-PWM1.2-RXD1"
+ IC1 74
+ P9 33
+Net 116 "/P2.0-PWM1.1-TXD1" "P2.0-PWM1.1-TXD1"
+ IC1 75
+ P9 34
+Net 117 "/TCK-SWDCLK" "TCK-SWDCLK"
+ U6 4
+ IC1 5
+Net 118 "/TMS-SWDIO" "TMS-SWDIO"
+ U6 2
+ IC1 3
+Net 119 "/TDI" "TDI"
+ IC1 2
+ U6 8
+Net 120 "/TDO-SWO" "TDO-SWO"
+ IC1 1
+ U6 6
+Net 123 "" ""
+ X2 2
+ C3 2
+ IC1 18
+Net 124 "" ""
+ IC1 16
+ X2 1
+ C4 2
+}
+#End

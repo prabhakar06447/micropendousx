@@ -1,0 +1,22 @@
+Not yet complete.
+
+Open the design in KiCAD and CVpcb will list all footprints.
+
+MicropendousX-1769_Assembly.svg shows component placement and values.
+
+Notes:	- 10uF capacitors are 0805 size and should be X5R +/-20% 10V or better
+	- all other capacitors and resistors are 0603 unless otherwise noted
+	- precision components are noted as such, all other parts can be standard
+	- USB Switch - TS3USB221DRCR
+	- USB Power Switch - AP2161WG - Active Low SOT23-5 (SOT25)
+	- 32.768kHz Crystal - standard cylinder watch crystal
+	- Crystals 12MHz, 25MHz - HC49-US +/- 30ppm ~20pF load
+	- Schottky Rectifier Diode - MBRX120 or MBR120VLSF in SOD-123
+	- Regulator - 1117 3.3V in SOT223
+	- the microSD connector is the 3M 290805, DigiKey Part# 3M5607CT-ND
+	- Cortex JTAG is 1.27mm 5x2 SMT unshrouded such as DigiKey Part# S9012E-05-ND
+	- the 33uF 1206 size tantalum capacitor should be largest value and lowest ESR you can afford
+	- USB-A vertical connector can be DigiKey Part# 151-1114-ND or similar
+	- USB-miniB can be DigiKey Part# H2959CT-ND or similar
+	- all other components are standard or have no footprint variations
+
