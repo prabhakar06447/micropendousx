@@ -1,5 +1,80 @@
-# EESchema Netlist Version 1.1 created  2/23/2010 10:22:01 PM
+# EESchema Netlist Version 1.1 created  3/2/2010 2:10:49 AM
 (
+ ( /4B8CB8C3 $noname  U3 SWD_JTAG {Lib=CONN_CORTEX_DEBUG}
+  (    1 VDD )
+  (    2 /SWDIO-PIO1_3-AD4-CT32B1_MAT2 )
+  (    3 GND )
+  (    4 /SWCLK-PIO0_10-SCK-CT16B0_MAT2 )
+  (    5 GND )
+  (    6 /SWO )
+  (    7 ? )
+  (    8 ? )
+  (    9 GND )
+  (   10 /nRESET )
+ )
+ ( /4B8D96A1 $noname  IC1 LPC1343 {Lib=LPC1343}
+  (    1 /PIO2_6 )
+  (    2 /PIO2_0-nDTR )
+  (    3 /nRESET )
+  (    4 /nMSC )
+  (    5 GND )
+  (    6 /XTALIN )
+  (    7 /XTALOUT )
+  (    8 VDD )
+  (    9 /PIO1_8-CT16B1_CAP0 )
+  (   10 /PIO0_2-SSEL-CT16B0_CAP0 )
+  (   11 /PIO2_7 )
+  (   12 /PIO2_8 )
+  (   13 /PIO2_1-nDSR )
+  (   14 VBUS )
+  (   15 /PIO0_4-SCL )
+  (   16 /PIO0_5-SDA )
+  (   17 /PIO1_9-CT16B1_MAT0 )
+  (   18 /PIO2_4 )
+  (   19 N-000013 )
+  (   20 N-000008 )
+  (   21 /PIO2_5 )
+  (   22 /PIO0_6-nUSB_CONNECT-SCK )
+  (   23 /PIO0_7-nCTS )
+  (   24 /PIO2_9 )
+  (   25 /PIO2_10 )
+  (   26 /PIO2_2-nDCD )
+  (   27 /PIO0_8-MISO-CT16B0_MAT0 )
+  (   28 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+  (   29 /SWCLK-PIO0_10-SCK-CT16B0_MAT2 )
+  (   30 /PIO1_10-AD6-CT16B1_MAT1 )
+  (   31 /PIO2_11-SCK )
+  (   32 /PIO0_11-AD0-CT32B0_MAT3 )
+  (   33 /PIO1_0-AD1-CT32B_CAP0 )
+  (   34 /PIO1_1-AD2-CT32B1_MAT0 )
+  (   35 /PIO1_2-AD3-CT32B1_MAT1 )
+  (   36 /PIO3_0 )
+  (   37 /PIO3_1 )
+  (   38 /PIO2_3_nRI )
+  (   39 /SWDIO-PIO1_3-AD4-CT32B1_MAT2 )
+  (   40 /PIO1_4-AD5-CT32B1_MAT3-WAKEUP )
+  (   41 GND )
+  (   42 /PIO1_11-AD7 )
+  (   43 /PIO3_2 )
+  (   44 VDD )
+  (   45 /PIO1_5-nRTS-CT32B0_CAP0 )
+  (   46 /PIO1_6-RXD-CT32B0_MAT0 )
+  (   47 /PIO1_7-TXD-CT32B0_MAT1 )
+  (   48 /PIO3_3 )
+ )
+ ( /4B8D969F $noname  V67 VIA {Lib=VIA}
+  (    1 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+ )
+ ( /4B8D969E $noname  V66 VIA {Lib=VIA}
+  (    1 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+ )
+ ( /4B8D969D $noname  V65 VIA {Lib=VIA}
+  (    1 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+ )
+ ( /4B8D969C $noname  R7 0 {Lib=R_MINI}
+  (    1 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+  (    2 /SWO )
+ )
  ( /4B849B4C $noname  V63 VIA {Lib=VIA}
   (    1 GND )
  )
@@ -25,7 +100,7 @@
  ( /4B849590 $noname  Q1 PCH {Lib=MOSFET_P_OPENDOUS}
   (    1 /PIO0_6-nUSB_CONNECT-SCK )
   (    2 VDD )
-  (    3 N-000004 )
+  (    3 N-000010 )
  )
  ( /4B21FEB7 $noname  V58 VIA {Lib=VIA}
   (    1 VDD )
@@ -64,9 +139,6 @@
   (    1 GND )
  )
  ( /4B1B8805 $noname  V45 VIA {Lib=VIA}
-  (    1 GND )
- )
- ( /4B1B8803 $noname  V44 VIA {Lib=VIA}
   (    1 GND )
  )
  ( /4B1B8801 $noname  V51 VIA {Lib=VIA}
@@ -114,22 +186,22 @@
  )
  ( /4B1B8056 $noname  P1 Bottom {Lib=CONN_20}
   (    1 /PIO2_5 )
-  (    2 /TCK-SWCLK )
-  (    3 /PIO0_6-nUSB_CONNECT-SCK )
-  (    4 /PIO0_7-nCTS )
-  (    5 /PIO2_9 )
-  (    6 /PIO2_10 )
-  (    7 /PIO2_2-nDCD )
-  (    8 /PIO0_8-MISO-CT16B0_MAT0 )
-  (    9 /PIO0_9-MOSI-CT16B_MAT1-SWO )
-  (   10 /PIO1_10-AD6-CT16B1_MAT1 )
-  (   11 /PIO2_11-SCK )
-  (   12 /nTRST )
-  (   13 /PIO3_0 )
-  (   14 /PIO0_2-SSEL-CT16B0_CAP0 )
-  (   15 /PIO3_1 )
-  (   16 /PIO2_3_nRI )
-  (   17 /PIO1_3-SWDIO-AD4-CT32B1_MAT2 )
+  (    2 /PIO0_7-nCTS )
+  (    3 /PIO2_9 )
+  (    4 /PIO2_10 )
+  (    5 /PIO2_2-nDCD )
+  (    6 /PIO0_8-MISO-CT16B0_MAT0 )
+  (    7 /PIO0_9-MOSI-CT16B_MAT1-SWO )
+  (    8 /PIO1_10-AD6-CT16B1_MAT1 )
+  (    9 /PIO2_11-SCK )
+  (   10 /PIO0_11-AD0-CT32B0_MAT3 )
+  (   11 /PIO1_0-AD1-CT32B_CAP0 )
+  (   12 /PIO1_1-AD2-CT32B1_MAT0 )
+  (   13 /PIO1_2-AD3-CT32B1_MAT1 )
+  (   14 /PIO3_0 )
+  (   15 /PIO0_2-SSEL-CT16B0_CAP0 )
+  (   16 /PIO3_1 )
+  (   17 /PIO2_3_nRI )
   (   18 /PIO1_4-AD5-CT32B1_MAT3-WAKEUP )
   (   19 /PIO1_11-AD7 )
   (   20 GND )
@@ -176,17 +248,8 @@
  ( /4B1B77E4 $noname  V28 VIA {Lib=VIA}
   (    1 GND )
  )
- ( /4B1ACEF4 $noname  V23 VIA {Lib=VIA}
-  (    1 GND )
- )
- ( /4B1ACEF2 $noname  V22 VIA {Lib=VIA}
-  (    1 GND )
- )
- ( /4B1ACEF0 $noname  V21 VIA {Lib=VIA}
-  (    1 GND )
- )
  ( /4B1ACE68 $noname  V20 VIA {Lib=VIA}
-  (    1 /TCK-SWCLK )
+  (    1 /PIO2_9 )
  )
  ( /4B1AC49A $noname  V19 VIA {Lib=VIA}
   (    1 /nRESET )
@@ -203,76 +266,23 @@
  ( /4B19DEC9 $noname  V15 VIA {Lib=VIA}
   (    1 GND )
  )
- ( /4B19DABD $noname  V10 VIA {Lib=VIA}
-  (    1 /TMS )
- )
  ( /4B19DABB $noname  V11 VIA {Lib=VIA}
-  (    1 /TDI )
+  (    1 /PIO0_7-nCTS )
  )
  ( /4B19DAB9 $noname  V12 VIA {Lib=VIA}
-  (    1 /TCK-SWCLK )
+  (    1 /PIO0_2-SSEL-CT16B0_CAP0 )
  )
  ( /4B19DAB6 $noname  V14 VIA {Lib=VIA}
   (    1 /nRESET )
  )
  ( /4B19DAB4 $noname  V13 VIA {Lib=VIA}
-  (    1 /TDO )
+  (    1 /SWO )
  )
  ( /4B19D6E0 $noname  V8 VIA {Lib=VIA}
   (    1 VBUS )
  )
  ( /4B19D6D8 $noname  V9 VIA {Lib=VIA}
   (    1 /nMSC )
- )
- ( /4B199F4D $noname  IC1 LPC1343 {Lib=LPC1343}
-  (    1 /PIO2_6 )
-  (    2 /PIO2_0-nDTR )
-  (    3 /nRESET )
-  (    4 /nMSC )
-  (    5 GND )
-  (    6 /XTALIN )
-  (    7 /XTALOUT )
-  (    8 VDD )
-  (    9 /PIO1_8-CT16B1_CAP0 )
-  (   10 /PIO0_2-SSEL-CT16B0_CAP0 )
-  (   11 /PIO2_7 )
-  (   12 /PIO2_8 )
-  (   13 /PIO2_1-nDSR )
-  (   14 VBUS )
-  (   15 /PIO0_4-SCL )
-  (   16 /PIO0_5-SDA )
-  (   17 /PIO1_9-CT16B1_MAT0 )
-  (   18 /PIO2_4 )
-  (   19 N-000007 )
-  (   20 N-000002 )
-  (   21 /PIO2_5 )
-  (   22 /PIO0_6-nUSB_CONNECT-SCK )
-  (   23 /PIO0_7-nCTS )
-  (   24 /PIO2_9 )
-  (   25 /PIO2_10 )
-  (   26 /PIO2_2-nDCD )
-  (   27 /PIO0_8-MISO-CT16B0_MAT0 )
-  (   28 /PIO0_9-MOSI-CT16B_MAT1-SWO )
-  (   29 /TCK-SWCLK )
-  (   30 /PIO1_10-AD6-CT16B1_MAT1 )
-  (   31 /PIO2_11-SCK )
-  (   32 /TDI )
-  (   33 /TMS )
-  (   34 /TDO )
-  (   35 /nTRST )
-  (   36 /PIO3_0 )
-  (   37 /PIO3_1 )
-  (   38 /PIO2_3_nRI )
-  (   39 /PIO1_3-SWDIO-AD4-CT32B1_MAT2 )
-  (   40 /PIO1_4-AD5-CT32B1_MAT3-WAKEUP )
-  (   41 GND )
-  (   42 /PIO1_11-AD7 )
-  (   43 /PIO3_2 )
-  (   44 VDD )
-  (   45 /PIO1_5-nRTS-CT32B0_CAP0 )
-  (   46 /PIO1_6-RXD-CT32B0_MAT0 )
-  (   47 /PIO1_7-TXD-CT32B0_MAT1 )
-  (   48 /PIO3_3 )
  )
  ( /4B199E59 $noname  V7 VIA {Lib=VIA}
   (    1 GND )
@@ -325,10 +335,10 @@
  )
  ( /4B185DF5 $noname  R3 1k5 {Lib=R_MINI}
   (    1 /DP )
-  (    2 N-000004 )
+  (    2 N-000010 )
  )
  ( /4B185D15 $noname  R2 33 {Lib=R_MINI}
-  (    1 N-000007 )
+  (    1 N-000013 )
   (    2 /DM )
  )
  ( /4B185CEB $noname  CR1 ESD_ZENER {Lib=ESD_ZENER}
@@ -356,20 +366,8 @@
   (    2 GND )
  )
  ( /4B1857B3 $noname  R1 33 {Lib=R_MINI}
-  (    1 N-000002 )
+  (    1 N-000008 )
   (    2 /DP )
- )
- ( /4B18579B $noname  U3 CORTEX_M3_JTAG {Lib=CONN_CORTEXM3_JTAG}
-  (    1 VDD )
-  (    2 /TMS )
-  (    3 GND )
-  (    4 /TCK-SWCLK )
-  (    5 GND )
-  (    6 /TDO )
-  (    7 ? )
-  (    8 /TDI )
-  (    9 GND )
-  (   10 /nRESET )
  )
  ( /4B1853BA $noname  R5 12k {Lib=R_MINI}
   (    1 /nRESET )
@@ -424,22 +422,26 @@ $endlist
 $endfootprintlist
 }
 { Pin List by Nets
-Net 1 "GND" "GND"
- V63 1
- V64 1
- U4 1
- U2 4
- U1 6
- U1 9
- C1 1
- C2 1
- U3 3
- U3 5
- U3 9
+Net 2 "/SWCLK-PIO0_10-SCK-CT16B0_MAT2" "SWCLK-PIO0_10-SCK-CT16B0_MAT2"
+ U3 4
+ IC1 29
+Net 3 "/SWDIO-PIO1_3-AD4-CT32B1_MAT2" "SWDIO-PIO1_3-AD4-CT32B1_MAT2"
+ IC1 39
+ U3 2
+Net 5 "/PIO0_9-MOSI-CT16B_MAT1-SWO" "PIO0_9-MOSI-CT16B_MAT1-SWO"
+ R7 1
+ V65 1
+ V66 1
+ V67 1
+ IC1 28
+ U1 3
+ P1 7
+Net 6 "GND" "GND"
  C5 2
  C6 2
  C7 2
  C8 2
+ U4 1
  SW1 1
  SW2 1
  C3 2
@@ -449,253 +451,249 @@ Net 1 "GND" "GND"
  V5 1
  V6 1
  V7 1
- IC1 41
- IC1 5
  V15 1
  V16 1
  V17 1
  V18 1
- V21 1
- V22 1
- V23 1
  V28 1
- V29 1
  V30 1
  V31 1
  V34 1
  V35 1
- V59 1
- V60 1
- V61 1
- V62 1
- C9 2
  V36 1
  V37 1
- V57 1
  P1 20
  V38 1
  V39 1
  V40 1
  V48 1
- V43 1
- V42 1
- V41 1
- V47 1
- V46 1
- V45 1
- V44 1
- V51 1
- V50 1
  V49 1
-Net 2 "" ""
+ V50 1
+ V51 1
+ V45 1
+ V46 1
+ V47 1
+ V41 1
+ U3 3
+ U3 5
+ V42 1
+ V43 1
+ V57 1
+ C9 2
+ IC1 5
+ IC1 41
+ V62 1
+ V61 1
+ C2 1
+ C1 1
+ V60 1
+ U1 9
+ V59 1
+ V29 1
+ U3 9
+ U1 6
+ V63 1
+ V64 1
+ U2 4
+Net 7 "/PIO0_6-nUSB_CONNECT-SCK" "PIO0_6-nUSB_CONNECT-SCK"
+ IC1 22
+ Q1 1
+Net 8 "" ""
  R1 1
  IC1 20
-Net 3 "/DP" "DP"
- U2 3
- CR1 2
+Net 9 "/DP" "DP"
  R3 1
  R1 2
-Net 4 "" ""
- R3 2
+ U2 3
+ CR1 2
+Net 10 "" ""
  Q1 3
-Net 5 "VIN" "VIN"
- C3 1
- U4 3
- P2 2
+ R3 2
+Net 11 "VIN" "VIN"
  D1 1
-Net 6 "GNDPWR" "GNDPWR"
- CR2 1
- R6 2
+ C3 1
+ P2 2
+ U4 3
+Net 12 "GNDPWR" "GNDPWR"
  U2 5
+ R6 2
  CR1 1
-Net 7 "" ""
+ CR2 1
+Net 13 "" ""
  IC1 19
  R2 1
-Net 8 "/DM" "DM"
- R2 2
+Net 14 "/DM" "DM"
  U2 2
  CR2 2
-Net 9 "VBUS" "VBUS"
+ R2 2
+Net 15 "VBUS" "VBUS"
  V1 1
- V8 1
- P2 3
- D1 2
- U2 1
  IC1 14
-Net 10 "/TDO" "TDO"
+ V8 1
+ U2 1
+ D1 2
+ P2 3
+Net 16 "/SWO" "SWO"
+ R7 2
  U3 6
- IC1 34
  V13 1
-Net 11 "/TDI" "TDI"
- U3 8
- V11 1
- IC1 32
-Net 12 "/TMS" "TMS"
- V10 1
- U3 2
- IC1 33
-Net 13 "/PIO0_8-MISO-CT16B0_MAT0" "PIO0_8-MISO-CT16B0_MAT0"
- IC1 27
- V25 1
- U1 7
- V26 1
- P1 8
-Net 14 "/PIO0_2-SSEL-CT16B0_CAP0" "PIO0_2-SSEL-CT16B0_CAP0"
+Net 17 "/PIO0_2-SSEL-CT16B0_CAP0" "PIO0_2-SSEL-CT16B0_CAP0"
+ P1 15
+ IC1 10
+ V12 1
  U1 2
  V24 1
- IC1 10
- P1 14
-Net 15 "/PIO2_8" "PIO2_8"
- IC1 12
+Net 18 "/PIO0_7-nCTS" "PIO0_7-nCTS"
+ IC1 23
+ P1 2
+ V11 1
+Net 19 "/PIO2_9" "PIO2_9"
+ IC1 24
+ V20 1
+ P1 3
+Net 20 "/PIO0_8-MISO-CT16B0_MAT0" "PIO0_8-MISO-CT16B0_MAT0"
+ U1 7
+ P1 6
+ IC1 27
+ V26 1
+ V25 1
+Net 21 "/PIO2_8" "PIO2_8"
  V54 1
+ IC1 12
  P2 10
-Net 16 "/PIO2_7" "PIO2_7"
- IC1 11
+Net 22 "/PIO2_7" "PIO2_7"
  V56 1
+ IC1 11
  P2 9
-Net 17 "/PIO1_8-CT16B1_CAP0" "PIO1_8-CT16B1_CAP0"
- IC1 9
- P2 11
+Net 23 "/PIO1_8-CT16B1_CAP0" "PIO1_8-CT16B1_CAP0"
  V55 1
-Net 18 "/PIO2_4" "PIO2_4"
+ P2 11
+ IC1 9
+Net 24 "/PIO2_4" "PIO2_4"
  IC1 18
  V53 1
  P2 8
-Net 19 "/PIO2_1-nDSR" "PIO2_1-nDSR"
+Net 25 "/PIO2_1-nDSR" "PIO2_1-nDSR"
  V52 1
  IC1 13
  P2 7
-Net 20 "VDD" "VDD"
+Net 26 "VDD" "VDD"
+ C6 1
+ U1 4
  C7 1
  C8 1
- C6 1
- C4 1
  C5 1
- U4 4
- R4 2
- R5 2
- V58 1
- U1 4
  IC1 44
- IC1 8
  V3 1
  V2 1
  Q1 2
  C9 1
  U3 1
- P2 1
+ U4 4
+ R5 2
+ C4 1
+ IC1 8
  U4 2
-Net 21 "/nMSC" "nMSC"
- P2 13
+ P2 1
+ V58 1
+ R4 2
+Net 27 "/PIO3_3" "PIO3_3"
+ IC1 48
+ P2 16
+Net 28 "/PIO3_2" "PIO3_2"
+ IC1 43
+ P2 20
+Net 29 "/PIO3_1" "PIO3_1"
+ IC1 37
+ P1 16
+Net 30 "/PIO3_0" "PIO3_0"
+ IC1 36
+ P1 14
+Net 31 "/PIO2_10" "PIO2_10"
+ P1 4
+ IC1 25
+Net 32 "/PIO2_6" "PIO2_6"
+ P2 15
+ IC1 1
+Net 33 "/PIO2_5" "PIO2_5"
+ P1 1
+ IC1 21
+Net 34 "/PIO2_3_nRI" "PIO2_3_nRI"
+ IC1 38
+ P1 17
+Net 35 "/PIO2_2-nDCD" "PIO2_2-nDCD"
+ P1 5
+ IC1 26
+Net 36 "/PIO2_0-nDTR" "PIO2_0-nDTR"
+ IC1 2
+ P2 14
+Net 37 "/PIO1_11-AD7" "PIO1_11-AD7"
+ IC1 42
+ P1 19
+Net 38 "/PIO1_10-AD6-CT16B1_MAT1" "PIO1_10-AD6-CT16B1_MAT1"
+ IC1 30
+ P1 8
+Net 39 "/PIO1_9-CT16B1_MAT0" "PIO1_9-CT16B1_MAT0"
+ IC1 17
+ P2 4
+Net 40 "/PIO1_7-TXD-CT32B0_MAT1" "PIO1_7-TXD-CT32B0_MAT1"
+ IC1 47
+ P2 17
+Net 41 "/PIO1_6-RXD-CT32B0_MAT0" "PIO1_6-RXD-CT32B0_MAT0"
+ IC1 46
+ P2 18
+Net 42 "/PIO1_5-nRTS-CT32B0_CAP0" "PIO1_5-nRTS-CT32B0_CAP0"
+ P2 19
+ IC1 45
+Net 43 "/PIO0_5-SDA" "PIO0_5-SDA"
+ P2 5
+ IC1 16
+Net 44 "/PIO0_4-SCL" "PIO0_4-SCL"
+ P2 6
+ IC1 15
+Net 45 "/nMSC" "nMSC"
  IC1 4
  V32 1
  V9 1
  R4 1
+ P2 13
  SW2 2
-Net 22 "/nRESET" "nRESET"
- V19 1
- SW1 2
- R5 1
+Net 46 "/nRESET" "nRESET"
  V27 1
- V14 1
- U3 10
- IC1 3
+ R5 1
  V33 1
+ V19 1
  P2 12
-Net 23 "/nTRST" "nTRST"
- IC1 35
- P1 12
-Net 24 "/PIO2_11-SCK" "PIO2_11-SCK"
- U1 5
- P1 11
- IC1 31
-Net 25 "/PIO0_9-MOSI-CT16B_MAT1-SWO" "PIO0_9-MOSI-CT16B_MAT1-SWO"
- IC1 28
- P1 9
- U1 3
-Net 26 "/PIO2_9" "PIO2_9"
- P1 5
- IC1 24
-Net 27 "/PIO0_7-nCTS" "PIO0_7-nCTS"
- P1 4
- IC1 23
-Net 28 "/PIO0_6-nUSB_CONNECT-SCK" "PIO0_6-nUSB_CONNECT-SCK"
- P1 3
- Q1 1
- IC1 22
-Net 29 "/TCK-SWCLK" "TCK-SWCLK"
- IC1 29
- P1 2
- V20 1
- U3 4
- V12 1
-Net 30 "/PIO3_3" "PIO3_3"
- P2 16
- IC1 48
-Net 31 "/PIO3_2" "PIO3_2"
- IC1 43
- P2 20
-Net 32 "/PIO3_1" "PIO3_1"
- IC1 37
- P1 15
-Net 33 "/PIO3_0" "PIO3_0"
- P1 13
- IC1 36
-Net 34 "/PIO2_10" "PIO2_10"
- IC1 25
- P1 6
-Net 35 "/PIO2_6" "PIO2_6"
- IC1 1
- P2 15
-Net 36 "/PIO2_5" "PIO2_5"
- IC1 21
- P1 1
-Net 37 "/PIO2_3_nRI" "PIO2_3_nRI"
- IC1 38
- P1 16
-Net 38 "/PIO2_2-nDCD" "PIO2_2-nDCD"
- IC1 26
- P1 7
-Net 39 "/PIO2_0-nDTR" "PIO2_0-nDTR"
- P2 14
- IC1 2
-Net 40 "/PIO1_11-AD7" "PIO1_11-AD7"
- IC1 42
- P1 19
-Net 41 "/PIO1_10-AD6-CT16B1_MAT1" "PIO1_10-AD6-CT16B1_MAT1"
- IC1 30
- P1 10
-Net 42 "/PIO1_9-CT16B1_MAT0" "PIO1_9-CT16B1_MAT0"
- P2 4
- IC1 17
-Net 43 "/PIO1_7-TXD-CT32B0_MAT1" "PIO1_7-TXD-CT32B0_MAT1"
- P2 17
- IC1 47
-Net 44 "/PIO1_6-RXD-CT32B0_MAT0" "PIO1_6-RXD-CT32B0_MAT0"
- P2 18
- IC1 46
-Net 45 "/PIO1_5-nRTS-CT32B0_CAP0" "PIO1_5-nRTS-CT32B0_CAP0"
- IC1 45
- P2 19
-Net 46 "/PIO1_4-AD5-CT32B1_MAT3-WAKEUP" "PIO1_4-AD5-CT32B1_MAT3-WAKEUP"
- IC1 40
+ V14 1
+ IC1 3
+ U3 10
+ SW1 2
+Net 47 "/PIO1_4-AD5-CT32B1_MAT3-WAKEUP" "PIO1_4-AD5-CT32B1_MAT3-WAKEUP"
  P1 18
-Net 47 "/PIO1_3-SWDIO-AD4-CT32B1_MAT2" "PIO1_3-SWDIO-AD4-CT32B1_MAT2"
- P1 17
- IC1 39
-Net 48 "/PIO0_5-SDA" "PIO0_5-SDA"
- P2 5
- IC1 16
-Net 49 "/PIO0_4-SCL" "PIO0_4-SCL"
- P2 6
- IC1 15
-Net 53 "/XTALIN" "XTALIN"
+ IC1 40
+Net 48 "/PIO1_2-AD3-CT32B1_MAT1" "PIO1_2-AD3-CT32B1_MAT1"
+ P1 13
+ IC1 35
+Net 49 "/PIO1_1-AD2-CT32B1_MAT0" "PIO1_1-AD2-CT32B1_MAT0"
+ IC1 34
+ P1 12
+Net 50 "/PIO1_0-AD1-CT32B_CAP0" "PIO1_0-AD1-CT32B_CAP0"
+ P1 11
+ IC1 33
+Net 51 "/PIO0_11-AD0-CT32B0_MAT3" "PIO0_11-AD0-CT32B0_MAT3"
+ P1 10
+ IC1 32
+Net 52 "/PIO2_11-SCK" "PIO2_11-SCK"
+ IC1 31
+ P1 9
+ U1 5
+Net 55 "/XTALIN" "XTALIN"
+ X1 2
  C2 2
  IC1 6
- X1 2
-Net 54 "/XTALOUT" "XTALOUT"
+Net 56 "/XTALOUT" "XTALOUT"
  C1 2
- X1 1
  IC1 7
+ X1 1
 }
 #End
