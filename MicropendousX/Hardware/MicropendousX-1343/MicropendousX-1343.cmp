@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CVpcb (20090216-final) date = 2/23/2010 10:21:58 PM
+Cmp-Mod V01 Created by CVpcb (20090216-final) date = 3/2/2010 1:25:37 AM
 
 BeginCmp
 TimeStamp = /4B184FF0;
@@ -85,7 +85,7 @@ IdModule  = SOD123;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B199F4D;
+TimeStamp = /4B8D9625;
 Reference = IC1;
 ValeurCmp = LPC1343;
 IdModule  = QFP48_0.5mm_7x7mm_SOT313_LPC1343;
@@ -150,6 +150,13 @@ EndCmp
 BeginCmp
 TimeStamp = /4B186BD4;
 Reference = R6;
+ValeurCmp = 0;
+IdModule  = SM0805_Opendous;
+EndCmp
+
+BeginCmp
+TimeStamp = /4B8D969C;
+Reference = R7;
 ValeurCmp = 0;
 IdModule  = SM0805_Opendous;
 EndCmp
@@ -640,6 +647,27 @@ EndCmp
 BeginCmp
 TimeStamp = /4B849B4A;
 Reference = V64;
+ValeurCmp = VIA;
+IdModule  = 1Pin_20mil_VIA;
+EndCmp
+
+BeginCmp
+TimeStamp = /4B8D969D;
+Reference = V65;
+ValeurCmp = VIA;
+IdModule  = 1Pin_20mil_VIA;
+EndCmp
+
+BeginCmp
+TimeStamp = /4B8D969E;
+Reference = V66;
+ValeurCmp = VIA;
+IdModule  = 1Pin_20mil_VIA;
+EndCmp
+
+BeginCmp
+TimeStamp = /4B8D969F;
+Reference = V67;
 ValeurCmp = VIA;
 IdModule  = 1Pin_20mil_VIA;
 EndCmp

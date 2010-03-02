@@ -7,9 +7,10 @@ QTY, Manufacturer Part#     , Cost($USD each) - References - Description
 1  , MBR120VLSFT1G          , 0.53 - D1 - DIODE SCHOTTKY 20V 1A SOD123FL
 1  , LPC1343FBD48           , 6.30 - IC1 - IC MCU 32BIT 32KB FLASH 48LQFP
 1  , BSS84P L6327           , 0.37 - Q1 - MOSFET P-CH 60V 170MA SOT-23
-2  , RMCF1/1033.2FRTR-ND    , 0.04 - R1 R2 - RES 33.2 OHM 1/8W 1% 0805 SMD
+2  , RMCF1/1033.2FRCT-ND    , 0.04 - R1 R2 - RES 33.2 OHM 1/8W 1% 0805 SMD
 1  , RC0805FR-071K5L        , 0.07 - R3 - RES 1.50K OHM 1/8W 1% 0805 SMD
-2  , RMCF1/1015KJRTR-ND     , 0.03 - R4 R5 - RES 15K OHM 1/8W 5% 0805 SMD
+2  , RMCF1/1015KJRCT-ND     , 0.03 - R4 R5 - RES 15K OHM 1/8W 5% 0805 SMD
+1  , RMCF1/100RCT-ND        , 0.03 - R7 - RES 0 OHM 1/8W 5% 0805 SMD
 2  , EVQ-Q2U03W             , 0.39 - SW1 SW2 - SWITCH LT 6MM 260GF H=3.1MM SMD
 1  , 2908-05WB-MG           , 1.23 - U1 - CONN EJECT MICROSD PUSH-PUSH SMD
 1  , 690-004-221-023        , 0.93 - U2 - CONN USB JACK TYPE B HORIZON R/A
@@ -25,4 +26,5 @@ Notes:	- Component costs listed are for single quantity orders from DigiKey
 	- LPC1343FBD48 can be replaced with non-USB LPC1313FBD48 (Cortex-M3) or
 	  LPC1114FBD48 (Cortex-M0) ICs.  USB will then only provide power.
 	- R6 is a copper trace connecting GND and GNDPWR.  Its pins should be shorted.
+	- R7 need only be installed if you require JTAG ETM trace capability
 
