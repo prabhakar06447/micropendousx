@@ -4,7 +4,7 @@
 DRAFT!
 
 
-Download the latest [http://www.codesourcery.com/sgpp/lite/arm/download.html EABI GCC] for your platform and install.  Download the [http://code.google.com/p/micropendousx/downloads/list MicropendousX Distribution] and extract it.  Open a Terminal or Command Prompt and change to the `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/` directory.  Run `make` to compile.
+Download the latest [http://www.codesourcery.com/sgpp/lite/arm/portal/release1033 EABI GCC] for your platform and install.  Download the [http://code.google.com/p/micropendousx/downloads/list MicropendousX Distribution] and extract it.  Open a Terminal or Command Prompt and change to the `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/` directory.  Run `make` to compile.
 
 Procure any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG debugger with a [http://infocenter.arm.com/help/topic/com.arm.doc.faqs/ka13634.html Cortex Debug Header] or an ARM JTAG to Cortex Debug Header adapter.  [http://www.freddiechopin.info/index.php/en/download/category/4-openocd OpenOCD for Windows] is also available.
 
