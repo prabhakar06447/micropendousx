@@ -12,6 +12,8 @@ Edit `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/OpenOCD.cfg` f
 
 You can also connect to your MicropendousX with a serial terminal.  Typed letters or numbers will be incremented and returned.  See [http://code.google.com/p/micropendous/wiki/SerialPortUsageLinux SerialPortUsageLinux] or [http://code.google.com/p/micropendous/wiki/SerialPortUsageWindows SerialPortUsageWindows] for some notes which you will need to adapt for the LPC17xx.
 
+If you interested in using [http://www.eclipse.org/ Eclipse] for development and debugging there are some useful tutorials by [http://rockboxplayer.googlecode.com/svn/trunk/docs/Using_Open_Source_Tools_for_AT91SAM7S_Cross_Development_revision_C.pdf James P. Lynch] and [http://code.google.com/p/rockboxplayer/wiki/EclipseWithJTAGDebugSetup Casainho].
+
 Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
