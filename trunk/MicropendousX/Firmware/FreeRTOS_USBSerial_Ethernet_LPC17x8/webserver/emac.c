@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V6.0.1 - Copyright (C) 2009 Real Time Engineers Ltd.
+    FreeRTOS V6.0.4 - Copyright (C) 2010 Real Time Engineers Ltd.
 
     ***************************************************************************
     *                                                                         *
@@ -60,10 +60,10 @@
 
 /* Hardware specific includes. */
 #include "EthDev_LPC17xx.h"
+#include "LPC17xx_Useful_Defines.h"
 
 /* LPC1758 does not have functional MIIM - use software per AN10859 */
 #include "mdio.h"
-#include "LPC17xx_Useful_Defines.h"
 
 /* Time to wait between each inspection of the link status. */
 #define emacWAIT_FOR_LINK_TO_ESTABLISH ( 500 / portTICK_RATE_MS )
@@ -71,15 +71,11 @@
 /* Short delay used in several places during the initialisation process. */
 #define emacSHORT_DELAY				   ( 2 )
 
-/* Hardware specific bit definitions for LAN8720 - duplex and speed are in reg. 1F */
-#define emacLINK_ESTABLISHED        ( 0x0004 )
-#define emacFULL_DUPLEX_ENABLED     ( 0x0010 )
-#define emac10BASE_T_MODE           ( 0x0004 )
-#define emacPINSEL2_VALUE           0x50150105
-/* 01010000000101010000000100000101 = 0x50150105 */
-/* 00987654321098765432109876543210 */
-/* 1514      1A1918      14    1110*/
-/* All ENET pins are enabled */
+/* Hardware specific bit definitions. */
+#define emacLINK_ESTABLISHED		( 0x0001 )
+#define emacFULL_DUPLEX_ENABLED		( 0x0004 )
+#define emac10BASE_T_MODE			( 0x0002 )
+#define emacPINSEL2_VALUE 0x50150105
 
 /* If no buffers are available, then wait this long before looking again.... */
 #define emacBUFFER_WAIT_DELAY	( 3 / portTICK_RATE_MS )
@@ -134,7 +130,7 @@ static long prvWritePHY( long lPhyReg, long lValue );
  * Read a value from ucPhyReg within the PHY.  *plStatus will be set to
  * pdFALSE if there is an error.
  */
-static unsigned int prvReadPHY( unsigned char ucPhyReg, long *plStatus );
+static unsigned short prvReadPHY( unsigned char ucPhyReg, long *plStatus );
 
 /*-----------------------------------------------------------*/
 
@@ -154,40 +150,39 @@ unsigned char * uip_buf;
 value will be set back to 0 once the data has been sent twice. */
 static unsigned short usSendLen = 0;
 
-
 /*-----------------------------------------------------------*/
 
 long lEMACInit( void )
 {
-	long lReturn = pdPASS;
-	unsigned int ulID1, ulID2;
-	unsigned long long int phyID = 0;
+long lReturn = pdPASS;
+unsigned long ulID1, ulID2;
 
 	/* Reset peripherals, configure port pins and registers. */
 	prvSetupEMACHardware();
 
-	/* Check the PHY part number is as expected */
+	/* Check the PHY part number is as expected. */
 	ulID1 = prvReadPHY( PHY_REG_IDR1, &lReturn );
 	ulID2 = prvReadPHY( PHY_REG_IDR2, &lReturn );
-	phyID = (unsigned long int)((ulID1 << 16) | (ulID2 & 0xFFF0));
-	/* TODO reenable after testing */
-	//if (phyID != PHY_DEVICE_ID) {
-	//	return pdFAIL;
-	//}
+	if( ( (ulID1 << 16UL ) | ( ulID2 & 0xFFF0UL ) ) == PHY_DEVICE_ID )
+	{
+		/* Set the Ethernet MAC Address registers */
+		LPC_EMAC->SA0 = ( configMAC_ADDR0 << 8 ) | configMAC_ADDR1;
+		LPC_EMAC->SA1 = ( configMAC_ADDR2 << 8 ) | configMAC_ADDR3;
+		LPC_EMAC->SA2 = ( configMAC_ADDR4 << 8 ) | configMAC_ADDR5;
 
-	/* Set the Ethernet MAC Address registers */
-	LPC_EMAC->SA0 = ( configMAC_ADDR0 << 8 ) | configMAC_ADDR1;
-	LPC_EMAC->SA1 = ( configMAC_ADDR2 << 8 ) | configMAC_ADDR3;
-	LPC_EMAC->SA2 = ( configMAC_ADDR4 << 8 ) | configMAC_ADDR5;
+		/* Initialize Tx and Rx DMA Descriptors */
+		prvInitDescriptors();
 
-	/* Initialize Tx and Rx DMA Descriptors */
-	prvInitDescriptors();
+		/* Receive broadcast and perfect match packets */
+		LPC_EMAC->RxFilterCtrl = RFC_UCAST_EN | RFC_BCAST_EN | RFC_PERFECT_EN;
 
-	/* Receive broadcast and perfect match packets */
-	LPC_EMAC->RxFilterCtrl = RFC_UCAST_EN | RFC_BCAST_EN | RFC_PERFECT_EN;
-
-	/* Setup the PHY. */
-	prvConfigurePHY();
+		/* Setup the PHY. */
+		prvConfigurePHY();
+	}
+	else
+	{
+		lReturn = pdFAIL;
+	}
 
 	/* Check the link status. */
 	if( lReturn == pdPASS )
@@ -253,7 +248,7 @@ unsigned long ulAttempts = 0;
 
 static void prvInitDescriptors( void )
 {
-	long x, lNextBuffer = 0;
+long x, lNextBuffer = 0;
 
 	for( x = 0; x < NUM_RX_FRAG; x++ )
 	{
@@ -297,23 +292,23 @@ static void prvInitDescriptors( void )
 
 static void prvSetupEMACHardware( void )
 {
-	U32 us;
+	unsigned short us;
 	long x, lDummy;
-
-	/* Power up the EMAC controller. */
-	LPC_SC->PCONP |= PCONP_PCENET;
-	vTaskDelay( emacSHORT_DELAY );
 
 	/* Enable P1 Ethernet Pins. */
 	LPC_PINCON->PINSEL2 = emacPINSEL2_VALUE;
 	if (dev_175x == __FALSE) {
-		/* LPC176x device - no MDIO, MDC remap. */
+		/* LPC176x device - no MDIO and MDC remap. */
 		LPC_PINCON->PINSEL3 = (LPC_PINCON->PINSEL3 & ~0x0000000F) | 0x00000005;
 	} else {
 		/* LPC1758 has no functional MIIM - remap MDIO, MDC per AN10859 */
 		LPC_PINCON->PINSEL4 &= ~0x000F0000;
 		LPC_GPIO2->FIODIR |= MDC;
 	}
+
+	/* Power Up the EMAC controller. */
+	LPC_SC->PCONP |= PCONP_PCENET;
+	vTaskDelay( emacSHORT_DELAY );
 
 	/* Reset all EMAC internal modules. */
 	LPC_EMAC->MAC1 = MAC1_RES_TX | MAC1_RES_MCS_TX | MAC1_RES_RX | MAC1_RES_MCS_RX | MAC1_SIM_RES | MAC1_SOFT_RES;
@@ -339,6 +334,7 @@ static void prvSetupEMACHardware( void )
 
 	/* Put the PHY in reset mode */
 	prvWritePHY( PHY_REG_BMCR, MCFG_RES_MII );
+	prvWritePHY( PHY_REG_BMCR, MCFG_RES_MII );
 
 	/* Wait for hardware reset to end. */
 	for( x = 0; x < 100; x++ )
@@ -356,7 +352,7 @@ static void prvSetupEMACHardware( void )
 
 static void prvConfigurePHY( void )
 {
-	U32 us; /* (unsigned int) as defined in mdio.h  */
+	unsigned short us;
 	long x, lDummy;
 
 	/* Auto negotiate the configuration. */
@@ -381,12 +377,13 @@ static void prvConfigurePHY( void )
 
 static long prvSetupLinkStatus( void )
 {
-	long lReturn = pdFAIL, x, lReturnTEMP;
-	U32 usLinkStatus; /* (unsigned int) as defined in mdio.h  */
+long lReturn = pdFAIL, x;
+unsigned short usLinkStatus;
 
 	/* Wait with timeout for the link to be established. */
 	for( x = 0; x < 10; x++ )
 	{
+		//usLinkStatus = prvReadPHY( PHY_REG_STS, &lReturn );
 		usLinkStatus = prvReadPHY( PHY_REG_BMSR, &lReturn );
 		if( usLinkStatus & emacLINK_ESTABLISHED )
 		{
@@ -398,8 +395,6 @@ static long prvSetupLinkStatus( void )
         vTaskDelay( emacWAIT_FOR_LINK_TO_ESTABLISH );
 	}
 
-	/* LAN8720 has  */
-	usLinkStatus = prvReadPHY( PHY_REG_SPECIAL, &lReturnTEMP );
 	if( lReturn == pdPASS )
 	{
 		/* Configure Full/Half Duplex mode. */
@@ -554,10 +549,11 @@ static long prvWritePHY( long lPhyReg, long lValue )
 			return pdFAIL;
 		}
 	}
+
 }
 /*-----------------------------------------------------------*/
 
-static unsigned int prvReadPHY( unsigned char ucPhyReg, long *plStatus )
+static unsigned short prvReadPHY( unsigned char ucPhyReg, long *plStatus )
 {
 	long x;
 	const long lMaxTime = 10;
@@ -596,8 +592,8 @@ static unsigned int prvReadPHY( unsigned char ucPhyReg, long *plStatus )
 
 void vEMAC_ISR( void )
 {
-	unsigned long ulStatus;
-	long lHigherPriorityTaskWoken = pdFALSE;
+unsigned long ulStatus;
+long lHigherPriorityTaskWoken = pdFALSE;
 
 	ulStatus = LPC_EMAC->IntStatus;
 

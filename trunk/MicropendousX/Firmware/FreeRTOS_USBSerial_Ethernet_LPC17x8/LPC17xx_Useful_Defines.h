@@ -21,6 +21,18 @@
 #ifndef __LPC17xx_USEFUL_DEFINES_H
 #define __LPC17xx_USEFUL_DEFINES_H
 
+#ifndef	PROGMEM
+	#define	PROGMEM		__attribute__ ((section ("text")))
+#endif
+
+#ifndef	pgm_read_byte
+	#define	pgm_read_byte(x)	((uint8_t)(x))
+#endif
+
+#define	ATOMIC_BLOCK(type)		do { type } while(0);
+#define ATOMIC_RESTORESTATE
+
+
 	/* Various LPC17xx models have differing functionality */
 	#if (defined(_LPC1759_) || defined(_LPC1758_) ||  \
 				defined(_LPC1757_) || defined(_LPC1756_) ||  \

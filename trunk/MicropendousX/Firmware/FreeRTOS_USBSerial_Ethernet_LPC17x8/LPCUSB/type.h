@@ -12,9 +12,6 @@
 #ifndef __TYPE_H__
 #define __TYPE_H__
 
-/* Useful register settings, types, and LPC model defines */
-#include "LPC17xx_Useful_Defines.h"
-
 #ifndef NULL
 #define NULL    ((void *)0)
 #endif
@@ -30,7 +27,7 @@
 typedef unsigned char  BYTE;
 typedef unsigned short WORD;
 typedef unsigned long  DWORD;
-// typedef unsigned int   BOOL; // defined elsewhere
+typedef unsigned int   BOOL;
 
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;

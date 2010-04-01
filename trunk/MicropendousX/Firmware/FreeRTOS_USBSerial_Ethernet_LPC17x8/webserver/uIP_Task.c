@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V6.0.1 - Copyright (C) 2009 Real Time Engineers Ltd.
+    FreeRTOS V6.0.4 - Copyright (C) 2010 Real Time Engineers Ltd.
 
     ***************************************************************************
     *                                                                         *
@@ -117,9 +117,10 @@ clock_time_t clock_time( void )
 void vuIP_Task( void *pvParameters )
 {
 portBASE_TYPE i;
-uip_ipaddr_t xIPAddr;
+uip_ipaddr_t xIPAddr, ipaddr;
 struct timer periodic_timer, arp_timer;
 extern void ( vEMAC_ISR_Wrapper )( void );
+uint8_t numberOfRuns = 0;
 
 	( void ) pvParameters;
 
@@ -227,6 +228,20 @@ extern void ( vEMAC_ISR_Wrapper )( void );
 				xSemaphoreTake( xEMACSemaphore, configTICK_RATE_HZ / 2 );
 			}
 		}
+
+
+		if (numberOfRuns == 255) {
+			// do nothing
+		} else if (numberOfRuns == 254) {
+			// run this only once but after ethernet is working
+			uip_ipaddr(&ipaddr, 192,168,1,1);
+			uip_connect(&ipaddr, HTONS(80));
+			numberOfRuns = 255;
+		} else {
+			numberOfRuns++;
+		}
+
+
 	}
 }
 /*-----------------------------------------------------------*/

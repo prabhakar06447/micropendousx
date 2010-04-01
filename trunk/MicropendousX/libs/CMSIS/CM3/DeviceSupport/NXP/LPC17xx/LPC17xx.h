@@ -1,6 +1,6 @@
 /**************************************************************************//**
  * @file     LPC17xx.h
- * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File for 
+ * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File for
  *           NXP LPC17xx Device Series
  * @version  V1.07
  * @date     19. October 2009
@@ -9,9 +9,9 @@
  * Copyright (C) 2009 ARM Limited. All rights reserved.
  *
  * @par
- * ARM Limited (ARM) is supplying this software for use with Cortex-M 
- * processor based microcontrollers.  This file can be freely distributed 
- * within development tools that are supporting such ARM based processors. 
+ * ARM Limited (ARM) is supplying this software for use with Cortex-M
+ * processor based microcontrollers.  This file can be freely distributed
+ * within development tools that are supporting such ARM based processors.
  *
  * @par
  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
@@ -78,6 +78,8 @@ typedef enum IRQn
   MCPWM_IRQn                    = 30,       /*!< Motor Control PWM Interrupt                      */
   QEI_IRQn                      = 31,       /*!< Quadrature Encoder Interface Interrupt           */
   PLL1_IRQn                     = 32,       /*!< PLL1 Lock (USB PLL) Interrupt                    */
+  USBActivity_IRQn				= 33,		/*!< USB Activity Interrupt 						  */
+  CANActivity_IRQn				= 34,		/*!< CAN Activity Interrupt 						  */
 } IRQn_Type;
 
 
@@ -912,6 +914,13 @@ typedef struct
 /* Base addresses                                                             */
 #define LPC_FLASH_BASE        (0x00000000UL)
 #define LPC_RAM_BASE          (0x10000000UL)
+#ifdef __LPC17XX_REV00
+#define LPC_AHBRAM0_BASE      (0x20000000UL)
+#define LPC_AHBRAM1_BASE      (0x20004000UL)
+#else
+#define LPC_AHBRAM0_BASE      (0x2007C000UL)
+#define LPC_AHBRAM1_BASE      (0x20080000UL)
+#endif
 #define LPC_GPIO_BASE         (0x2009C000UL)
 #define LPC_APB0_BASE         (0x40000000UL)
 #define LPC_APB1_BASE         (0x40080000UL)
@@ -989,7 +998,7 @@ typedef struct
 #define LPC_TIM2              ((LPC_TIM_TypeDef       *) LPC_TIM2_BASE     )
 #define LPC_TIM3              ((LPC_TIM_TypeDef       *) LPC_TIM3_BASE     )
 #define LPC_RIT               ((LPC_RIT_TypeDef       *) LPC_RIT_BASE      )
-#define LPC_UART0             ((LPC_UART0_TypeDef     *) LPC_UART0_BASE    )
+#define LPC_UART0             ((LPC_UART_TypeDef     *) LPC_UART0_BASE    )
 #define LPC_UART1             ((LPC_UART1_TypeDef     *) LPC_UART1_BASE    )
 #define LPC_UART2             ((LPC_UART_TypeDef      *) LPC_UART2_BASE    )
 #define LPC_UART3             ((LPC_UART_TypeDef      *) LPC_UART3_BASE    )
@@ -1015,6 +1024,7 @@ typedef struct
 #define LPC_QEI               ((LPC_QEI_TypeDef       *) LPC_QEI_BASE      )
 #define LPC_EMAC              ((LPC_EMAC_TypeDef      *) LPC_EMAC_BASE     )
 #define LPC_GPDMA             ((LPC_GPDMA_TypeDef     *) LPC_GPDMA_BASE    )
+#define DMAREQSEL             (*(__IO uint32_t *)  ( 0x4000C1C4))
 #define LPC_GPDMACH0          ((LPC_GPDMACH_TypeDef   *) LPC_GPDMACH0_BASE )
 #define LPC_GPDMACH1          ((LPC_GPDMACH_TypeDef   *) LPC_GPDMACH1_BASE )
 #define LPC_GPDMACH2          ((LPC_GPDMACH_TypeDef   *) LPC_GPDMACH2_BASE )
