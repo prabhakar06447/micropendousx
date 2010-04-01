@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V6.0.1 - Copyright (C) 2009 Real Time Engineers Ltd.
+    FreeRTOS V6.0.4 - Copyright (C) 2010 Real Time Engineers Ltd.
 
     ***************************************************************************
     *                                                                         *
@@ -71,8 +71,6 @@ task.h is included from an application file. */
  * Macro to define the amount of stack available to the idle task.
  */
 #define tskIDLE_STACK_SIZE	configMINIMAL_STACK_SIZE
-
-#define tskIDLE_PRIORITY			( ( unsigned portBASE_TYPE ) 0 )
 
 /*
  * Task control block.  A task control block (TCB) is allocated to each task,
@@ -1744,7 +1742,7 @@ portBASE_TYPE xReturn;
 			passed since vTaskSetTimeout() was called. */
 			xReturn = pdTRUE;
 		}
-		else if( ( ( portTickType ) xTickCount - ( portTickType ) pxTimeOut->xTimeOnEntering ) < ( portTickType ) *pxTicksToWait )
+		else if( ( ( portTickType ) ( ( portTickType ) xTickCount - ( portTickType ) pxTimeOut->xTimeOnEntering ) ) < ( portTickType ) *pxTicksToWait )
 		{
 			/* Not a genuine timeout. Adjust parameters for time remaining. */
 			*pxTicksToWait -= ( ( portTickType ) xTickCount - ( portTickType ) pxTimeOut->xTimeOnEntering );
@@ -2040,7 +2038,16 @@ tskTCB *pxNewTCB;
 		do
 		{
 			listGET_OWNER_OF_NEXT_ENTRY( pxNextTCB, pxList );
-			usStackRemaining = usTaskCheckFreeStackSpace( ( unsigned char * ) pxNextTCB->pxStack );
+			#if ( portSTACK_GROWTH > 0 )
+			{
+				usStackRemaining = usTaskCheckFreeStackSpace( ( unsigned char * ) pxNextTCB->pxEndOfStack );
+			}
+			#else
+			{
+				usStackRemaining = usTaskCheckFreeStackSpace( ( unsigned char * ) pxNextTCB->pxStack );
+			}
+			#endif			
+			
 			sprintf( pcStatusString, ( char * ) "%s\t\t%c\t%u\t%u\t%u\r\n", pxNextTCB->pcTaskName, cStatus, ( unsigned int ) pxNextTCB->uxPriority, usStackRemaining, ( unsigned int ) pxNextTCB->uxTCBNumber );
 			strcat( ( char * ) pcWriteBuffer, ( char * ) pcStatusString );
 

@@ -51,7 +51,8 @@ CPU = cortex-m3
 CPU_MODE = mthumb
 
 # Additional CPU flags
-CPU_FLAGS = -mapcs-frame -mthumb-interwork
+#CPU_FLAGS = -mapcs-frame -mthumb-interwork
+CPU_FLAGS = -mapcs-frame
 CPU_FLAGS_ASM = -mthumb-interwork
 
 # Linker Script for the current MCU
@@ -96,21 +97,27 @@ F_CLOCK = $(F_CPU)
 FORMAT = ihex
 
 
+# Output Directory
+OUTDIR = .
+
+
 # Target file name (without extension).
 TARGET = FreeRTOS_USB_Eth_Main
 
 
 # Path to the LUFA library
-LUFA_PATH = ../../libs
-LPCUSB_PATH = ./LPCUSB
-CMSIS_CORE_PATH = ../../libs/CMSIS/CM3/CoreSupport
-CMSIS_DEVICE_PATH = ../../libs/CMSIS/CM3/DeviceSupport/NXP/LPC17xx
-INCLUDE_PATH = ../../libs/CMSIS/CM3/INC/NXP/LPC17xx
+LIBS_PATH = ../../libs
+LUFA_PATH = $(LIBS_PATH)/LUFA
+LPCUSB_PATH = $(LIBS_PATH)/LPCUSB
+CMSIS_CORE_PATH = $(LIBS_PATH)/CMSIS/CM3/CoreSupport
+CMSIS_DEVICE_PATH = $(LIBS_PATH)/CMSIS/CM3/DeviceSupport/NXP/LPC17xx
+INCLUDE_PATH = $(LIBS_PATH)/CMSIS/CM3/INC/NXP/LPC17xx
 WEBSERVER_PATH = ./webserver
-FREERTOS_PATH = ./FreeRTOS
-FREERTOS_DEMO_DIR = ./CommonDemoTasks
+FREERTOS_PATH = $(LIBS_PATH)/FreeRTOS
+FREERTOS_DEMO_DIR = $(FREERTOS_PATH)/Demo/Common
+FREERTOS_DEMO_TYPE_DIR = $(FREERTOS_DEMO_DIR)/Minimal
 FREERTOS_SOURCE_DIR = $(FREERTOS_PATH)/Source
-FREERTOS_PORT_DIR = $(FREERTOS_PATH)/portable/GCC/ARM_CM3
+FREERTOS_PORT_DIR = $(FREERTOS_SOURCE_DIR)/portable/GCC/ARM_CM3
 
 
 # compile-time options - LUFA related
@@ -125,7 +132,8 @@ COMPILE_OPTS += -D PACK_STRUCT_END=__attribute\(\(packed\)\)
 COMPILE_OPTS += -D ALIGN_STRUCT_END=__attribute\(\(aligned\(4\)\)\)
 # Microcontroller Model - the specific part number
 COMPILE_OPTS += -D _LPC1758_
-
+# Defines related to AVR to ARM conversion
+COMPILE_OPTS += -D USB_SERIES_7_AVR=1
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(TARGET).c \
@@ -140,20 +148,20 @@ SRC = $(TARGET).c \
 	  $(LPCUSB_PATH)/usbhw_lpc.c \
 	  $(LPCUSB_PATH)/usbinit.c \
 	  $(LPCUSB_PATH)/usbstdreq.c \
-	  $(FREERTOS_PATH)/list.c \
-	  $(FREERTOS_PATH)/queue.c \
-	  $(FREERTOS_PATH)/tasks.c \
-	  $(FREERTOS_PATH)/portable/MemMang/heap_2.c \
+	  $(FREERTOS_SOURCE_DIR)/list.c \
+	  $(FREERTOS_SOURCE_DIR)/queue.c \
+	  $(FREERTOS_SOURCE_DIR)/tasks.c \
+	  $(FREERTOS_SOURCE_DIR)/portable/MemMang/heap_2.c \
 	  $(FREERTOS_PORT_DIR)/port.c \
-	  $(FREERTOS_DEMO_DIR)/BlockQ.c \
-	  $(FREERTOS_DEMO_DIR)/GenQTest.c \
-	  $(FREERTOS_DEMO_DIR)/PollQ.c \
-	  $(FREERTOS_DEMO_DIR)/QPeek.c \
-	  $(FREERTOS_DEMO_DIR)/blocktim.c \
-	  $(FREERTOS_DEMO_DIR)/flash.c \
-	  $(FREERTOS_DEMO_DIR)/integer.c \
-	  $(FREERTOS_DEMO_DIR)/recmutex.c \
-	  $(FREERTOS_DEMO_DIR)/semtest.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/BlockQ.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/GenQTest.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/PollQ.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/QPeek.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/blocktim.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/flash.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/integer.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/recmutex.c \
+	  $(FREERTOS_DEMO_TYPE_DIR)/semtest.c \
 	  $(WEBSERVER_PATH)/emac.c \
 	  $(WEBSERVER_PATH)/mdio.c \
 	  $(WEBSERVER_PATH)/http-strings.c \
@@ -180,6 +188,7 @@ SRC = $(TARGET).c \
 #	  $(LUFA_PATH)/LUFA/Drivers/USB/HighLevel/ConfigDescriptor.c \
 #	  $(LUFA_PATH)/LUFA/Drivers/USB/Class/Device/CDC.c \
 #	  $(LUFA_PATH)/LUFA/Drivers/USB/Class/Host/CDC.c \
+
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC = 
@@ -209,17 +218,13 @@ OBJDIR = .
 OPT = 0
 
 
-# Debugging format.
-#DEBUG = dwarf-2
-DEBUG = 3
-
-
 # List any extra directories to look for include files here.
 #     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
-EXTRAINCDIRS = $(LUFA_PATH)/ $(CMSIS_CORE_PATH)/ $(CMSIS_DEVICE_PATH)/ $(INCLUDE_PATH)/
-EXTRAINCDIRS += $(FREERTOS_PATH)/include $(LPCUSB_PATH)/ ./webserver
+EXTRAINCDIRS = $(CMSIS_CORE_PATH)/ $(CMSIS_DEVICE_PATH)/ $(INCLUDE_PATH)/
+EXTRAINCDIRS += $(LPCUSB_PATH)/  ./webserver  $(LUFA_PATH)/ 
+EXTRAINCDIRS += $(FREERTOS_PATH)/include $(FREERTOS_SOURCE_DIR)/include/ 
 EXTRAINCDIRS += $(FREERTOS_DEMO_DIR)/include $(FREERTOS_PORT_DIR)/
 
 
@@ -253,19 +258,31 @@ CPPDEFS = -DF_CPU=$(F_CPU)UL
 #  -Wall...:     warning level
 #  -Wa,...:      tell GCC to pass this to the assembler.
 #    -alhms...: create assembler listing
-CFLAGS = -g$(DEBUG)
+# Produce debug info in dwarf-2 format with additional information (-g3)
+CFLAGS = -gdwarf-2 -g3
 CFLAGS += $(CDEFS)
 CFLAGS += -O$(OPT)
+CFLAGS += -Wall
+CFLAGS += -Wno-unused
+CFLAGS += -Wno-comments
+CFLAGS += -fmessage-length=0
+CFLAGS += -fno-builtin
+CFLAGS += -ffunction-sections
+CFLAGS += -Wextra
+CFLAGS += -D__thumb2__=1 
+CFLAGS += -msoft-float 
+CFLAGS += -mno-sched-prolog 
+CFLAGS += -fno-hosted 
+CFLAGS += -mtune=cortex-m3 
+CFLAGS += -march=armv7-m 
+CFLAGS += -mfix-cortex-m3-ldrd  
+#CFLAGS += -Wundef
 #CFLAGS += -funsigned-char
 #CFLAGS += -funsigned-bitfields
-#CFLAGS += -ffunction-sections
 #CFLAGS += -fno-inline-small-functions
 #CFLAGS += -fpack-struct
 #CFLAGS += -fshort-enums
-CFLAGS += -Wall
-CFLAGS += -fmessage-length=0 -fno-builtin -ffunction-sections -Wextra
 #CFLAGS += -Wstrict-prototypes
-#CFLAGS += -Wundef
 #CFLAGS += -fno-unit-at-a-time
 #CFLAGS += -Wunreachable-code
 #CFLAGS += -Wsign-compare
@@ -373,12 +390,66 @@ LDFLAGS += --gc-sections
 LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(patsubst %,-L%,$(EXTRALIBDIRS))
 LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB)
+LDFLAGS += -static
+LDFLAGS += -Wl,--start-group 
+#LDFLAGS += -L$(THUMB2GNULIB) -L$(THUMB2GNULIB2)
+LDFLAGS += -lc -lg -lstdc++ -lsupc++ 
+LDFLAGS += -lgcc -lm 
+LDFLAGS += -Wl,--end-group 
 #LDFLAGS += $(MATH_LIB)
 #LDFLAGS += -T linker_script.x
 
 
 
 #---------------- Programming Options ----------------
+
+# ---------------------------------------------------------------------------
+# Options for OpenOCD flash-programming
+# Released to the Public Domain by Martin Thomas, Kaiserslautern, Germany 
+# <eversmith(at)heizung-thomas(dot)de>
+#
+# Please read the OpenOCD user manual!
+#
+OOCD_LOADFILE=$(TARGET).hex
+# if OpenOCD is in the $PATH just set OPENOCDEXE=openocd
+OOCD_EXE=openocd
+# interface and board/target settings (using the OOCD target-library here)
+OOCD_CL=-f OpenOCD.cfg
+# debug level
+#OOCD_CL=-d3
+OOCD_CL+=-d0
+# initialize
+OOCD_CL+=-c init
+# show the targets
+OOCD_CL+=-c targets
+# increase JTAG frequency a little bit - can be disabled for tests
+#OOCD_CL+= -c "jtag_khz 150"
+# reset the target
+OOCD_CL+=-c reset
+# halt the target for loading
+OOCD_CL+=-c halt
+# sleep a bit to make sure halt occurs
+OOCD_CL+=-c "sleep 200"
+# wait for halt to finish
+OOCD_CL+=-c wait_halt
+# get info on flash
+OOCD_CL+=-c "flash probe 0"
+# get info on flash bank 0
+OOCD_CL+=-c "flash info 0"
+# flash-write and -verify
+OOCD_CL+=-c "flash write_image erase unlock $(OOCD_LOADFILE)" -c "verify_image $(OOCD_LOADFILE)"
+# sleep a bit to make sure everything completes
+OOCD_CL+=-c "sleep 200"
+# reset target
+OOCD_CL+=-c "reset run"
+# terminate OOCD after programming
+OOCD_CL+=-c shutdown
+
+
+
+
+
+
 
 # Programming hardware: alf avr910 avrisp bascom bsd 
 # dt006 pavr picoweb pony-stk200 sp12 stk200 stk500
@@ -593,8 +664,12 @@ gccversion :
 
 
 # Program the device.  
-program: $(TARGET).hex $(TARGET).eep
-	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+#program: $(TARGET).hex $(TARGET).eep
+#	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
+
+program:
+	$(OOCD_EXE) $(OOCD_CL)
+
 
 
 # Generate avr-gdb config/init file which does the following:
@@ -612,19 +687,9 @@ ifeq ($(DEBUG_BACKEND),simulavr)
 endif
 	@echo break main >> $(GDBINIT_FILE)
 
-debug: gdb-config $(TARGET).elf
-ifeq ($(DEBUG_BACKEND), avarice)
-	@echo Starting AVaRICE - Press enter when "waiting to connect" message displays.
-	@$(WINSHELL) /c start avarice --jtag $(JTAG_DEV) --erase --program --file \
-	$(TARGET).elf $(DEBUG_HOST):$(DEBUG_PORT)
-	@$(WINSHELL) /c pause
 
-else
-	@$(WINSHELL) /c start simulavr --gdbserver --device $(CPU) --clock-freq \
-	$(DEBUG_MFREQ) --port $(DEBUG_PORT)
-endif
-	@$(WINSHELL) /c start avr-$(DEBUG_UI) --command=$(GDBINIT_FILE)
-
+debug: $(TARGET).elf
+	arm-none-eabi-gdb.exe -x gdb_lpc17xx_debug.gdb
 
 
 

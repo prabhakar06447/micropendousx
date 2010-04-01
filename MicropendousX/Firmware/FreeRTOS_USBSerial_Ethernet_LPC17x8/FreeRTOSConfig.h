@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V6.0.1 - Copyright (C) 2009 Real Time Engineers Ltd.
+    FreeRTOS V6.0.4 - Copyright (C) 2010 Real Time Engineers Ltd.
 
     ***************************************************************************
     *                                                                         *
@@ -54,7 +54,7 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
-#include <LPC17xx.h>
+#include "LPC17xx.h"
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -108,17 +108,17 @@ to exclude the API function. */
 
 /* MAC address configuration. */
 #define configMAC_ADDR0	0x00
-#define configMAC_ADDR1	0x12
-#define configMAC_ADDR2	0x13
-#define configMAC_ADDR3	0x10
-#define configMAC_ADDR4	0x15
-#define configMAC_ADDR5	0x11
+#define configMAC_ADDR1	0xDE
+#define configMAC_ADDR2	0xAD
+#define configMAC_ADDR3	0xC0
+#define configMAC_ADDR4	0xDE
+#define configMAC_ADDR5	0x00
 
 /* IP address configuration. */
 #define configIP_ADDR0		192
 #define configIP_ADDR1		168
 #define configIP_ADDR2		2
-#define configIP_ADDR3		102
+#define configIP_ADDR3		2
 
 /* Netmask configuration. */
 #define configNET_MASK0		255

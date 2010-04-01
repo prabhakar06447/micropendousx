@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V6.0.1 - Copyright (C) 2009 Real Time Engineers Ltd.
+    FreeRTOS V6.0.4 - Copyright (C) 2010 Real Time Engineers Ltd.
 
     ***************************************************************************
     *                                                                         *
@@ -50,8 +50,6 @@
     http://www.OpenRTOS.com - Commercial support, development, porting,
     licensing and training services.
 */
-
-
 /*
  * Creates all the demo application tasks, then starts the scheduler.  The WEB
  * documentation provides more details of the standard demo application tasks
@@ -149,17 +147,16 @@ char *pcGetTaskStatusMessage( void );
 /* Holds the status message displayed by the WEB server. */
 static char *pcStatusMessage = mainPASS_STATUS_MESSAGE;
 
+/*-----------------------------------------------------------*/
+
 /* dev_175x will be __TRUE is code is running on an LPC175x device */
 char dev_175x;
-
-
-/*-----------------------------------------------------------*/
 
 
 
 int main( void )
 {
-	char cIPAddress[ 16 ]; /* Enough space for "xxx.xxx.xxx.xxx\0". */
+char cIPAddress[ 16 ]; /* Enough space for "xxx.xxx.xxx.xxx\0". */
 
 	/* Configure the hardware for use by this demo. */
 	prvSetupHardware();
@@ -178,15 +175,14 @@ int main( void )
 
     /* Create the USB task. */
     xTaskCreate( vUSBTask, ( signed char * ) "USB", configMINIMAL_STACK_SIZE, ( void * ) NULL, tskIDLE_PRIORITY, NULL );
-
-	/* Display the IP address */
-	/* REMOVED as Code Red files have incompatible license */
-	// LCDdriver_initialisation();
-	// LCD_PrintString( 5, 10, "FreeRTOS.org", 14, COLOR_GREEN);
-	// sprintf( cIPAddress, "%d.%d.%d.%d", configIP_ADDR0, configIP_ADDR1, configIP_ADDR2, configIP_ADDR3 );
-	// LCD_PrintString( 5, 30, cIPAddress, 14, COLOR_RED);
-
-	/*Create the uIP task.  The WEB server runs in this task. */
+	
+	/* Display the assigned IP address. */
+	//LCDdriver_initialisation();
+	//LCD_PrintString( 5, 10, "FreeRTOS.org", 14, COLOR_GREEN);
+	//sprintf( cIPAddress, "%d.%d.%d.%d", configIP_ADDR0, configIP_ADDR1, configIP_ADDR2, configIP_ADDR3 );
+	//LCD_PrintString( 5, 30, cIPAddress, 14, COLOR_RED);
+    
+	// Create the uIP task.  The WEB server runs in this task.
 	xTaskCreate( vuIP_Task, ( signed char * ) "uIP", mainBASIC_WEB_STACK_SIZE, ( void * ) NULL, mainUIP_TASK_PRIORITY, NULL );
 
     /* Start the scheduler. */
@@ -410,3 +406,4 @@ const unsigned long TCR_COUNT_RESET = 2, CTCR_CTM_TIMER = 0x00, TCR_COUNT_ENABLE
 	LPC_TIM0->TCR = TCR_COUNT_ENABLE;
 }
 /*-----------------------------------------------------------*/
+

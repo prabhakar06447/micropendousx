@@ -7,7 +7,7 @@
 # and download firmware.
 #
 # Start your OpenOCD gdb server before running
-# this script with:  gdb -x gdb_lpc17xx_program.gdb
+# this script with:  arm-none-eabi-gdb -x gdb_lpc17xx_program.gdb
 #
 # Note the 'monitor' command just passes its
 # arguments to OpenOCD
