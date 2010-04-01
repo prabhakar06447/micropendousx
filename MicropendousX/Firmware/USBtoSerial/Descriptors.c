@@ -54,6 +54,7 @@
  *  number of device configurations. The descriptor is read out by the USB host when the enumeration
  *  process begins.
  */
+
 USB_Descriptor_Device_t PROGMEM DeviceDescriptor =
 {
 	.Header                 = {.Size = sizeof(USB_Descriptor_Device_t), .Type = DTYPE_Device},
@@ -75,6 +76,8 @@ USB_Descriptor_Device_t PROGMEM DeviceDescriptor =
 		
 	.NumberOfConfigurations = FIXED_NUM_CONFIGURATIONS
 };
+
+
 
 /** Configuration descriptor structure. This descriptor, located in FLASH memory, describes the usage
  *  of the device in one of its supported configurations, including information about any device interfaces

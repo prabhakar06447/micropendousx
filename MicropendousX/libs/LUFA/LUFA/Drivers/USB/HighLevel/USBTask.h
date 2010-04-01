@@ -32,10 +32,9 @@
 #define __USBTASK_H__
 
 	/* Includes: */
-		#include <avr/io.h>
-		#include <avr/interrupt.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
-		
+
 		#include "../LowLevel/LowLevel.h"
 		#include "Events.h"
 		#include "StdRequestType.h"

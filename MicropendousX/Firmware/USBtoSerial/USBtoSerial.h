@@ -37,10 +37,11 @@
 #define _USB_SERIAL_H_
 
 	/* Includes: */
-		#include <avr/io.h>
-		#include <avr/wdt.h>
-		#include <avr/interrupt.h>
-		#include <avr/power.h>
+		#include <LPC17xx.h>
+		#include <stdlib.h>
+
+		#include "LPC17xx_Useful_Defines.h"
+		#include "Hardware_Setup.h"
 
 		#include "Descriptors.h"
 

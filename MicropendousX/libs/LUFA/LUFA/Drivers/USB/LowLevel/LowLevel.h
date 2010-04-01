@@ -8,6 +8,7 @@
 
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Adapted for the LPC17xx by Opendous Inc. - www.MicropendousX.org
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -40,8 +41,7 @@
 #define __USBLOWLEVEL_H__
 
 	/* Includes: */
-		#include <avr/io.h>
-		#include <avr/interrupt.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 		
 		#include "../HighLevel/USBMode.h"
@@ -51,7 +51,7 @@
 		#include "../HighLevel/Events.h"
 		#include "../HighLevel/USBTask.h"
 		#include "../HighLevel/USBInterrupt.h"
-		
+
 		#if defined(USB_CAN_BE_HOST) || defined(__DOXYGEN__)
 			#include "Host.h"
 			#include "Pipe.h"
@@ -105,7 +105,7 @@
 		#endif
 		
 		#if !defined(USB_PLL_PSC)
-			#error No PLL prescale value available for chosen F_CPU value and AVR model.
+//			#error No PLL prescale value available for chosen F_CPU value and AVR model.
 		#endif
 		
 	/* Public Interface - May be used in end-application: */
@@ -191,14 +191,15 @@
 				 *
 				 *  \note This token is not available on some AVR models which do not support hardware VBUS monitoring.
 				 */
-				#define USB_VBUS_GetStatus()             ((USBSTA & (1 << VBUS)) ? true : false)
+				#define USB_VBUS_GetStatus()             (true)
 			#endif
 
 			/** Detaches the device from the USB bus. This has the effect of removing the device from any
 			 *  attached host, ceasing USB communications. If no host is present, this prevents any host from
 			 *  enumerating the device once attached until \ref USB_Attach() is called.
 			 */
-			#define USB_Detach()                    MACROS{ UDCON  |=  (1 << DETACH);  }MACROE
+			#warning TODO - LowLevel.h - USB can be detached by disabling external pull-up on D+ line - TODO
+			#define USB_Detach()                    __NOP();
 
 			/** Attaches the device to the USB bus. This announces the device's presence to any attached
 			 *  USB host, starting the enumeration process. If no host is present, attaching the device
@@ -208,7 +209,8 @@
 			 *  attachment of a device to the host. This is despite the bit being located in the device-mode
 			 *  register and despite the datasheet making no mention of its requirement in host mode.
 			 */
-			#define USB_Attach()                    MACROS{ UDCON  &= ~(1 << DETACH);  }MACROE
+			#warning TODO - LowLevel.h - USB can be atached by enabling external pull-up on D+ line - TODO
+			#define USB_Attach()				;
 			
 			#if !defined(USB_STREAM_TIMEOUT_MS) || defined(__DOXYGEN__)
 				/** Constant for the maximum software timeout period of the USB data stream transfer functions
@@ -326,35 +328,41 @@
 	/* Private Interface - For use in library only: */
 	#if !defined(__DOXYGEN__)
 		/* Macros: */
-			#define USB_PLL_On()               MACROS{ PLLCSR   =  USB_PLL_PSC; PLLCSR |= (1 << PLLE); }MACROE
-			#define USB_PLL_Off()              MACROS{ PLLCSR   =  0;                           }MACROE
-			#define USB_PLL_IsReady()                ((PLLCSR  &   (1 << PLOCK)) ? true : false)
+			#define USB_PLL_On()						__NOP();
+			#define USB_PLL_Off()						__NOP();
+			#define USB_PLL_IsReady()                (true)
 
-			#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-				#define USB_REG_On()           MACROS{ UHWCON  |=  (1 << UVREGE);               }MACROE
-				#define USB_REG_Off()          MACROS{ UHWCON  &= ~(1 << UVREGE);               }MACROE
-			#else
-				#define USB_REG_On()           MACROS{ REGCR   &= ~(1 << REGDIS);               }MACROE
-				#define USB_REG_Off()          MACROS{ REGCR   |=  (1 << REGDIS);               }MACROE			
-			#endif
-			
-			#define USB_OTGPAD_On()            MACROS{ USBCON  |=  (1 << OTGPADE);              }MACROE
-			#define USB_OTGPAD_Off()           MACROS{ USBCON  &= ~(1 << OTGPADE);              }MACROE
+			#define USB_REG_On()						__NOP();
+			#define USB_REG_Off()						__NOP();
 
-			#define USB_CLK_Freeze()           MACROS{ USBCON  |=  (1 << FRZCLK);               }MACROE
-			#define USB_CLK_Unfreeze()         MACROS{ USBCON  &= ~(1 << FRZCLK);               }MACROE
+			#define USB_OTGPAD_On()						__NOP();
+			#define USB_OTGPAD_Off()						__NOP();
 
-			#define USB_Controller_Enable()    MACROS{ USBCON  |=  (1 << USBE);                 }MACROE
-			#define USB_Controller_Disable()   MACROS{ USBCON  &= ~(1 << USBE);                 }MACROE
-			#define USB_Controller_Reset()     MACROS{ const uint8_t Temp = USBCON; USBCON = (Temp & ~(1 << USBE)); \
-			                                           USBCON = (Temp | (1 << USBE));           }MACROE
+			#define USB_CLK_Freeze()						__NOP();
+			#define USB_CLK_Unfreeze()						__NOP();
+
+			#warning TODO - LowLevel.h - implement proper SIE enable/disable - TODO
+			#define USB_Controller_Enable()						__NOP();
+			#define USB_Controller_Disable()						__NOP();
+			inline void USB_Controller_Reset(void) ATTR_ALWAYS_INLINE;
+			inline void USB_Controller_Reset(void)
+			{
+				LPC_USB->USBDevIntClr = 0x10;	// Clear CCEMPTY
+				LPC_USB->USBCmdCode = 0x00FE0500;	// CMD_CODE=0xFE, CMD_PHASE=0x05(Command)
+				while (!(LPC_USB->USBDevIntSt & 0x10));	// Wait for CCEMPTY
+				LPC_USB->USBDevIntClr = 0x10;	// Clear CCEMPTY
+				LPC_USB->USBCmdCode = 0x00100100;	// CMD_WDATA=0x10=(1 << 4)(RST(4)=1), CMD_PHASE=0x01(Write)
+				while (!(LPC_USB->USBDevIntSt & 0x10));	// Wait for CCEMPTY
+				LPC_USB->USBDevIntClr = 0x10;	// Clear CCEMPTY
+			}
 	
 		/* Inline Functions: */
 			#if defined(USB_CAN_BE_BOTH)
 			static inline uint8_t USB_GetUSBModeFromUID(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
 			static inline uint8_t USB_GetUSBModeFromUID(void)
 			{
-				if (USBSTA & (1 << ID))
+				#warning TODO - LowLevel.h - determine USB mode - TODO
+				if (1)
 				  return USB_MODE_DEVICE;
 				else
 				  return USB_MODE_HOST;

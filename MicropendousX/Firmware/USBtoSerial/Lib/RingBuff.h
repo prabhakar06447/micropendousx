@@ -54,12 +54,12 @@
 #define _RINGBUFF_H_
 
 	/* Includes: */
-	#include <avr/io.h>
-	#include <avr/interrupt.h>
-	#include <util/atomic.h>
+	#include <LPC17xx.h>
 	#include <limits.h>
 
 	#include <LUFA/Common/Common.h>
+
+	#include "LPC17xx_Useful_Defines.h"
 
 	/* Defines and checks: */
 	#if defined(BUFF_STATICSIZE)

@@ -8,6 +8,7 @@
 
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Adapted for the LPC17xx by Opendous Inc. - www.MicropendousX.org
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -41,8 +42,7 @@
 #define __USBDEVICE_H__
 
 	/* Includes: */
-		#include <avr/pgmspace.h>
-		#include <avr/eeprom.h>
+		#include <LPC17xx.h>
 
 		#include "../../../Common/Common.h"	
 		#include "../HighLevel/StdDescriptors.h"
@@ -130,16 +130,29 @@
 				static inline bool USB_Device_DisableSOFEvents(void);
 			#else
 				#if !defined(NO_DEVICE_REMOTE_WAKEUP)
-					#define USB_Device_SendRemoteWakeup()   MACROS{ UDCON |= (1 << RMWKUP); }MACROE
+					#define USB_Device_SendRemoteWakeup()   __NOP();
 
-					#define USB_Device_IsRemoteWakeupSent()       ((UDCON &  (1 << RMWKUP)) ? false : true)
+					#define USB_Device_IsRemoteWakeupSent()       (false)
 				#endif
 				
-				#define USB_Device_IsUSBSuspended()           ((UDINT &  (1 << SUSPI)) ? true : false)
-				
-				#define USB_Device_EnableSOFEvents()    MACROS{ USB_INT_Enable(USB_INT_SOFI); }MACROE
+				// #define USB_Device_IsUSBSuspended()           ((UDINT &  (1 << SUSPI)) ? true : false)
+				inline bool USB_Device_IsUSBSuspended(void) ATTR_ALWAYS_INLINE;
+				inline bool USB_Device_IsUSBSuspended(void)
+				{
+					// bit 2 in the Device Status command is SUS
+					LPC_USB->USBDevIntClr = 0x30;
+					LPC_USB->USBCmdCode = (uint32_t)(((uint32_t)0x00000500)  |  ((uint32_t)(0xFE << 16)));
+					while (!(LPC_USB->USBDevIntSt & 0x10));
+					LPC_USB->USBDevIntClr = 0x10;
+					LPC_USB->USBCmdCode = (uint32_t)(((uint32_t)0x00000200)  |  ((uint32_t)(0xFE << 16)));
+					while (!(LPC_USB->USBDevIntSt & 0x20)); // Wait for CDFULL
+					LPC_USB->USBDevIntClr = 0x20; // Clear CDFULL
+					return ((uint8_t)((LPC_USB->USBCmdData) & (1 << 2)) ? true : false); // Read byte
+				}
 
-				#define USB_Device_DisableSOFEvents()   MACROS{ USB_INT_Disable(USB_INT_SOFI); }MACROE
+				#define USB_Device_EnableSOFEvents()    __NOP();
+
+				#define USB_Device_DisableSOFEvents()   __NOP();
 			#endif
 			
 		/* Type Defines: */
@@ -207,8 +220,9 @@
 	/* Private Interface - For use in library only: */
 	#if !defined(__DOXYGEN__)
 		/* Macros: */		
-			#define USB_Device_SetLowSpeed()        MACROS{ UDCON |=  (1 << LSM);   }MACROE
-			#define USB_Device_SetFullSpeed()       MACROS{ UDCON &= ~(1 << LSM);   }MACROE
+			#warning TODO - Device.h - enable both full and low speed - TODO
+			#define USB_Device_SetLowSpeed()	__NOP();
+			#define USB_Device_SetFullSpeed()	__NOP();
 	#endif
 
 #endif

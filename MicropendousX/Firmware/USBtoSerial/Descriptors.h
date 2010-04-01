@@ -37,10 +37,12 @@
 #define _DESCRIPTORS_H_
 
 	/* Includes: */
-		#include <avr/pgmspace.h>
+		#include <LPC17xx.h>
+		#include "LPC17xx_Useful_Defines.h"
 
 		#include <LUFA/Drivers/USB/USB.h>
 		#include <LUFA/Drivers/USB/Class/CDC.h>
+		#include <LUFA/Drivers/USB/HighLevel/StdDescriptors.h>
 
 	/* Macros: */
 		/** Endpoint number of the CDC device-to-host notification IN endpoint. */

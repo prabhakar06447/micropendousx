@@ -1,21 +1,21 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2009.
+     Copyright (C) Dean Camera, 2010.
               
   dean [at] fourwalledcubicle [dot] com
       www.fourwalledcubicle.com
 */
 
 /*
-  Copyright 2009  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
-  Permission to use, copy, modify, and distribute this software
-  and its documentation for any purpose and without fee is hereby
-  granted, provided that the above copyright notice appear in all
-  copies and that both that the copyright notice and this
-  permission notice and warranty disclaimer appear in supporting
-  documentation, and that the name of the author not be used in
-  advertising or publicity pertaining to distribution of the
+  Permission to use, copy, modify, distribute, and sell this 
+  software and its documentation for any purpose is hereby granted
+  without fee, provided that the above copyright notice appear in 
+  all copies and that both that the copyright notice and this
+  permission notice and warranty disclaimer appear in supporting 
+  documentation, and that the name of the author not be used in 
+  advertising or publicity pertaining to distribution of the 
   software without specific, written prior permission.
 
   The author disclaim all warranties with regard to this
@@ -28,22 +28,25 @@
   this software.
 */
 
-/** \file
- *
- *  Board specific Buttons driver header for Micropendous boards.
- *
- *  \note This file should not be included directly. It is automatically included as needed by the Buttons driver
- *        dispatch header located in LUFA/Drivers/Board/Buttons.h.
- */
+/*
+   This is a stub driver header file, for implementing custom board
+   layout hardware with compatible LUFA board specific drivers. If
+   the library is configured to use the BOARD_USER board mode, this
+   driver file should be completed and copied into the "/Board/" folder
+   inside the application's folder.
 
-#ifndef __BUTTON1_USBKEY_H__
-#define __BUTTON1_USBKEY_H__
+   This stub is for the board-specific component of the LUFA Buttons driver,
+   for the control of physical board-mounted GPIO pushbuttons.
+*/
+ 
+#ifndef __BUTTONS_USER_H__
+#define __BUTTONS_USER_H__
 
 	/* Includes: */
-		#include <avr/io.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 
-		#include "../../../Common/Common.h"
+		// TODO: Add any required includes here
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
@@ -51,49 +54,26 @@
 		#endif
 
 	/* Preprocessor Checks: */
-		#if !defined(INCLUDE_FROM_BUTTONS_H)
+		#if !defined(__INCLUDE_FROM_BUTTONS_H)
 			#error Do not include this file directly. Include LUFA/Drivers/Board/Buttons.h instead.
 		#endif
 		
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
-			/** Button mask for the HWB button on the board. */
-            #if (defined(__AVR_AT90USB162__)  || defined(__AVR_AT90USB82__))
-                #define BUTTON1                      (1 << PD7)
-                #define BUTTON1_PORT           PORTD
-                #define BUTTON1_PORTDD      DDRD
-                #define BUTTON1_PORTIN        PIND
-            #endif
-
-            #if (defined(__AVR_ATmega16U4__)  || defined(__AVR_ATmega32U4__))
-                #define BUTTON1                      (1 << PE2)
-                #define BUTTON1_PORT           PORTE
-                #define BUTTON1_PORTDD      DDRE
-                #define BUTTON1_PORTIN        PINE
-            #endif
-
-            #if (defined(__AVR_AT90USB1287__) || defined(__AVR_AT90USB647__) ||  \
-                    defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB646__) ||  \
-                    defined(__AVR_ATmega32U6__))
-                #define BUTTON1                      (1 << PE2)
-                #define BUTTON1_PORT           PORTE
-                #define BUTTON1_PORTDD      DDRE
-                #define BUTTON1_PORTIN        PINE
-            #endif
-
-
+			/** Button mask for the first button on the board. */
+			#define BUTTONS_BUTTON1          // TODO: Add mask for first board button here
+	
 		/* Inline Functions: */
 		#if !defined(__DOXYGEN__)
-			static inline void BUTTON1_Init(void)
+			static inline void Buttons_Init(void)
 			{
-				BUTTON1_PORTDD  &= ~BUTTON1;
-				BUTTON1_PORT |=  BUTTON1;
+				// TODO: Initialize the appropriate port pins as an inputs here, with pull-ups
 			}
 
-			static inline uint8_t BUTTON1_GetStatus(void) ATTR_WARN_UNUSED_RESULT;
-			static inline uint8_t BUTTON1_GetStatus(void)
+			static inline uint8_t Buttons_GetStatus(void) ATTR_WARN_UNUSED_RESULT;
+			static inline uint8_t Buttons_GetStatus(void)
 			{
-				return ((BUTTON1_PORTIN & BUTTON1) ^ BUTTON1);
+				// TODO: Return current button status here, debounced if required
 			}
 		#endif
 
@@ -101,6 +81,5 @@
 		#if defined(__cplusplus)
 			}
 		#endif
-
+			
 #endif
-

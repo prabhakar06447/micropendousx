@@ -243,6 +243,8 @@ void CDC_Device_SendControlLineStateChange(USB_ClassInfo_CDC_Device_t* const CDC
 	Endpoint_ClearIN();
 }
 
+
+/*
 void CDC_Device_CreateStream(USB_ClassInfo_CDC_Device_t* CDCInterfaceInfo, FILE* Stream)
 {
 	*Stream = (FILE)FDEV_SETUP_STREAM(CDC_Device_putchar, CDC_Device_getchar, _FDEV_SETUP_RW);
@@ -254,6 +256,11 @@ void CDC_Device_CreateBlockingStream(USB_ClassInfo_CDC_Device_t* CDCInterfaceInf
 	*Stream = (FILE)FDEV_SETUP_STREAM(CDC_Device_putchar, CDC_Device_getchar_Blocking, _FDEV_SETUP_RW);
 	fdev_set_udata(Stream, CDCInterfaceInfo);
 }
+*/
+
+
+#define _FDEV_ERR		-1
+#define fdev_get_udata(stream) ((stream)->_p)
 
 static int CDC_Device_putchar(char c, FILE* Stream)
 {
@@ -263,17 +270,19 @@ static int CDC_Device_putchar(char c, FILE* Stream)
 static int CDC_Device_getchar(FILE* Stream)
 {
 	if (!(CDC_Device_BytesReceived((USB_ClassInfo_CDC_Device_t*)fdev_get_udata(Stream))))
-	  return _FDEV_EOF;
+	  return EOF;
 
 	return CDC_Device_ReceiveByte((USB_ClassInfo_CDC_Device_t*)fdev_get_udata(Stream));
 }
 
+
+/*
 static int CDC_Device_getchar_Blocking(FILE* Stream)
 {
 	while (!(CDC_Device_BytesReceived((USB_ClassInfo_CDC_Device_t*)fdev_get_udata(Stream))))
 	{
 		if (USB_DeviceState == DEVICE_STATE_Unattached)
-		  return _FDEV_EOF;
+		  return EOF;
 	
 		CDC_Device_USBTask((USB_ClassInfo_CDC_Device_t*)fdev_get_udata(Stream));
 		USB_USBTask();
@@ -281,5 +290,6 @@ static int CDC_Device_getchar_Blocking(FILE* Stream)
 
 	return CDC_Device_ReceiveByte((USB_ClassInfo_CDC_Device_t*)fdev_get_udata(Stream));
 }
+*/
 
 #endif
