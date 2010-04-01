@@ -32,7 +32,7 @@
 #define __HOSTCHAPTER9_H__
 
 	/* Includes: */
-		#include <avr/io.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 		
 		#include "LowLevel.h"

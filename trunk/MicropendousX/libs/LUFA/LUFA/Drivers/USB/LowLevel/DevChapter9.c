@@ -139,7 +139,8 @@ static void USB_Device_SetAddress(void)
 	if (DeviceAddress)
 	  USB_DeviceState = DEVICE_STATE_Addressed;
 
-	UDADDR = ((1 << ADDEN) | DeviceAddress);
+//	UDADDR = ((1 << ADDEN) | DeviceAddress);
+// TODO - how does LPC17xx handle device address?
 
 	return;
 }
@@ -236,7 +237,9 @@ static void USB_Device_GetInternalSerialDescriptor(void)
 
 	for (uint8_t SerialCharNum = 0; SerialCharNum < 20; SerialCharNum++)
 	{
-		uint8_t SerialByte = boot_signature_byte_get(SigReadAddress);
+//		uint8_t SerialByte = boot_signature_byte_get(SigReadAddress);
+// TODO - implement Serial Number for LPC
+		uint8_t SerialByte = 0;
 		
 		if (SerialCharNum & 0x01)
 		{

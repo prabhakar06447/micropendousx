@@ -36,6 +36,13 @@
 #define  __INCLUDE_FROM_ENDPOINT_C
 #include "Endpoint.h"
 
+
+volatile uint8_t _endpoinReadByteIndex = 0;
+volatile uint32_t _endpointReadTempData = 0;
+volatile uint8_t _endpoinWriteByteIndex = 0;
+volatile uint32_t _endpointWriteTempData = 0;
+
+
 #if !defined(FIXED_CONTROL_ENDPOINT_SIZE)
 uint8_t USB_ControlEndpointSize = ENDPOINT_CONTROLEP_DEFAULT_SIZE;
 #endif
@@ -47,27 +54,33 @@ uint8_t Endpoint_BytesToEPSizeMaskDynamic(const uint16_t Size)
 
 bool Endpoint_ConfigureEndpoint_Prv(const uint8_t Number, const uint8_t UECFG0XData, const uint8_t UECFG1XData)
 {
+#warning TODO - Endpoint.c - CRITICAL - properly enable EPs - TODO
+
 	Endpoint_SelectEndpoint(Number);
 	Endpoint_EnableEndpoint();
 
-	UECFG1X = 0;
-
-	UECFG0X = UECFG0XData;
-	UECFG1X = UECFG1XData;
+	// TODO - allocate EP size and select number of banks
+//	UECFG1X = 0;
+//	UECFG0X = UECFG0XData;
+//	UECFG1X = UECFG1XData;
 
 	return Endpoint_IsConfigured();
 }
 
 void Endpoint_ClearEndpoints(void)
 {
-	UEINT = 0;
+//	UEINT = 0;	// clear device interrupts
 
 	for (uint8_t EPNum = 0; EPNum < ENDPOINT_TOTAL_ENDPOINTS; EPNum++)
 	{
 		Endpoint_SelectEndpoint(EPNum);	
-		UEIENX = 0;
-		UEINTX = 0;
-		Endpoint_DeallocateMemory();
+
+	// TODO - clear all EP-related interrupts
+#warning TODO - Endpoint.c - clear all EP-related interrupts - TODO
+//		UEIENX = 0;
+//		UEINTX = 0;
+
+//		Endpoint_DeallocateMemory(); // no LPC equivalent
 		Endpoint_DisableEndpoint();
 	}
 }
@@ -107,7 +120,7 @@ uint8_t Endpoint_WaitUntilReady(void)
 
 	for (;;)
 	{
-		if (Endpoint_GetEndpointDirection() == ENDPOINT_DIR_IN)
+		if (Endpoint_GetEndpointDirection())
 		{
 			if (Endpoint_IsINReady())
 			  return ENDPOINT_READYWAIT_NoError;
@@ -122,7 +135,13 @@ uint8_t Endpoint_WaitUntilReady(void)
 		  return ENDPOINT_READYWAIT_DeviceDisconnected;
 		else if (Endpoint_IsStalled())
 		  return ENDPOINT_READYWAIT_EndpointStalled;
-			  
+
+		// check if this is Start-Of-Frame (SOF)
+		// on LPC need to check if current Frame number has changed in SIE
+		#warning TODO - Endpoint.c - account for start of frame - TODO
+		_LUFAUSBFrameNumber = 0;
+// LPC has no Start-Of-Frame Interrupt
+/*
 		if (USB_INT_HasOccurred(USB_INT_SOFI))
 		{
 			USB_INT_Clear(USB_INT_SOFI);
@@ -130,6 +149,7 @@ uint8_t Endpoint_WaitUntilReady(void)
 			if (!(TimeoutMSRem--))
 			  return ENDPOINT_READYWAIT_Timeout;
 		}
+*/
 	}
 }
 
@@ -210,6 +230,20 @@ uint8_t Endpoint_Discard_Stream(uint16_t Length
 
 /* The following abuses the C preprocessor in order to copy-past common code with slight alterations,
  * so that the code needs to be written once. It is a crude form of templating to reduce code maintenance. */
+
+
+// Memory functions redefined for ARM Cortex
+
+uint8_t pgm_read_byte(uint8_t *addr);
+uint8_t pgm_read_byte(uint8_t *addr) { return (uint8_t)(*addr); }
+
+uint8_t eeprom_read_byte(uint8_t *__p);
+uint8_t eeprom_read_byte(uint8_t *__p) { return (uint8_t)(*__p); }
+
+void eeprom_write_byte(uint8_t *__p, uint8_t __value);
+void eeprom_write_byte(uint8_t *__p, uint8_t __value) { *__p = __value; }
+
+
 
 #define  TEMPLATE_FUNC_NAME                        Endpoint_Write_Stream_LE
 #define  TEMPLATE_BUFFER_TYPE                      const void*

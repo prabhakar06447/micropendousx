@@ -10,10 +10,7 @@
  *
  *  The following list indicates what microcontrollers are compatible with this project.
  *
- *  - Series 7 USB AVRs
- *  - Series 6 USB AVRs
- *  - Series 4 USB AVRs
- *  - Series 2 USB AVRs
+ *  - LPC17xx with at least 64kbytes of FLASH memory
  *
  *  \section SSec_Info USB Information:
  *
@@ -44,16 +41,16 @@
  *
  *  \section SSec_Description Project Description: 
  *
- *  USB to Serial bridge project. This project allows a USB AVR to serve
- *  as a USB to USART bridge between a USB host and a device lacking a
- *  USB port. When programmed into a USB AVR, the AVR will enumerate as a
- *  virtual COM port.
+ *  USB to Serial bridge project. This project allows a LPC17xx to serve
+ *  as a USB to UART bridge between a USB host and a device lacking a
+ *  USB port. When programmed into a LPC17xx, the LPC17xx will enumerate as
+ *  a virtual COM port.
  *
- *  The AVR's hardware USART's settings will change to mirror as closely as
+ *  The LPC17xx's hardware UART's settings will change to mirror as closely as
  *  possible the serial settings set on the host. However, due to hardware
  *  limitations, some options may not be supported (baud rates with unacceptable
- *  error rates at the AVR's clock speed, data lengths other than 6, 7 or 8 bits,
- *  1.5 stop bits, parity other than none, even or odd).
+ *  error rates, data lengths other than 6, 7 or 8 bits, 1.5 stop bits,
+ *  parity other than none, even or odd).
  *  
  *  After running this project for the first time on a new computer,
  *  you will need to supply the .INF file located in this project

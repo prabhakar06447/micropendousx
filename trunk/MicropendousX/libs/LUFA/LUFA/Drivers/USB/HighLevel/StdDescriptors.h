@@ -41,7 +41,7 @@
 #define __USBDESCRIPTORS_H__
 
 	/* Includes: */
-		#include <avr/pgmspace.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 		#include <stddef.h>
 

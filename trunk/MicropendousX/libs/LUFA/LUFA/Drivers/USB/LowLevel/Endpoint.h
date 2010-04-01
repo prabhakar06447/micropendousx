@@ -8,6 +8,7 @@
 
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Adapted for the LPC17xx by Opendous Inc. - www.MicropendousX.org
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -65,14 +66,14 @@
 #ifndef __ENDPOINT_H__
 #define __ENDPOINT_H__
 
+
 	/* Includes: */
-		#include <avr/io.h>
-		#include <avr/pgmspace.h>
-		#include <avr/eeprom.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 
 		#include "../../../Common/Common.h"
 		#include "../HighLevel/USBTask.h"
+		#include "Device.h"
 
 		#if !defined(NO_STREAM_CALLBACKS) || defined(__DOXYGEN__)
 			#include "../HighLevel/StreamCallbacks.h"
@@ -93,26 +94,26 @@
 			/** Endpoint data direction mask for \ref Endpoint_ConfigureEndpoint(). This indicates that the endpoint
 			 *  should be initialized in the OUT direction - i.e. data flows from host to device.
 			 */
-			#define ENDPOINT_DIR_OUT                      (0 << EPDIR)
+			#define ENDPOINT_DIR_OUT                      0
 
 			/** Endpoint data direction mask for \ref Endpoint_ConfigureEndpoint(). This indicates that the endpoint
 			 *  should be initialized in the IN direction - i.e. data flows from device to host.
 			 */
-			#define ENDPOINT_DIR_IN                       (1 << EPDIR)
+			#define ENDPOINT_DIR_IN                       1
 
 			/** Mask for the bank mode selection for the \ref Endpoint_ConfigureEndpoint() macro. This indicates
 			 *  that the endpoint should have one single bank, which requires less USB FIFO memory but results
 			 *  in slower transfers as only one USB device (the AVR or the host) can access the endpoint's
 			 *  bank at the one time.
 			 */
-			#define ENDPOINT_BANK_SINGLE                  (0 << EPBK0)
+			#define ENDPOINT_BANK_SINGLE                  0
 
 			/** Mask for the bank mode selection for the \ref Endpoint_ConfigureEndpoint() macro. This indicates
 			 *  that the endpoint should have two banks, which requires more USB FIFO memory but results
 			 *  in faster transfers as one USB device (the AVR or the host) can access one bank while the other
 			 *  accesses the second bank.
 			 */
-			#define ENDPOINT_BANK_DOUBLE                  (1 << EPBK0)
+			#define ENDPOINT_BANK_DOUBLE                  1
 			
 			/** Endpoint address for the default control endpoint, which always resides in address 0. This is
 			 *  defined for convenience to give more readable code when used with the endpoint macros.
@@ -347,78 +348,206 @@
 				 *  \param[in] DirectionMask  New endpoint direction, as a ENDPOINT_DIR_* mask.
 				 */
 				static inline void Endpoint_SetEndpointDirection(uint8_t DirectionMask);
-			#else
-				#if defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-					#define Endpoint_BytesInEndpoint()        UEBCX
-				#elif defined(USB_SERIES_4_AVR)
-					#define Endpoint_BytesInEndpoint()        (((uint16_t)UEBCHX << 8) | UEBCLX)				
-				#elif defined(USB_SERIES_2_AVR)
-					#define Endpoint_BytesInEndpoint()        UEBCLX
-				#endif
+
+			#else // NOT if defined(__DOXYGEN__)
+
+
+				// helper functions for running SIE commands, each consisting of a Command followed by 1 or more possibly optional read/write commands
+
+				// Issue a SIE command with no/ignored data phase
+				//USBDevIntClr = 0x30; // Clear both CCEMPTY & CDFULL
+				//USBCmdCode = 0x00_command_0500; // CMD_CODE=0x_command_, CMD_PHASE=0x05(Command)
+				//while (!(USBDevIntSt & 0x10)); // Wait for CCEMPTY
+				//USBDevIntClr = 0x10; // Clear CCEMPTY interrupt bit
+				inline void SIE_Command(uint8_t command) ATTR_ALWAYS_INLINE;
+				inline void SIE_Command(uint8_t command)
+				{
+					LPC_USB->USBDevIntClr = 0x30;
+					LPC_USB->USBCmdCode = (uint32_t)(((uint32_t)0x00000500)  |  ((uint32_t)(command << 16)));
+					while (!(LPC_USB->USBDevIntSt & 0x10));
+					LPC_USB->USBDevIntClr = 0x10;
+				}
+
+
+				// Issue a read SIE command and return the read byte
+				inline uint8_t SIE_Read(uint8_t command) ATTR_ALWAYS_INLINE;
+				inline uint8_t SIE_Read(uint8_t command)
+				{
+					// CMD_CODE=0x_command_, CMD_PHASE=0x02(Read)
+					LPC_USB->USBCmdCode = (uint32_t)(((uint32_t)0x00000200)  |  ((uint32_t)(command << 16)));
+					while (!(LPC_USB->USBDevIntSt & 0x20)); // Wait for CDFULL
+					LPC_USB->USBDevIntClr = 0x20; // Clear CDFULL
+					return LPC_USB->USBCmdData; // Read byte
+				}
+
+
+				// Issue a write SIE command of data byte, should be preceded by a SIE_Command call with related data location
+				//USBCmdCode = (uint32_t)(((uint32_t)0x00000100)  |  ((uint32_t)(byte << 16))); // CMD_WDATA=0x_byte_, CMD_PHASE=0x01(Write)
+				//while (!(USBDevIntSt & 0x10)); // Wait for CCEMPTY
+				//USBDevIntClr = 0x10; // Clear CCEMPTY
+				static inline void SIE_Write(uint8_t byte);
+				#define SIE_Write(byte)	\
+												MACROS {	\
+													LPC_USB->USBCmdCode = (uint32_t)(((uint32_t)0x00000100)  |  ((uint32_t)(byte << 16)));	\
+													while (!(LPC_USB->USBDevIntSt & 0x10));	\
+													LPC_USB->USBDevIntClr = 0x10;	\
+												} MACROE
+
+
+				// need to AND with 0x3FF as only last 9 bits are number of bytes in endpoint
+				#define Endpoint_BytesInEndpoint()        (LPC_USB->USBRxPLen & ((uint32_t)0x000003FF))
+
 				
 				#if !defined(CONTROL_ONLY_DEVICE)
-					#define Endpoint_GetCurrentEndpoint()     (UENUM & ENDPOINT_EPNUM_MASK)
+					// current endpoint number is in bits 5:2, 0x3C = 111100, but other bits are not EPnum-related
+					#define Endpoint_GetCurrentEndpoint()     ((LPC_USB->USBCtrl & ((uint32_t)0x0000003C)) >> 2)
 				#else
 					#define Endpoint_GetCurrentEndpoint()     ENDPOINT_CONTROLEP
 				#endif
-				
+
+
+				// get the current index of the endpoint number
+				static inline uint8_t Endpoint_GetCurrentEndpointIndex(void) ATTR_ALWAYS_INLINE;
+				static inline uint8_t Endpoint_GetCurrentEndpointIndex(void)
+				{
+					// want the index of the current endpoint, i.e., the "logical" endpoint, not the "physical" endpoint currently selected
+					uint32_t currEP = ((LPC_USB->USBCtrl & ((uint32_t)0x0000003C)) >> 2);
+					return (uint8_t)((currEP >> 1) + (currEP & 0x00000001));
+				}
+
+
+
 				#if !defined(CONTROL_ONLY_DEVICE)
-					#define Endpoint_SelectEndpoint(epnum)    MACROS{ UENUM = (epnum); }MACROE
+					// current endpoint number is in bits 5:2 so shift left 2 places
+					#define Endpoint_SelectEndpoint(epnum)    MACROS{ LPC_USB->USBCtrl |= (epnum << 2); }MACROE
 				#else
 					#define Endpoint_SelectEndpoint(epnum)    (void)(epnum)
 				#endif
 
-				#define Endpoint_ResetFIFO(epnum)             MACROS{ UERST = (1 << (epnum)); UERST = 0; }MACROE
+				// Clear Buffer is the closest Cortex SIE equivalent, see Pg242 and Pg of UM10360 (User Manual for LPC17xx)
+				#define Endpoint_ResetFIFO(epnum)	\
+												MACROS {	\
+													SIE_Command((uint8_t) epnum);	\
+													SIE_Command(0xF2);	\
+												} MACROE
 
-				#define Endpoint_EnableEndpoint()             MACROS{ UECONX |= (1 << EPEN); }MACROE
+				// "Realize" the currently selected endpoint, enable its interrupt, and enable it in the SIE in Endpoint Status
+				#define Endpoint_EnableEndpoint()	\
+												MACROS {	\
+													LPC_USB->USBEpIntEn |= (1 << ((uint8_t)Endpoint_GetCurrentEndpoint()));	\
+													LPC_USB->USBReEp |= (1 << ((uint8_t)Endpoint_GetCurrentEndpoint()));	\
+													SIE_Command((uint8_t) (Endpoint_GetCurrentEndpoint() + 0x40));	\
+													SIE_Write(0x00);	\
+												} MACROE
 
-				#define Endpoint_DisableEndpoint()            MACROS{ UECONX &= ~(1 << EPEN); }MACROE
+				// "un-Realize" the currently selected endpoint, disable its interrupt, and disable it in the SIE in Endpoint Status
+				#define Endpoint_DisableEndpoint()	\
+												MACROS {	\
+													LPC_USB->USBEpIntEn &= ~(1 << ((uint8_t)Endpoint_GetCurrentEndpoint()));	\
+													LPC_USB->USBReEp &= ~(1 << ((uint8_t)Endpoint_GetCurrentEndpoint()));	\
+													SIE_Command((uint8_t) (Endpoint_GetCurrentEndpoint() + 0x40));	\
+													SIE_Write(1 << 5);	\
+												} MACROE
 
-				#define Endpoint_IsEnabled()                  ((UECONX & (1 << EPEN)) ? true : false)
+				// is the endpoint "Realized"
+				#define Endpoint_IsEnabled()	(((uint32_t)LPC_USB->USBReEp) & ((uint32_t)(1 << ((uint8_t)Endpoint_GetCurrentEndpoint()))))
 
+				// for Control EPs - yes, the EP is always writable
 				#if !defined(CONTROL_ONLY_DEVICE)
-					#define Endpoint_IsReadWriteAllowed()     ((UEINTX & (1 << RWAL)) ? true : false)
+					#define Endpoint_IsReadWriteAllowed()	true
 				#endif
-				
-				#define Endpoint_IsConfigured()               ((UESTA0X & (1 << CFGOK)) ? true : false)
 
-				#define Endpoint_GetEndpointInterrupts()      UEINT
+				// LPC equivalent would be that the endpoint interrupt is enabled and configured
+				#define Endpoint_IsConfigured()               ((LPC_USB->USBEpIntEn) ? true : false)
 
-				#define Endpoint_HasEndpointInterrupted(n)    ((UEINT & (1 << (n))) ? true : false)
-				
-				#define Endpoint_IsINReady()                  ((UEINTX & (1 << TXINI))  ? true : false)
-				
-				#define Endpoint_IsOUTReceived()              ((UEINTX & (1 << RXOUTI)) ? true : false)
+				#define Endpoint_GetEndpointInterrupts()	(LPC_USB->USBEpIntEn)
 
-				#define Endpoint_IsSETUPReceived()            ((UEINTX & (1 << RXSTPI)) ? true : false)
+				// Endpoint Interrupt Status Register - assuming logical endpoints
+				// TODO - account for the fact that logical endpoints have different IN/OUT interrupts
+				#define Endpoint_HasEndpointInterrupted(n)    ((LPC_USB->USBEpIntSt & ((uint32_t)(1 << n))) ? true : false)
 
-				#define Endpoint_ClearSETUP()                 MACROS{ UEINTX &= ~(1 << RXSTPI); }MACROE
+				// LPC busy loops before writing data to IN buffer so always true
+				#define Endpoint_IsINReady()                  (true)
 
+				// closest LPC equivalent would be whether the current endpoint interrupted
+				// TODO - account for the fact that logical endpoints have different IN/OUT interrupts
+				#define Endpoint_IsOUTReceived()              (((LPC_USB->USBEpIntSt & ((uint32_t)(1 << Endpoint_GetCurrentEndpointIndex()))) ? true : false))
+
+				static inline uint8_t Endpoint_IsSETUPReceived(void) ATTR_ALWAYS_INLINE;
+				static inline uint8_t Endpoint_IsSETUPReceived(void)
+				{
+					// bit 2 in the select endpoint command is STP
+					SIE_Command((uint8_t)(Endpoint_GetCurrentEndpoint()));
+					return (((uint8_t)(SIE_Read(Endpoint_GetCurrentEndpoint()) & (1 << 2))) ? true : false);
+				}
+
+				// Select Endpoint/Clear interrupt command will clear the STP(Setup) and PO(Packet Overwritten - previous packet was overwritten) bits
+				#define Endpoint_ClearSETUP()	\
+												MACROS {	\
+													SIE_Command((uint8_t)(Endpoint_GetCurrentEndpoint() + 0x40));	\
+													SIE_Read(Endpoint_GetCurrentEndpoint() + 0x40);	\
+												} MACROE
+
+				// send final data byte(s) and then Validate the buffer via the SIE to inform hardware the data is ready to send
+				// same procedure for Control and normal endpoints
 				#if !defined(CONTROL_ONLY_DEVICE)
-					#define Endpoint_ClearIN()                MACROS{ uint8_t Temp = UEINTX; UEINTX = (Temp & ~(1 << TXINI)); \
-					                                                  UEINTX = (Temp & ~(1 << FIFOCON)); }MACROE
+//					#define Endpoint_ClearIN()                MACROS{ uint8_t Temp = UEINTX; UEINTX = (Temp & ~(1 << TXINI)); \
+//					                                                  UEINTX = (Temp & ~(1 << FIFOCON)); }MACROE
+					#define Endpoint_ClearIN()	\
+												MACROS {	\
+													if (_endpoinWriteByteIndex != 0) { LPC_USB->USBTxData = _endpointWriteTempData;}	\
+													SIE_Command((uint8_t)Endpoint_GetCurrentEndpoint());	\
+													SIE_Command((uint8_t)0xFA);	\
+												} MACROE
 				#else
-					#define Endpoint_ClearIN()                MACROS{ UEINTX &= ~(1 << TXINI); }MACROE
+//					#define Endpoint_ClearIN()                MACROS{ UEINTX &= ~(1 << TXINI); }MACROE
+					#define Endpoint_ClearIN()	\
+												MACROS {	\
+													if (_endpoinWriteByteIndex != 0){LPC_USB->USBTxData = _endpointWriteTempData;}	\
+													SIE_Command((uint8_t)Endpoint_GetCurrentEndpoint());	\
+													SIE_Command((uint8_t)0xFA);	\
+												} MACROE
 				#endif
 
+				// no similar command for ClearOUT exists on LPC - data not read from buffer will be lost when new data arrives
 				#if !defined(CONTROL_ONLY_DEVICE)
-					#define Endpoint_ClearOUT()               MACROS{ uint8_t Temp = UEINTX; UEINTX = (Temp & ~(1 << RXOUTI)); \
-					                                                  UEINTX = (Temp & ~(1 << FIFOCON)); }MACROE
+					#define Endpoint_ClearOUT()		__NOP();
 				#else
-					#define Endpoint_ClearOUT()               MACROS{ UEINTX &= ~(1 << RXOUTI); }MACROE			
+					#define Endpoint_ClearOUT()		__NOP();
 				#endif
 
-				#define Endpoint_StallTransaction()           MACROS{ UECONX |= (1 << STALLRQ); }MACROE
+				// Set Endpoint Status Command - bit 0 is Stall - setting to 1 stalls
+				#define Endpoint_StallTransaction()	\
+												MACROS {	\
+													SIE_Command((uint8_t)(Endpoint_GetCurrentEndpoint() + 0x40));	\
+													SIE_Write(1 << 0);	\
+												} MACROE
 
-				#define Endpoint_ClearStall()                 MACROS{ UECONX |= (1 << STALLRQC); }MACROE
+				// Set Endpoint Status Command - bit 0 is Stall - setting to 0 unstalls
+				#define Endpoint_ClearStall() \
+												MACROS {	\
+													SIE_Command((uint8_t)(Endpoint_GetCurrentEndpoint() + 0x40));	\
+													SIE_Write(0 << 0);	\
+												} MACROE
 
-				#define Endpoint_IsStalled()                  ((UECONX & (1 << STALLRQ)) ? true : false)
 
-				#define Endpoint_ResetDataToggle()            MACROS{ UECONX |= (1 << RSTDT); }MACROE
-				
-				#define Endpoint_GetEndpointDirection()       (UECFG0X & ENDPOINT_DIR_IN)
-				
-				#define Endpoint_SetEndpointDirection(dir)    MACROS{ UECFG0X = ((UECFG0X & ~ENDPOINT_DIR_IN) | (dir)); }MACROE
+				static inline uint8_t Endpoint_IsStalled(void) ATTR_ALWAYS_INLINE;
+				static inline uint8_t Endpoint_IsStalled(void)
+				{
+					// bit 1 in the select endpoint command is ST (Stall)
+					SIE_Command((uint8_t)(Endpoint_GetCurrentEndpoint()));
+					return (((uint8_t)(SIE_Read(Endpoint_GetCurrentEndpoint()) & (1 << 1))) ? true : false);
+				}
+
+				// TODO - the LPC has a toggle bit enable in the SIE and an error code for it but no way to toggle
+				#define Endpoint_ResetDataToggle()		__NOP();
+
+				// even# physical EPs are OUT, odd# physical EPs are IN
+				#define Endpoint_GetEndpointDirection()			(Endpoint_GetCurrentEndpoint() & 0x01)
+
+				// TODO - LPC does not explicitly set direction
+				// 1 for IN, 0 for OUT - ENDPOINT_DIR_IN, ENDPOINT_DIR_OUT
+				#define Endpoint_SetEndpointDirection(dir)		(dir & 0x00)
 			#endif
 
 		/* Enums: */
@@ -483,10 +612,33 @@
 			 *
 			 *  \return Next byte in the currently selected endpoint's FIFO buffer
 			 */
+extern volatile uint8_t _endpoinReadByteIndex;
+extern volatile uint32_t _endpointReadTempData;
+#define USBCtrl_RD_EN		0
 			static inline uint8_t Endpoint_Read_Byte(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
 			static inline uint8_t Endpoint_Read_Byte(void)
 			{
-				return UEDATX;
+				uint8_t temp = 0;
+
+//				return UEDATX;
+				// data is in little endian format
+
+				if (_endpoinReadByteIndex == 0) {
+					LPC_USB->USBCtrl |= (1 << USBCtrl_RD_EN);
+					__NOP(); // need 3 clock cycles after setting USBCtrl
+					_endpointReadTempData = LPC_USB->USBRxData;
+					temp = (uint8_t)_endpointReadTempData;
+					_endpoinReadByteIndex = 1;
+				} else {
+					temp = (uint8_t)(_endpointReadTempData << (8 * _endpoinReadByteIndex));
+					_endpoinReadByteIndex++;
+				}
+
+				if (_endpoinReadByteIndex == 4) {
+					_endpoinReadByteIndex = 0;
+				}
+
+				return temp;
 			}
 
 			/** Writes one byte from the currently selected endpoint's bank, for IN direction endpoints.
@@ -495,10 +647,27 @@
 			 *
 			 *  \param[in] Byte  Next byte to write into the the currently selected endpoint's FIFO buffer
 			 */
+#define USBCtrl_WR_EN		1
+extern volatile uint8_t _endpoinWriteByteIndex;
+extern volatile uint32_t _endpointWriteTempData;
 			static inline void Endpoint_Write_Byte(const uint8_t Byte) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_Write_Byte(const uint8_t Byte)
 			{
-				UEDATX = Byte;
+//				UEDATX = Byte;
+				// data is in little endian format (byte 0 at index 0 byte 1 at 1)
+				// write the data every 4 bytes OR EndpointClearIN does remaining bytes before endpoint is sent
+
+				if (_endpoinWriteByteIndex == 3) {
+					_endpointWriteTempData |= (uint32_t)(Byte << (8 * _endpoinWriteByteIndex));
+					LPC_USB->USBCtrl |= (1 << USBCtrl_WR_EN);
+					__NOP(); // need 3 clock cycles after setting USBCtrl
+					LPC_USB->USBTxData = _endpointWriteTempData;
+					_endpoinWriteByteIndex = 0;
+				} else {
+					_endpointWriteTempData |= (uint32_t)(Byte << (8 * _endpoinWriteByteIndex));
+					_endpoinWriteByteIndex++;
+				}
+
 			}
 
 			/** Discards one byte from the currently selected endpoint's bank, for OUT direction endpoints.
@@ -510,7 +679,7 @@
 			{
 				uint8_t Dummy;
 				
-				Dummy = UEDATX;
+				Dummy = Endpoint_Read_Byte();
 			}
 			
 			/** Reads two bytes from the currently selected endpoint's bank in little endian format, for OUT
@@ -529,8 +698,8 @@
 					uint8_t  Bytes[2];
 				} Data;
 				
-				Data.Bytes[0] = UEDATX;
-				Data.Bytes[1] = UEDATX;
+				Data.Bytes[0] = Endpoint_Read_Byte();
+				Data.Bytes[1] = Endpoint_Read_Byte();
 			
 				return Data.Word;
 			}
@@ -551,8 +720,8 @@
 					uint8_t  Bytes[2];
 				} Data;
 				
-				Data.Bytes[1] = UEDATX;
-				Data.Bytes[0] = UEDATX;
+				Data.Bytes[1] = Endpoint_Read_Byte();
+				Data.Bytes[0] = Endpoint_Read_Byte();
 			
 				return Data.Word;
 			}
@@ -567,8 +736,8 @@
 			static inline void Endpoint_Write_Word_LE(const uint16_t Word) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_Write_Word_LE(const uint16_t Word)
 			{
-				UEDATX = (Word & 0xFF);
-				UEDATX = (Word >> 8);
+				Endpoint_Write_Byte((Word & 0xFF));
+				Endpoint_Write_Byte((Word >> 8));
 			}
 			
 			/** Writes two bytes to the currently selected endpoint's bank in big endian format, for IN
@@ -581,8 +750,8 @@
 			static inline void Endpoint_Write_Word_BE(const uint16_t Word) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_Write_Word_BE(const uint16_t Word)
 			{
-				UEDATX = (Word >> 8);
-				UEDATX = (Word & 0xFF);
+				Endpoint_Write_Byte((Word >> 8));
+				Endpoint_Write_Byte((Word & 0xFF));
 			}
 
 			/** Discards two bytes from the currently selected endpoint's bank, for OUT direction endpoints.
@@ -594,8 +763,8 @@
 			{
 				uint8_t Dummy;
 				
-				Dummy = UEDATX;
-				Dummy = UEDATX;
+				Dummy = Endpoint_Read_Byte();
+				Dummy = Endpoint_Read_Byte();
 			}
 
 			/** Reads four bytes from the currently selected endpoint's bank in little endian format, for OUT
@@ -614,10 +783,10 @@
 					uint8_t  Bytes[4];
 				} Data;
 				
-				Data.Bytes[0] = UEDATX;
-				Data.Bytes[1] = UEDATX;
-				Data.Bytes[2] = UEDATX;
-				Data.Bytes[3] = UEDATX;
+				Data.Bytes[0] = Endpoint_Read_Byte();
+				Data.Bytes[1] = Endpoint_Read_Byte();
+				Data.Bytes[2] = Endpoint_Read_Byte();
+				Data.Bytes[3] = Endpoint_Read_Byte();
 			
 				return Data.DWord;
 			}
@@ -638,10 +807,10 @@
 					uint8_t  Bytes[4];
 				} Data;
 				
-				Data.Bytes[3] = UEDATX;
-				Data.Bytes[2] = UEDATX;
-				Data.Bytes[1] = UEDATX;
-				Data.Bytes[0] = UEDATX;
+				Data.Bytes[3] = Endpoint_Read_Byte();
+				Data.Bytes[2] = Endpoint_Read_Byte();
+				Data.Bytes[1] = Endpoint_Read_Byte();
+				Data.Bytes[0] = Endpoint_Read_Byte();
 			
 				return Data.DWord;
 			}
@@ -656,10 +825,10 @@
 			static inline void Endpoint_Write_DWord_LE(const uint32_t DWord) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_Write_DWord_LE(const uint32_t DWord)
 			{
-				UEDATX = (DWord &  0xFF);
-				UEDATX = (DWord >> 8);
-				UEDATX = (DWord >> 16);
-				UEDATX = (DWord >> 24);
+				Endpoint_Write_Byte((DWord &  0xFF));
+				Endpoint_Write_Byte((DWord >> 8));
+				Endpoint_Write_Byte((DWord >> 16));
+				Endpoint_Write_Byte((DWord >> 24));
 			}
 			
 			/** Writes four bytes to the currently selected endpoint's bank in big endian format, for IN
@@ -672,10 +841,10 @@
 			static inline void Endpoint_Write_DWord_BE(const uint32_t DWord) ATTR_ALWAYS_INLINE;
 			static inline void Endpoint_Write_DWord_BE(const uint32_t DWord)
 			{
-				UEDATX = (DWord >> 24);
-				UEDATX = (DWord >> 16);
-				UEDATX = (DWord >> 8);
-				UEDATX = (DWord &  0xFF);
+				Endpoint_Write_Byte((DWord >> 24));
+				Endpoint_Write_Byte((DWord >> 16));
+				Endpoint_Write_Byte((DWord >> 8));
+				Endpoint_Write_Byte((DWord &  0xFF));
 			}
 
 			/** Discards four bytes from the currently selected endpoint's bank, for OUT direction endpoints.	
@@ -687,10 +856,10 @@
 			{
 				uint8_t Dummy;
 				
-				Dummy = UEDATX;
-				Dummy = UEDATX;
-				Dummy = UEDATX;
-				Dummy = UEDATX;
+				Dummy = Endpoint_Read_Byte();
+				Dummy = Endpoint_Read_Byte();
+				Dummy = Endpoint_Read_Byte();
+				Dummy = Endpoint_Read_Byte();
 			}
 
 		/* External Variables: */
@@ -1163,8 +1332,8 @@
 	/* Private Interface - For use in library only: */
 	#if !defined(__DOXYGEN__)
 		/* Macros: */
-			#define Endpoint_AllocateMemory()              MACROS{ UECFG1X |=  (1 << ALLOC); }MACROE
-			#define Endpoint_DeallocateMemory()            MACROS{ UECFG1X &= ~(1 << ALLOC); }MACROE
+//			#define Endpoint_AllocateMemory()              MACROS{ UECFG1X |=  (1 << ALLOC); }MACROE
+//			#define Endpoint_DeallocateMemory()            MACROS{ UECFG1X &= ~(1 << ALLOC); }MACROE
 			
 			#define _ENDPOINT_GET_MAXSIZE(n)               _ENDPOINT_GET_MAXSIZE2(ENDPOINT_DETAILS_EP ## n)
 			#define _ENDPOINT_GET_MAXSIZE2(details)        _ENDPOINT_GET_MAXSIZE3(details)
@@ -1190,14 +1359,10 @@
 				#define ENDPOINT_DETAILS_EP4               64,  true			
 			#endif
 
+			#warning TODO - Endpoint.h - CRITICAL - properly enable EPs - TODO
 			#define Endpoint_ConfigureEndpoint(Number, Type, Direction, Size, Banks)            \
-			                                    Endpoint_ConfigureEndpoint_Prv((Number),        \
-			                                              (((Type) << EPTYPE0) | (Direction)),  \
-			                                              ((1 << ALLOC) | (Banks) |             \
-			                                                (__builtin_constant_p(Size) ?       \
-			                                                 Endpoint_BytesToEPSizeMask(Size) : \
-			                                                 Endpoint_BytesToEPSizeMaskDynamic(Size))))
-													
+			                                    Endpoint_ConfigureEndpoint_Prv(Number, Direction, Size)
+
 		/* Function Prototypes: */
 			void    Endpoint_ClearEndpoints(void);
 			uint8_t Endpoint_BytesToEPSizeMaskDynamic(const uint16_t Size);
@@ -1216,7 +1381,9 @@
 					CheckBytes <<= 1;
 				}
 				
-				return (MaskVal << EPSIZE0);
+//				return (MaskVal << EPSIZE0);
+// TODO - EPSIZE0 should be dynamic
+				return (MaskVal);
 			}
 
 	#endif

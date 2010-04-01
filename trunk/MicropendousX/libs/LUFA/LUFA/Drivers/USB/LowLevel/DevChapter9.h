@@ -32,10 +32,7 @@
 #define __DEVCHAPTER9_H__
 
 	/* Includes: */
-		#include <avr/io.h>
-		#include <avr/pgmspace.h>
-		#include <avr/eeprom.h>
-		#include <avr/boot.h>
+		#include <LPC17xx.h>
 		
 		#include "../HighLevel/StdDescriptors.h"
 		#include "../HighLevel/Events.h"

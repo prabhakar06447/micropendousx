@@ -8,6 +8,7 @@
 
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Adapted for the LPC17xx by Opendous Inc. - www.MicropendousX.org
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -68,13 +69,13 @@ void USB_Init(
 	#endif
 	
 	#if defined(USB_DEVICE_ONLY) && (defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR))
-	UHWCON |= (1 << UIMOD);
+//	UHWCON |= (1 << UIMOD);
 	#elif defined(USB_HOST_ONLY)
-	UHWCON &= ~(1 << UIMOD);
+//	UHWCON &= ~(1 << UIMOD);
 	#elif defined(USB_CAN_BE_BOTH)
 	if (Mode == USB_MODE_UID)
 	{
-		UHWCON |=  (1 << UIDE);
+//		UHWCON |=  (1 << UIDE);
 
 		USB_INT_Clear(USB_INT_IDTI);
 		USB_INT_Enable(USB_INT_IDTI);
@@ -83,11 +84,11 @@ void USB_Init(
 	}
 	else if (Mode == USB_MODE_DEVICE)
 	{
-		UHWCON |=  (1 << UIMOD);
+//		UHWCON |=  (1 << UIMOD);
 	}
 	else if (Mode == USB_MODE_HOST)			
 	{
-		UHWCON &= ~(1 << UIMOD);
+//		UHWCON &= ~(1 << UIMOD);
 	}
 	else
 	{
@@ -104,7 +105,7 @@ void USB_Init(
 
 	USB_IsInitialized = true;
 
-	sei();
+//	sei();
 }
 
 void USB_ShutDown(void)
@@ -121,7 +122,7 @@ void USB_ShutDown(void)
 	#endif
 
 	#if defined(USB_CAN_BE_BOTH)
-	UHWCON &= ~(1 << UIDE);
+//	UHWCON &= ~(1 << UIDE);
 	#endif
 
 	USB_IsInitialized = false;
@@ -156,7 +157,7 @@ void USB_ResetInterface(void)
 	if (!(USB_Options & USB_OPT_MANUAL_PLL))
 	{
 		#if defined(USB_SERIES_4_AVR)
-		PLLFRQ = ((1 << PLLUSB) | (1 << PDIV3) | (1 << PDIV1));
+//		PLLFRQ = ((1 << PLLUSB) | (1 << PDIV3) | (1 << PDIV1));
 		#endif
 
 		USB_PLL_On();
@@ -166,28 +167,35 @@ void USB_ResetInterface(void)
 	USB_Controller_Reset();
 	
 	#if defined(USB_CAN_BE_BOTH)
-	if (UHWCON & (1 << UIDE))
+
+	// check if the USB mode has changed
+	// on LPC would need to ???
+	#warning TODO - LowLevel.c - USB Mode Change - TODO
+/*	if (UHWCON & (1 << UIDE))
 	{
 		USB_INT_Clear(USB_INT_IDTI);
 		USB_INT_Enable(USB_INT_IDTI);
 		USB_CurrentMode = USB_GetUSBModeFromUID();
 	}
+*/
 	#endif
 		
-	if (!(USB_Options & USB_OPT_REG_DISABLED))
-	  USB_REG_On();
-	else
-	  USB_REG_Off();
+	if (!(USB_Options & USB_OPT_REG_DISABLED)) {
+		USB_REG_On();
+	} else {
+		USB_REG_Off();
+	}
 	
 	USB_CLK_Unfreeze();
 
 	#if (defined(USB_CAN_BE_DEVICE) && (defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)))
 	if (USB_CurrentMode == USB_MODE_DEVICE)
 	{
-		if (USB_Options & USB_DEVICE_OPT_LOWSPEED)
-		  USB_Device_SetLowSpeed();
-		else
-		  USB_Device_SetFullSpeed();
+		if (USB_Options & USB_DEVICE_OPT_LOWSPEED) {
+			USB_Device_SetLowSpeed();
+		} else {
+			USB_Device_SetFullSpeed();
+		}
 	}
 	#endif
 	
@@ -218,7 +226,7 @@ void USB_ResetInterface(void)
 	USB_INT_Enable(USB_INT_EORSTI);
 
 		#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-		USB_INT_Enable(USB_INT_VBUS);
+//		USB_INT_Enable(USB_INT_VBUS); // no LPC equivalent
 		#endif
 	#elif defined(USB_HOST_ONLY)
 	USB_Host_HostMode_On();
@@ -244,7 +252,7 @@ void USB_ResetInterface(void)
 		#endif
 
 		#if defined(CONTROL_ONLY_DEVICE)
-		UENUM = ENDPOINT_CONTROLEP;
+//		UENUM = ENDPOINT_CONTROLEP;
 		#endif
 	}
 	else if (USB_CurrentMode == USB_MODE_HOST)

@@ -56,10 +56,14 @@
 #define __COMMON_H__
 
 	/* Includes: */
-		#include <avr/io.h>
+		#include <LPC17xx.h>
 	
 		#include "FunctionAttributes.h"
 		#include "BoardTypes.h"
+
+	/* Global Variable for Library */
+		extern volatile uint16_t _LUFAUSBFrameNumber;
+
 
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */		

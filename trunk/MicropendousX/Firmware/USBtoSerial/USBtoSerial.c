@@ -9,6 +9,9 @@
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
+  Modified for ARM Cortex-M3 by Opendous Inc. 2010-03
+  www.MicropendousX.org
+
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
   without fee, provided that the above copyright notice appear in 
@@ -105,12 +108,7 @@ int main(void)
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware(void)
 {
-	/* Disable watchdog if enabled by bootloader/fuses */
-	MCUSR &= ~(1 << WDRF);
-	wdt_disable();
-
-	/* Disable clock division */
-	clock_prescale_set(clock_div_1);
+	prvSetupHardware();
 
 	/* Hardware Initialization */
 	LEDs_Init();
@@ -135,7 +133,7 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 	LEDs_SetAllLEDs(LEDMASK_USB_READY);
 
 	if (!(CDC_Device_ConfigureEndpoints(&VirtualSerial_CDC_Interface)))
-	  LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
+		LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
 }
 
 /** Event handler for the library USB Unhandled Control Request event. */

@@ -31,45 +31,57 @@
 #define  __INCLUDE_FROM_USB_DRIVER
 #include "USBInterrupt.h"
 
+volatile uint16_t _LUFAUSBFrameNumber = 0;
+
 void USB_INT_DisableAllInterrupts(void)
 {
 	#if defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-	USBCON &= ~((1 << VBUSTE) | (1 << IDTE));				
+//	USBCON &= ~((1 << VBUSTE) | (1 << IDTE));
 	#elif defined(USB_SERIES_4_AVR)
-	USBCON &= ~(1 << VBUSTE);					
+//	USBCON &= ~(1 << VBUSTE);	
 	#endif
-	
+
 	#if defined(USB_CAN_BE_HOST)
-	UHIEN   = 0;
-	OTGIEN  = 0;
+//	UHIEN   = 0;
+//	OTGIEN  = 0;
 	#endif
-	
+
 	#if defined(USB_CAN_BE_DEVICE)
-	UDIEN   = 0;
+//	UDIEN   = 0;
 	#endif
 }
 
 void USB_INT_ClearAllInterrupts(void)
 {
 	#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-	USBINT  = 0;
+//	USBINT  = 0;
 	#endif
 	
 	#if defined(USB_CAN_BE_HOST)
-	UHINT   = 0;
-	OTGINT  = 0;
+//	UHINT   = 0;
+//	OTGINT  = 0;
 	#endif
 	
 	#if defined(USB_CAN_BE_DEVICE)
-	UDINT   = 0;
+//	UDINT   = 0;
 	#endif
 }
 
-ISR(USB_GEN_vect, ISR_BLOCK)
+void USB_General_Interrupt_Handler(void)
 {
 	#if defined(USB_CAN_BE_DEVICE)
-	#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
-	if (USB_INT_HasOccurred(USB_INT_VBUS) && USB_INT_IsEnabled(USB_INT_VBUS))
+
+	// if this has been an EP interrupt, handle the EP
+	if (LPC_USB->USBEpIntSt) {
+		USB_USBTask();
+	}
+
+//	#if defined(USB_SERIES_4_AVR) || defined(USB_SERIES_6_AVR) || defined(USB_SERIES_7_AVR)
+	//	if (USB_INT_HasOccurred(USB_INT_VBUS) && USB_INT_IsEnabled(USB_INT_VBUS))
+	// check if the VBUS has changed
+	// on LPC need to check if there has been a USB bus RESET
+	#warning TODO - USBInterrupt.c - VBUS Change - TODO
+/*	if (0)
 	{
 		USB_INT_Clear(USB_INT_VBUS);
 
@@ -84,7 +96,8 @@ ISR(USB_GEN_vect, ISR_BLOCK)
 			EVENT_USB_Device_Disconnect();
 		}
 	}
-	#endif
+*/
+//	#endif
 
 	if (USB_INT_HasOccurred(USB_INT_SUSPEND) && USB_INT_IsEnabled(USB_INT_SUSPEND))
 	{
@@ -107,6 +120,10 @@ ISR(USB_GEN_vect, ISR_BLOCK)
 		#endif
 	}
 
+	// check if the USB Bus has been RESET
+	// on LPC need to check if current Frame number has changed in SIE
+	#warning TODO - USBInterrupt.c - USB Bus has been RESET - TODO
+/*
 	if (USB_INT_HasOccurred(USB_INT_WAKEUP) && USB_INT_IsEnabled(USB_INT_WAKEUP))
 	{
 		if (!(USB_Options & USB_OPT_MANUAL_PLL))
@@ -130,6 +147,7 @@ ISR(USB_GEN_vect, ISR_BLOCK)
 		EVENT_USB_Device_WakeUp();		
 		#endif
 	}
+*/
    
 	if (USB_INT_HasOccurred(USB_INT_EORSTI) && USB_INT_IsEnabled(USB_INT_EORSTI))
 	{
@@ -148,21 +166,28 @@ ISR(USB_GEN_vect, ISR_BLOCK)
 		                           ENDPOINT_DIR_OUT, USB_ControlEndpointSize,
 		                           ENDPOINT_BANK_SINGLE);
 
-		#if defined(INTERRUPT_CONTROL_ENDPOINT)
-		USB_INT_Enable(USB_INT_RXSTPI);
-		#endif
+		//#if defined(INTERRUPT_CONTROL_ENDPOINT)
+		//		USB_INT_Enable(USB_INT_RXSTPI);
+		// check if this is a SETUP packet
+		// on LPC need to check in SIE
+		#warning TODO - USBInterrupt.c - check if current packet is an interrupt packet - TODO
+		// code
+		//#endif
 
 		EVENT_USB_Device_Reset();
 	}
 	
-	if (USB_INT_HasOccurred(USB_INT_SOFI) && USB_INT_IsEnabled(USB_INT_SOFI))
-	{
-		USB_INT_Clear(USB_INT_SOFI);
-		
-		EVENT_USB_Device_StartOfFrame();
-	}
+	// check if this is Start-Of-Frame (SOF)
+	// on LPC need to check if current Frame number has changed in SIE
+	#warning TODO - USBInterrupt.c - account for start of frame - TODO
+	_LUFAUSBFrameNumber = 0;
+	// if start of frame has occured
+	// EVENT_USB_Device_StartOfFrame();
+
 	#endif
-	
+
+
+/*
 	#if defined(USB_CAN_BE_HOST)
 	if (USB_INT_HasOccurred(USB_INT_DDISCI) && USB_INT_IsEnabled(USB_INT_DDISCI))
 	{
@@ -228,9 +253,11 @@ ISR(USB_GEN_vect, ISR_BLOCK)
 		USB_ResetInterface();
 	}
 	#endif
+*/
 }
 
 #if defined(INTERRUPT_CONTROL_ENDPOINT) && defined(USB_CAN_BE_DEVICE)
+/*
 ISR(USB_COM_vect, ISR_BLOCK)
 {
 	uint8_t PrevSelectedEndpoint = Endpoint_GetCurrentEndpoint();
@@ -241,4 +268,5 @@ ISR(USB_COM_vect, ISR_BLOCK)
 	
 	Endpoint_SelectEndpoint(PrevSelectedEndpoint);
 }
+*/
 #endif

@@ -8,6 +8,7 @@
 
 /*
   Copyright 2010  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Adapted for the LPC17xx by Opendous Inc. - www.MicropendousX.org
 
   Permission to use, copy, modify, distribute, and sell this 
   software and its documentation for any purpose is hereby granted
@@ -32,7 +33,7 @@
 #define __USBINTERRUPT_H__
 
 	/* Includes: */
-		#include <avr/io.h>
+		#include <LPC17xx.h>
 		#include <stdbool.h>
 		
 		#include "../../../Common/Common.h"
@@ -53,31 +54,43 @@
 	/* Private Interface - For use in library only: */
 	#if !defined(__DOXYGEN__)
 		/* Macros: */
-			#define USB_INT_Enable(int)              MACROS{ USB_INT_GET_EN_REG(int)   |=   USB_INT_GET_EN_MASK(int);   }MACROE
-			#define USB_INT_Disable(int)             MACROS{ USB_INT_GET_EN_REG(int)   &= ~(USB_INT_GET_EN_MASK(int));  }MACROE
-			#define USB_INT_Clear(int)               MACROS{ USB_INT_GET_INT_REG(int)  &= ~(USB_INT_GET_INT_MASK(int)); }MACROE
-			#define USB_INT_IsEnabled(int)                 ((USB_INT_GET_EN_REG(int)   &    USB_INT_GET_EN_MASK(int)) ? true : false)
-			#define USB_INT_HasOccurred(int)               ((USB_INT_GET_INT_REG(int)  &    USB_INT_GET_INT_MASK(int)) ? true : false)
+			#define USB_INT_Enable(int)			MACROS{ USB_INT_GET_EN_REG(int)   |=   USB_INT_GET_EN_MASK(int);   }MACROE
+			#define USB_INT_Disable(int)			MACROS{ USB_INT_GET_EN_REG(int)   &= ~(USB_INT_GET_EN_MASK(int));  }MACROE
+			#define USB_INT_Clear(int)			MACROS{ USB_INT_GET_INT_CLR_REG(int)  &= ~(USB_INT_GET_INT_MASK(int)); }MACROE
+			#define USB_INT_IsEnabled(int)		((USB_INT_GET_EN_REG(int)   &    USB_INT_GET_EN_MASK(int)) ? true : false)
+			#define USB_INT_HasOccurred(int)	((USB_INT_GET_INT_REG(int)  &    USB_INT_GET_INT_MASK(int)) ? true : false)
 
-			#define USB_INT_GET_EN_REG(a, b, c, d)           a
-			#define USB_INT_GET_EN_MASK(a, b, c, d)          b
-			#define USB_INT_GET_INT_REG(a, b, c, d)          c
-			#define USB_INT_GET_INT_MASK(a, b, c, d)         d
+			#define USB_INT_GET_EN_REG(a, b, c, d, e)		a
+			#define USB_INT_GET_EN_MASK(a, b, c, d, e)		b
+			#define USB_INT_GET_INT_REG(a, b, c, d, e)		c
+			#define USB_INT_GET_INT_MASK(a, b, c, d, e)	d
+			#define USB_INT_GET_INT_CLR_REG(a, b, c, d, e)	e
 
-			#define USB_INT_VBUS                             USBCON, (1 << VBUSTE) , USBINT, (1 << VBUSTI)
-			#define USB_INT_IDTI                             USBCON, (1 << IDTE)   , USBINT, (1 << IDTI)
-			#define USB_INT_WAKEUP                           UDIEN , (1 << WAKEUPE), UDINT , (1 << WAKEUPI)
-			#define USB_INT_SUSPEND                          UDIEN , (1 << SUSPE)  , UDINT , (1 << SUSPI)
-			#define USB_INT_EORSTI                           UDIEN , (1 << EORSTE) , UDINT , (1 << EORSTI)
-			#define USB_INT_DCONNI                           UHIEN , (1 << DCONNE) , UHINT , (1 << DCONNI)
-			#define USB_INT_DDISCI                           UHIEN , (1 << DDISCE) , UHINT , (1 << DDISCI)
-			#define USB_INT_BCERRI                           OTGIEN, (1 << BCERRE) , OTGINT, (1 << BCERRI)
-			#define USB_INT_VBERRI                           OTGIEN, (1 << VBERRE) , OTGINT, (1 << VBERRI)
-			#define USB_INT_SOFI                             UDIEN,  (1 << SOFE)   , UDINT , (1 << SOFI)
-			#define USB_INT_HSOFI                            UHIEN,  (1 << HSOFE)  , UHINT , (1 << HSOFI)
-			#define USB_INT_RSTI                             UHIEN , (1 << RSTE)   , UHINT , (1 << RSTI)
-			#define USB_INT_SRPI                             OTGIEN, (1 << SRPE)   , OTGINT, (1 << SRPI)
-			#define USB_INT_RXSTPI                           UEIENX, (1 << RXSTPE) , UEINTX, (1 << RXSTPI)
+			// Enable Register, Enable Mask, Interrupt Register, Interrupt Mask
+
+			// AVR VBUSTE - VBUS transition
+			#define USB_INT_VBUS				(LPC_USB->USBDevIntEn), 0, (LPC_USB->USBDevIntSt), 0, (LPC_USB->USBDevIntClr)
+			// AVR IDTE - ID Transition = no LPC equivalent (alter functions which use this)
+			#define USB_INT_IDTI				(LPC_USB->USBDevIntEn), 0, (LPC_USB->USBDevIntSt), 0, (LPC_USB->USBDevIntClr)
+			// AVR WAKEUPE - Wake Up CPU = no LPC equivalent (alter functions which use this)
+			#define USB_INT_WAKEUP				(LPC_USB->USBDevIntEn), 0, (LPC_USB->USBDevIntSt), 0, (LPC_USB->USBDevIntClr)
+			// AVR SUSPE - Suspend = LPC Device Status Change (Reset, Suspend, Connect), USBDevIntEn, USBDevIntSt, DEV_STAT=3
+			#define USB_INT_SUSPEND				(LPC_USB->USBDevIntEn) ,	(1 << 3) , (LPC_USB->USBDevIntSt) , (1 << 3), (LPC_USB->USBDevIntClr)
+			// AVR EORSTE - End of RESET = LPC Device Status Change (Reset, Suspend, Connect), USBDevIntEn, USBDevIntSt, DEV_STAT=3
+			#define USB_INT_EORSTI				(LPC_USB->USBDevIntEn) ,	(1 << 3) , (LPC_USB->USBDevIntSt) , (1 << 3), (LPC_USB->USBDevIntClr)
+			// AVR SOFE - Start of Frame = no LPC equivalent (alter functions which use this)
+			#define USB_INT_SOFI				(LPC_USB->USBDevIntEn), 0, (LPC_USB->USBDevIntSt), 0, (LPC_USB->USBDevIntClr)
+			// AVR RXSTPE - received SETUP packet = no LPC equivalent (alter functions which use this)
+			#define USB_INT_RXSTPI				(LPC_USB->USBDevIntEn), 0, (LPC_USB->USBDevIntSt), 0, (LPC_USB->USBDevIntClr)
+
+// TODO - define the following for the LPC for HOST and OTG modes
+//			#define USB_INT_BCERRI				OTGIEN,	(1 << BCERRE) , OTGINT, (1 << BCERRI)
+//			#define USB_INT_VBERRI				OTGIEN,	(1 << VBERRE) , OTGINT, (1 << VBERRI)
+//			#define USB_INT_DDISCI				UHIEN ,	(1 << DDISCE) , UHINT , (1 << DDISCI)
+//			#define USB_INT_SRPI				OTGIEN,	(1 << SRPE)   , OTGINT, (1 << SRPI)
+//			#define USB_INT_DCONNI				UHIEN ,	(1 << DCONNE) , UHINT , (1 << DCONNI)
+//			#define USB_INT_HSOFI				UHIEN,	(1 << HSOFE)  , UHINT , (1 << HSOFI)
+//			#define USB_INT_RSTI				UHIEN,	(1 << RSTE)   , UHINT , (1 << RSTI)
 	
 		/* Function Prototypes: */
 			void USB_INT_ClearAllInterrupts(void);
