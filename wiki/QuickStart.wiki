@@ -29,6 +29,8 @@ If you are interested in using [http://www.eclipse.org/ Eclipse] for development
 
 If you are having JTAG communication issues try slowing down the JTAG clock speed by altering the `jtag_khz 500` setting in `OpenOCD.cfg`.
 
+If you are having many errors and are worried your firmware may not be uploading properly you can inject the vector checksum into your hex file using the [http://www.nxp.com/files/products/standard/microcontrollers/utilities/lpc2000_flash_utility.zip LPC2000 FLASH Utility].
+
 Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
