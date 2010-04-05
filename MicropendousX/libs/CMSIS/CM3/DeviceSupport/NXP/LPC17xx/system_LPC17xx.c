@@ -298,9 +298,22 @@
 /*--------------------- Flash Accelerator Configuration ----------------------
 //
 // <e> Flash Accelerator Configuration
-//   <o1.0..11>  Reserved
+//   <o1.0..1>   FETCHCFG: Fetch Configuration
+//               <0=> Instruction fetches from flash are not buffered
+//               <1=> One buffer is used for all instruction fetch buffering
+//               <2=> All buffers may be used for instruction fetch buffering
+//               <3=> Reserved (do not use this setting)
+//   <o1.2..3>   DATACFG: Data Configuration
+//               <0=> Data accesses from flash are not buffered
+//               <1=> One buffer is used for all data access buffering
+//               <2=> All buffers may be used for data access buffering
+//               <3=> Reserved (do not use this setting)
+//   <o1.4>      ACCEL: Acceleration Enable
+//   <o1.5>      PREFEN: Prefetch Enable
+//   <o1.6>      PREFOVR: Prefetch Override
+//   <o1.7..11>  RESERVED
 //   <o1.12..15> FLASHTIM: Flash Access Time
-//               <0=> 1 CPU clock (for CPU clock up to 20 MHz)
+//               <0=> 1 CPU clock  (for CPU clock up to 20 MHz)
 //               <1=> 2 CPU clocks (for CPU clock up to 40 MHz)
 //               <2=> 3 CPU clocks (for CPU clock up to 60 MHz)
 //               <3=> 4 CPU clocks (for CPU clock up to 80 MHz)
