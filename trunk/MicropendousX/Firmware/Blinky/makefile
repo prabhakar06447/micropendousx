@@ -55,9 +55,6 @@ CPU_MODE = mthumb
 CPU_FLAGS = -mapcs-frame
 CPU_FLAGS_ASM = -mthumb-interwork
 
-# Linker Script for the current MCU
-LINKER_SCRIPT = LPC17xx.ld
-
 
 # Target board (see library "Board Types" documentation, USER or blank for projects not requiring
 # LUFA board drivers). If USER is selected, put custom board drivers in a directory called 
@@ -109,9 +106,10 @@ TARGET = Blinky
 LIBS_PATH = ../../libs
 LUFA_PATH = $(LIBS_PATH)/LUFA
 LPCUSB_PATH = $(LIBS_PATH)/LPCUSB
-CMSIS_CORE_PATH = $(LIBS_PATH)/CMSIS/CM3/CoreSupport
-CMSIS_DEVICE_PATH = $(LIBS_PATH)/CMSIS/CM3/DeviceSupport/NXP/LPC17xx
-INCLUDE_PATH = $(LIBS_PATH)/CMSIS/CM3/INC/NXP/LPC17xx
+CMSIS_PATH = $(LIBS_PATH)/CMSIS
+CMSIS_CORE_PATH = $(CMSIS_PATH)/CM3/CoreSupport
+CMSIS_DEVICE_PATH = $(CMSIS_PATH)/CM3/DeviceSupport/NXP/LPC17xx
+INCLUDE_PATH = $(CMSIS_PATH)/CM3/INC/NXP/LPC17xx
 WEBSERVER_PATH = ./
 FREERTOS_PATH = ./FreeRTOS
 FREERTOS_DEMO_DIR = ./CommonDemoTasks
@@ -137,20 +135,7 @@ COMPILE_OPTS += -D USB_SERIES_7_AVR=1
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = $(TARGET).c \
-	  system_LPC17xx.c \
-
-
-#	  Descriptors.c \
-#	  Lib/RingBuff.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/LowLevel/DevChapter9.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/LowLevel/Endpoint.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/LowLevel/LowLevel.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/HighLevel/Events.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/HighLevel/USBInterrupt.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/HighLevel/USBTask.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/HighLevel/ConfigDescriptor.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/Class/Device/CDC.c \
-#	  $(LUFA_PATH)/LUFA/Drivers/USB/Class/Host/CDC.c \
+	  $(CMSIS_DEVICE_PATH)/system_LPC17xx.c \
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
@@ -165,8 +150,7 @@ CPPSRC =
 #     it will preserve the spelling of the filenames, and gcc itself does
 #     care about how the name is spelled on its command-line.
 ASRC = 
-ASRC += startup_LPC17xx.S
-#ASRC += $(CMSIS_DEVICE_PATH)/startup/gcc/startup_LPC17xx.S
+ASRC += $(CMSIS_DEVICE_PATH)/startup/gcc/startup_LPC17xx.S
 
 
 # Object files directory
@@ -182,8 +166,11 @@ OPT = 0
 
 
 # Debugging format.
-#DEBUG = dwarf-2
-DEBUG = 3
+DEBUG = dwarf-2 -g3
+
+
+# Linker Script for the current MCU
+LINKER_SCRIPT = $(CMSIS_PATH)/LinkerScripts/ldscript_rom_gnu.ld
 
 
 # List any extra directories to look for include files here.

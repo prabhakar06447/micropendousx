@@ -29,7 +29,7 @@ volatile uint32_t msTicks;                            /* counts 1ms timeTicks */
 
 
 /*----------------------------------------------------------------------------
-  SysTick_Handler
+  SysTick_Handler - placed into vector table by startup_LPC17xx
  *----------------------------------------------------------------------------*/
 void SysTick_Handler(void) {
   msTicks++;                        /* increment counter necessary in Delay() */

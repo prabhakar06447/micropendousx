@@ -24,8 +24,9 @@ monitor halt
 # load the firmware's symbol table into gdb
 file Blinky.elf
 
-# set a breakpoint on the first function in main()
-br prvSetupHardware
+# set a breakpoint
+echo -----------Set Breakpoint on SysTick_Handler---\n
+br SysTick_Handler
 
 #configure debugging and then display settings
 set debug arm
@@ -41,6 +42,8 @@ monitor resume
 monitor sleep 200
 echo -----------Monitor Poll------------------------\n
 monitor poll
+echo -----------print SystemCoreClock---------------\n
+print SystemCoreClock
 echo -----------print msTicks-----------------------\n
 print msTicks
 echo -----------info registers----------------------\n

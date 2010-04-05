@@ -125,13 +125,8 @@ __cs3_reset_cortex_m:
     .fnstart
     LDR     R0, =SystemInit
     BLX     R0
-.if (RAM_MODE)
-    LDR     R0,=main
+    LDR     R0,=_start
     BX      R0
-.else
-	LDR     R0,=_start
-    BX      R0
-.endif
     .pool
     .cantunwind
     .fnend
