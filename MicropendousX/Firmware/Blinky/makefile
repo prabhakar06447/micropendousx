@@ -19,6 +19,7 @@
 # Dean Camera
 # Opendous Inc.
 # Denver Gingerich
+# Casainho
 #
 #----------------------------------------------------------------------------
 # On command line:
@@ -239,7 +240,7 @@ CFLAGS += -mfix-cortex-m3-ldrd
 #CFLAGS += -fno-unit-at-a-time
 #CFLAGS += -Wunreachable-code
 #CFLAGS += -Wsign-compare
-CFLAGS += -Wa,-alhms=$(<:%.c=$(OBJDIR)/%.lst)
+#CFLAGS += -Wa,-alhms=$(<:%.c=$(OBJDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
 
@@ -266,7 +267,7 @@ CPPFLAGS += -Wall
 #CPPFLAGS += -Wstrict-prototypes
 #CPPFLAGS += -Wunreachable-code
 #CPPFLAGS += -Wsign-compare
-CPPFLAGS += -Wa,-alhms=$(<:%.cpp=$(OBJDIR)/%.lst)
+#CPPFLAGS += -Wa,-alhms=$(<:%.cpp=$(OBJDIR)/%.lst)
 CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #CPPFLAGS += $(CSTANDARD)
 
@@ -280,7 +281,8 @@ CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #             files -- see libnew docs [FIXME: not yet described there]
 #  -listing-cont-lines: Sets the maximum number of continuation lines of hex 
 #       dump that will be displayed for a given single line of source input.
-ASFLAGS = -g$(DEBUG) $(ADEFS) -I. -I$(INCLUDE_PATH)/ -alhms=$(<:%.S=$(OBJDIR)/%.lst)
+#ASFLAGS = -g$(DEBUG) $(ADEFS) -I. -I$(INCLUDE_PATH)/ -alhms=$(<:%.S=$(OBJDIR)/%.lst)
+ASFLAGS = -g$(DEBUG) $(ADEFS) -I. -I$(INCLUDE_PATH)
 
 
 #---------------- Library Options ----------------
@@ -803,7 +805,7 @@ $(shell mkdir $(OBJDIR)/ 2>/dev/null)
 
 
 # Include the dependency files.
--include $(shell mkdir $(OBJDIR)/ 2>/dev/null) $(wildcard $(OBJDIR)//*)
+#-include $(shell mkdir $(OBJDIR)/ 2>/dev/null) $(wildcard $(OBJDIR)//*)
 
 
 # Listing of phony targets.
@@ -812,3 +814,4 @@ showtarget begin finish end sizebefore sizeafter  \
 gccversion build elf hex eep lss sym coff extcoff \
 program dfu flip flip-ee dfu-ee clean debug       \
 clean_list clean_binary gdb-config doxygen
+
