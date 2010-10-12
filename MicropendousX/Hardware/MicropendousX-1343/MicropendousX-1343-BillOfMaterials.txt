@@ -25,6 +25,7 @@ Notes:	- Component costs listed are for single quantity orders from DigiKey
 	- R3, the 1.5k USB D+ pull-up, and USB series resistors R1, R2 must be 1% or better
 	- LPC1343FBD48 can be replaced with non-USB LPC1313FBD48 (Cortex-M3) or
 	  LPC1114FBD48 (Cortex-M0) ICs.  USB will then only provide power.
-	- R6 is a copper trace connecting GND and GNDPWR.  Its pins should be shorted.
-	- R7 need only be installed if you require JTAG ETM trace capability
-
+	  DO NOT populate D1 when using non-USB ICs
+	- MBR120VLSFT1G Schottky Diode can be replaced by MBRX120 in SOD123
+	- R6 is a copper trace connecting GND and GNDPWR. Its pins should be shorted.
+	- R7 need only be installed if you require SWD trace capability
