@@ -4,12 +4,12 @@
 DRAFT!
 
 
-Download the latest [http://www.codesourcery.com/sgpp/lite/arm/portal/release1033 EABI GCC] for your platform and install.  Download the [http://code.google.com/p/micropendousx/downloads/list MicropendousX Distribution] and extract it.  Open a Terminal or Command Prompt and change to the `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/` directory.  Run `make` to compile.
+Download the latest [http://www.codesourcery.com/sgpp/lite/arm/portal/release1033 EABI GCC] for your platform and install.  Download the [http://code.google.com/p/micropendousx/downloads/list MicropendousX Distribution] and extract it.  Open a Terminal or Command Prompt and change to the `/MicropendousX/Firmware/LPC17xx/Blinky` directory.  Run `make` to compile.
 {{{
 make
 }}}
 
-Procure any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG debugger with a [http://infocenter.arm.com/help/topic/com.arm.doc.faqs/ka13634.html Cortex Debug Header] or an ARM JTAG to Cortex Debug Header adapter.  [http://www.freddiechopin.info/index.php/en/download/category/4-openocd OpenOCD for Windows] is also available.  Edit `/MicropendousX/Firmware/FreeRTOS_USBSerial_Ethernet_LPC17x8/OpenOCD.cfg` for your particular JTAG `interface`.  Connect your MicropendousX to your OpenOCD debugger and run `make program` to program the firmware.
+Procure any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG debugger with a [http://infocenter.arm.com/help/topic/com.arm.doc.faqs/ka13634.html Cortex Debug Header] or an ARM JTAG to Cortex Debug Header adapter.  [http://www.freddiechopin.info/index.php/en/download/category/4-openocd OpenOCD for Windows] is also available.  Edit `/MicropendousX/Firmware/LPC17xx/Blinky/OpenOCD.cfg` for your particular JTAG `interface`.  Connect your MicropendousX to your OpenOCD debugger and run `make program` to program the firmware.
 {{{
 make program
 }}}
@@ -23,14 +23,14 @@ openocd OpenOCD.cfg
 make debug
 }}}
 
-While not debugging you can connect to your MicropendousX with a serial terminal.  Typed letters or numbers will be incremented and returned.  See [http://code.google.com/p/micropendous/wiki/SerialPortUsageLinux SerialPortUsageLinux] or [http://code.google.com/p/micropendous/wiki/SerialPortUsageWindows SerialPortUsageWindows] for some notes which you will need to adapt for the LPC17xx.
+While not debugging you can connect to your MicropendousX with a serial terminal.  Typed letters or numbers will be incremented and returned when `FreeRTOS_USBSerial_Ethernet_LPC17x8` firmware is loaded.  See [http://code.google.com/p/micropendous/wiki/SerialPortUsageLinux SerialPortUsageLinux] or [http://code.google.com/p/micropendous/wiki/SerialPortUsageWindows SerialPortUsageWindows] for some notes which you will need to adapt for the LPC17xx.
 
 If you are interested in using [http://www.eclipse.org/ Eclipse] for development and debugging there are some useful tutorials by [http://rockboxplayer.googlecode.com/svn/trunk/docs/Using_Open_Source_Tools_for_AT91SAM7S_Cross_Development_revision_C.pdf James P. Lynch] and [http://code.google.com/p/rockboxplayer/wiki/EclipseWithJTAGDebugSetup Casainho].
 
 If you are having JTAG communication issues try slowing down the JTAG clock speed by altering the `jtag_khz 500` setting in `OpenOCD.cfg`.
 
-If you are having many errors and are worried your firmware may not be uploading properly you can inject the vector checksum into your hex file using the [http://www.nxp.com/files/products/standard/microcontrollers/utilities/lpc2000_flash_utility.zip LPC2000 FLASH Utility].
+If you are having many errors and are worried your firmware may not be uploading properly you can inject the vector checksum into your hex file with the `LPcrc` utility in the `/Software/` directory.
 
-Here is a MicropendousX-1758 being debugged by a Luminary Micro ICDI interface but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
+Here is a MicropendousX-1768 being debugged by a Luminary Micro ICDI interface but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-1758-JTAG_Adapter_Connected-1.jpg
+http://micropendousx.googlecode.com/svn/trunk/MicropendousX/Hardware/MicropendousX-176x/MicropendousX-176x_JTAG_Connected-2.jpg
