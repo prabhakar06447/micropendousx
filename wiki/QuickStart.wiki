@@ -31,6 +31,6 @@ If you are having JTAG communication issues try slowing down the JTAG clock spee
 
 If you are having many errors and are worried your firmware may not be uploading properly you can inject the vector checksum into your hex file with the `LPcrc` utility in the `/Software/` directory.
 
-Here is a MicropendousX-1768 being debugged by a Luminary Micro ICDI interface but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
+Here is a MicropendousX-1768 being debugged by an [http://www.opendous.org/JTAG Opendous FT2232H JTAG Adaptor] but any [http://openocd.berlios.de/web/ OpenOCD]-compatible JTAG interface operating at 3.3V will work.
 
 http://micropendousx.googlecode.com/svn/trunk/MicropendousX/Hardware/MicropendousX-176x/MicropendousX-176x_JTAG_Connected-2.jpg
