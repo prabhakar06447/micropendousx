@@ -103,7 +103,7 @@ TARGET = Blinky
 
 
 # Path to the LUFA library
-LIBS_PATH = ../../libs
+LIBS_PATH = ../../../libs
 CMSIS_PATH = $(LIBS_PATH)/CMSIS
 CMSIS_CORE_PATH = $(CMSIS_PATH)/Core/CM3/CoreSupport
 CMSIS_DEVICE_PATH = $(CMSIS_PATH)/Core/CM3/DeviceSupport/NXP/LPC17xx
