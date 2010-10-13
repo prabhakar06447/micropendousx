@@ -1,4 +1,4 @@
-update=09/10/2010 17:17:03
+update=12/10/2010 22:28:12
 last_client=pcbnew
 [general]
 version=1
@@ -82,12 +82,12 @@ TxtPcbV=800
 TxtPcbH=600
 TxtModV=600
 TxtModH=600
-TxtModW=120
-VEgarde=100
-DrawLar=150
-EdgeLar=150
-TxtLar=120
-MSegLar=150
+TxtModW=60
+VEgarde=10
+DrawLar=60
+EdgeLar=60
+TxtLar=60
+MSegLar=60
 LastNetListRead=MicropendousX-176x.net
 [pcbnew/libraries]
 LibDir=
