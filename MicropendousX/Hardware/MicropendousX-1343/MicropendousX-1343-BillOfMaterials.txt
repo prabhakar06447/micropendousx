@@ -12,7 +12,7 @@ QTY, Manufacturer Part#     , Cost($USD each) - References - Description
 2  , RMCF1/1015KJRCT-ND     , 0.03 - R4 R5 - RES 15K OHM 1/8W 5% 0805 SMD
 1  , RMCF1/100RCT-ND        , 0.03 - R7 - RES 0 OHM 1/8W 5% 0805 SMD
 2  , EVQ-Q2U03W             , 0.39 - SW1 SW2 - SWITCH LT 6MM 260GF H=3.1MM SMD
-1  , 2908-05WB-MG           , 1.23 - U1 - CONN EJECT MICROSD PUSH-PUSH SMD
+1  , 101-00303-68           , 0.86 - U3 - CONN MINI MICRO-SD 8PIN PCB GOLD
 1  , 690-004-221-023        , 0.93 - U2 - CONN USB JACK TYPE B HORIZON R/A
 1  , GRPB052VWVN-RC         , 1.11 - U3 - Cortex CONN HEADER .050" 10PS DL PCB AU
 1  , ZLDO1117G33TA          , 0.62 - U4 - IC REG LDO 1A 3.3V SOT223            
