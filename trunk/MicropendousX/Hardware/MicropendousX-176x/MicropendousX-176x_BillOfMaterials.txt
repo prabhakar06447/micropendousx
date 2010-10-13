@@ -28,7 +28,7 @@ QTY, Manufacturer Part#         , Cost($USD each) - References - Description
 1  , AP2161WG                   , 0.00 - IC2 - USB Power Switch Active Low SOT23-5 (SOT25)
 1  , LAN8720A-CP                , 1.95 - IC4 - TXRX ETHERNET 10/100 RMII 24-QFN
 1  , TS3USB221DRCR              , 2.10 - IC5 - IC USB SWITCH DUAL 1X2 10SON
-1  , 2908-05WB-MG               , 1.23 - U3 - CONN EJECT MICROSD PUSH-PUSH SMD
+1  , 101-00303-68               , 0.86 - U3 - CONN MINI MICRO-SD 8PIN PCB GOLD
 1  , ZLDO1117G33TA              , 0.62 - U4 - REGULATOR LDO 1A 3.3V SOT223
 2  , EVQ-Q2H03W                 , 0.30 - SW? - EVQ Push Button Off-Mom SWITCH SMD
 1  , BSS84P L6327               , 0.46 - Q1 - MOSFET P-CH 60V 170MA SOT-23
