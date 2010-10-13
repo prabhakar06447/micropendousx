@@ -1,4 +1,4 @@
-update=09/10/2010 16:29:50
+update=13/10/2010 07:12:29
 last_client=pcbnew
 [general]
 version=1
@@ -71,6 +71,11 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=opendous
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [pcbnew]
 version=1
 PadDrlX=320
@@ -82,12 +87,12 @@ TxtPcbV=800
 TxtPcbH=600
 TxtModV=600
 TxtModH=600
-TxtModW=120
+TxtModW=80
 VEgarde=100
-DrawLar=150
-EdgeLar=150
-TxtLar=120
-MSegLar=150
+DrawLar=80
+EdgeLar=80
+TxtLar=80
+MSegLar=80
 LastNetListRead=MicropendousX-1343.net
 [pcbnew/libraries]
 LibDir=
@@ -101,3 +106,4 @@ LibName7=display
 LibName8=valves
 LibName9=led
 LibName10=dip_sockets
+LibName11=opendous

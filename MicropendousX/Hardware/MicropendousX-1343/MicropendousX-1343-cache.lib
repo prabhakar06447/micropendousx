@@ -1,4 +1,4 @@
-EESchema-LIBRARY Version 2.3  Date: 26/04/2010 13:35:42
+EESchema-LIBRARY Version 2.3  Date: 13/10/2010 07:24:18
 #
 # 1117
 #
@@ -185,8 +185,8 @@ DEF LPC1343 IC 0 40 Y Y 1 F N
 F0 "IC" -1500 -1650 60 H V C CNN
 F1 "LPC1343" -1400 1600 60 H V C CNN
 DRAW
-T 0 0 0 1 0 0 0 Drawn~By~Opendous~Inc.~(www.opendous.org)  Normal 0 C C
 T 0 0 50 50 0 0 0 LQFP48  Normal 0 C C
+T 0 0 0 1 0 0 0 Schematic~Symbol~Drawn~By~Opendous~Inc.~www.opendous.org  Normal 0 C C
 S 1650 1550 -1650 -1600 0 1 2 f
 X PIO2_6 1 1800 -700 150 L 40 40 1 1 B
 X PIO2_0-nDTR 2 1800 -100 150 L 40 40 1 1 B
