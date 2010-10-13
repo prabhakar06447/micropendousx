@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date 12/10/2010 22:28:42
+EESchema Schematic File Version 2  date 13/10/2010 07:56:43
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -44,15 +44,9 @@ Comment2 "http://creativecommons.org/licenses/by/3.0/"
 Comment3 "Copyright Under the Creative Commons Attribution License"
 Comment4 "www.MicropendousX.org"
 $EndDescr
-$Comp
-L GND #PWR01
-U 1 1 4CB51801
-P 7450 8050
-F 0 "#PWR01" H 7450 8050 30  0001 C CNN
-F 1 "GND" H 7450 7980 30  0001 C CNN
-	1    7450 8050
-	1    0    0    -1  
-$EndComp
+Connection ~ 4800 7050
+Wire Wire Line
+	4950 7050 4350 7050
 Wire Wire Line
 	7450 8050 7450 7900
 Connection ~ 3150 1300
@@ -114,8 +108,6 @@ Wire Wire Line
 	1850 8250 2300 8250
 Connection ~ 4500 7050
 Connection ~ 4500 6850
-Wire Wire Line
-	4800 7050 4350 7050
 Connection ~ 11050 8200
 Wire Wire Line
 	11050 8250 11050 7900
@@ -864,8 +856,6 @@ Wire Wire Line
 Wire Wire Line
 	900  5950 900  6000
 Wire Wire Line
-	4800 6850 4350 6850
-Wire Wire Line
 	5400 1750 5400 2850
 Wire Wire Line
 	5400 2850 5700 2850
@@ -972,6 +962,27 @@ Wire Wire Line
 	3425 1350 3450 1350
 Wire Wire Line
 	3450 1350 3450 1400
+Wire Wire Line
+	4950 6850 4350 6850
+Connection ~ 4800 6850
+$Comp
+L C_MINI C42
+U 1 1 4CB59E4B
+P 4950 6950
+F 0 "C42" V 4900 7000 30  0000 C CNN
+F 1 "0u1" V 5000 7000 25  0000 C CNN
+	1    4950 6950
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 4CB51801
+P 7450 8050
+F 0 "#PWR01" H 7450 8050 30  0001 C CNN
+F 1 "GND" H 7450 7980 30  0001 C CNN
+	1    7450 8050
+	1    0    0    -1  
+$EndComp
 Text Label 3450 1000 0    20   ~ 0
 2DN
 Text Label 3450 1100 0    20   ~ 0
@@ -1932,7 +1943,7 @@ L CONN_MICROSD U3
 U 1 1 4B739B9C
 P 1000 1450
 F 0 "U3" H 825 1025 40  0000 C CNN
-F 1 "CONN_MICROSD" H 1050 2000 30  0000 C CNN
+F 1 "microSD" H 1050 2000 30  0000 C CNN
 	1    1000 1450
 	-1   0    0    -1  
 $EndComp

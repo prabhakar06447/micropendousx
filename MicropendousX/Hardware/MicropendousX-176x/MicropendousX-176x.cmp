@@ -1,254 +1,261 @@
-Cmp-Mod V01 Created by CVpcb (20090216-final) date = 2/28/2010 12:41:24 AM
+Cmp-Mod V01 Created by CvPCB (2010-05-05 BZR 2356)-stable date = 13/10/2010 07:56:37
 
 BeginCmp
 TimeStamp = /4A89BD1A;
 Reference = C1;
-ValeurCmp = 33pF;
+ValeurCmp = 33p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89BD17;
 Reference = C2;
-ValeurCmp = 33pF;
+ValeurCmp = 33p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89BD36;
 Reference = C3;
-ValeurCmp = 22pF;
+ValeurCmp = 22p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89BD35;
 Reference = C4;
-ValeurCmp = 22pF;
+ValeurCmp = 22p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89DE7A;
 Reference = C5;
-ValeurCmp = 22pF;
+ValeurCmp = 22p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89DE79;
 Reference = C6;
-ValeurCmp = 22pF;
+ValeurCmp = 22p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89FBF2;
 Reference = C7;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89EEC2;
 Reference = C8;
-ValeurCmp = 12pF;
+ValeurCmp = 12p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89EEA8;
 Reference = C9;
-ValeurCmp = 12pF;
+ValeurCmp = 12p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89EEBF;
 Reference = C10;
-ValeurCmp = 12pF;
+ValeurCmp = 12p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89EEC1;
 Reference = C11;
-ValeurCmp = 12pF;
+ValeurCmp = 12p;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89DFA4;
 Reference = C12;
-ValeurCmp = 1uF;
+ValeurCmp = 1u;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A714C1D;
 Reference = C13;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89B34B;
 Reference = C16;
-ValeurCmp = 1uF;
+ValeurCmp = 1u;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AD6CD5E;
 Reference = C17;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AD6CD5D;
 Reference = C18;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AD6CD68;
 Reference = C19;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AD6CD67;
 Reference = C20;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89EF10;
 Reference = C21;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89B9AB;
 Reference = C22;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89B9AA;
 Reference = C23;
-ValeurCmp = 0.01uF;
+ValeurCmp = u01;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A8AEDCD;
 Reference = C24;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89B9A1;
 Reference = C25;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4A89B33C;
 Reference = C26;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4ADC5AC8;
 Reference = C28;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4ADC5ACB;
 Reference = C29;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4ADD83B9;
 Reference = C30;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B227269;
 Reference = C35;
-ValeurCmp = 120uF;
+ValeurCmp = 120u;
 IdModule  = SM1210_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B22726A;
 Reference = C36;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0805_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B794A59;
 Reference = C37;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B794B36;
 Reference = C38;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B7965DD;
 Reference = C39;
-ValeurCmp = 0.1uF;
+ValeurCmp = 0u1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B8141C5;
 Reference = C40;
-ValeurCmp = 33uF;
+ValeurCmp = 33u;
 IdModule  = SM1206_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4B814D2D;
 Reference = C41;
-ValeurCmp = 10uF;
+ValeurCmp = 10u;
 IdModule  = SM0805_Opendous;
+EndCmp
+
+BeginCmp
+TimeStamp = /4CB59E4B;
+Reference = C42;
+ValeurCmp = 0u1;
+IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AE00E56;
 Reference = CR1;
-ValeurCmp = ESD_ZENER;
+ValeurCmp = ESD;
 IdModule  = SM0603_Opendous;
 EndCmp
 
 BeginCmp
 TimeStamp = /4AE00E61;
 Reference = CR2;
-ValeurCmp = ESD_ZENER;
+ValeurCmp = ESD;
 IdModule  = SM0603_Opendous;
 EndCmp
 
@@ -274,7 +281,7 @@ IdModule  = LQFP100_0.5mm_SOT407-1_LPC1768;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B2271CB;
+TimeStamp = /4C39BB2C;
 Reference = IC2;
 ValeurCmp = AP2101;
 IdModule  = SOT23-5_Opendous;
@@ -288,7 +295,7 @@ IdModule  = QFN24_p0.5mm_TPS6513x;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B739A85;
+TimeStamp = /4CB513CB;
 Reference = IC5;
 ValeurCmp = TS3USB221;
 IdModule  = SON10_DRC;
@@ -423,7 +430,7 @@ EndCmp
 BeginCmp
 TimeStamp = /4A89DF50;
 Reference = R13;
-ValeurCmp = 12.1k;
+ValeurCmp = 12k1;
 IdModule  = SM0603_Opendous;
 EndCmp
 
@@ -465,7 +472,7 @@ EndCmp
 BeginCmp
 TimeStamp = /4ACF2E00;
 Reference = R23;
-ValeurCmp = 4.7k;
+ValeurCmp = 4k7;
 IdModule  = SM0603_Opendous;
 EndCmp
 
@@ -479,7 +486,7 @@ EndCmp
 BeginCmp
 TimeStamp = /4AD6D45F;
 Reference = R33;
-ValeurCmp = 1.5k;
+ValeurCmp = 1k5;
 IdModule  = SM0603_Opendous;
 EndCmp
 
@@ -570,8 +577,8 @@ EndCmp
 BeginCmp
 TimeStamp = /4B739B9C;
 Reference = U3;
-ValeurCmp = CONN_MICROSD;
-IdModule  = Memory_Card_microSD_3M_290805;
+ValeurCmp = microSD;
+IdModule  = MEMORY_CARD_microSD_101-00303_Amphenol;
 EndCmp
 
 BeginCmp
@@ -582,7 +589,7 @@ IdModule  = SOT223_Opendous;
 EndCmp
 
 BeginCmp
-TimeStamp = /4B73C6D2;
+TimeStamp = /4C39BAF5;
 Reference = U6;
 ValeurCmp = JTAG;
 IdModule  = Pin_Array_5x2_SMT_1.27mm_0.5_inch;
