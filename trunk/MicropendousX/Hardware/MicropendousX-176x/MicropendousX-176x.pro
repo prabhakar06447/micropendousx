@@ -1,5 +1,5 @@
-update=12/10/2010 22:28:12
-last_client=pcbnew
+update=13/10/2010 07:40:15
+last_client=cvpcb
 [general]
 version=1
 RootSch=MicropendousX-176x.sch
@@ -90,7 +90,6 @@ TxtLar=60
 MSegLar=60
 LastNetListRead=MicropendousX-176x.net
 [pcbnew/libraries]
-LibDir=
 LibName1=sockets
 LibName2=connect
 LibName3=discret
@@ -102,3 +101,9 @@ LibName8=valves
 LibName9=led
 LibName10=dip_sockets
 LibName11=opendous
+LibDir=
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
