@@ -14,6 +14,8 @@ http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Pro
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-SolderPasted.jpg
 
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-PreparingBGA.jpg
+
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-ExaminingPlacement.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-OvenTray.jpg
@@ -23,8 +25,6 @@ http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Pro
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Oven-Step2.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Oven-Step3.jpg
-
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-PreparingBGA.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Picture.jpg
 
