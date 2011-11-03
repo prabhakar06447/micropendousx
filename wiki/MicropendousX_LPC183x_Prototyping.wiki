@@ -1,18 +1,22 @@
 #summary Prototyping and testing notes for the MicropendousX-LPC183x
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Linux_lsusb.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-JumperSettingsUSB0.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Picture.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Small.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-WindowsLibUSB.jpg
+
+
+
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Materials.jpg
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-StencilPositioning.jpg
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-SolderPasted.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-ExaminingPlacement.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Materials.jpg
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-OvenTray.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Oven-Step1.jpg
 
@@ -20,10 +24,14 @@ http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Pro
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-Oven-Step3.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-OvenTray.jpg
-
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-PreparingBGA.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-SolderPasted.jpg
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Picture.jpg
 
-http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototyping-StencilPositioning.jpg
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-JumperSettingsUSB0.jpg
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Small.jpg
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-WindowsLibUSB.jpg
+
+http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Linux_lsusb.jpg
