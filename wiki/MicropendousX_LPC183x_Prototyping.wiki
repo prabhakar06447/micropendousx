@@ -28,6 +28,8 @@ http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Pro
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Picture.jpg
 
+http://micropendousx.googlecode.com/svn/trunk/MicropendousX/Hardware/MicropendousX-LPC183x/MicropendousX-LPC183x-Back.jpg
+
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-JumperSettingsUSB0.jpg
 
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Small.jpg
