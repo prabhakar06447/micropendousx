@@ -11,7 +11,7 @@ http://micropendousx.googlecode.com/svn/trunk/MicropendousX/Hardware/Micropendou
   * USB-miniB and USB-A connectors and on-board GPIO-controllable [http://focus.ti.com/docs/prod/folders/print/ts3usb221.html TS3USB221] USB switch for USB Device and Host modes
   * all pins not related to USB and Ethernet are exposed on the outer headers
   * microSD connector in [http://en.wikipedia.org/wiki/MicroSD SPI Mode] on the underside of the board
-  * 10/100 Ethernet based on the [http://www.smsc.com/index.php?tid=149&pid=59 LAN8720] PHY
+  * 10/100 Ethernet based on the [http://www.smsc.com/index.php?tid=149&pid=59 LAN8720] PHY.  *HOWEVER*, an [http://search.digikey.com/us/en/products/NC7SZ14P5X/NC7SZ14P5XCT-ND/ inverter] needs to be added to the _CLK_ signal to make the PHY usable.  Such an inverter is not currently included.  Thanks to _ForrestG_ for pointing this out.
   * [http://infocenter.arm.com/help/topic/com.arm.doc.faqs/ka13634.html Cortex Debug Header] for [http://en.wikipedia.org/wiki/Joint_Test_Action_Group JTAG]/SWD
   * 3.3V 1A+ +/- 2% [http://www.st.com/stonline/products/literature/ds/14492/st1l05b.htm ST1L05B] regulator
   * RESET button, NMI button, and USB status LED
