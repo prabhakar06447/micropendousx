@@ -54,6 +54,7 @@ Connect the battery:
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-Small.jpg
 
 The board enters USB DFU boot under Windows:
+
 http://micropendousx.googlecode.com/svn/trunk/Pictures/MicropendousX-LPC183x-Prototype-Testing-WindowsLibUSB.jpg
 
 The board enters USB DFU boot under Linux:
